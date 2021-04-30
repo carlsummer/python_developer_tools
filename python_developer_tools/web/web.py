@@ -37,6 +37,12 @@ def get_request_data(url):
     return r.text
 
 
+def http_get_data(url, data):
+    """发送post请求并获取数据"""
+    r = requests.get(url, data=data)
+    return r.text
+
+
 def export_excel(values=["1", "2", "3"]):
     """读取xls模板并写入数据"""
     export_excel_dir = os.path.join("", "")
