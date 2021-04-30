@@ -6,4 +6,4 @@
 from .cv import *
 from .files import *
 from .python import *
-from .web import *
+from python_developer_tools.web.web import *

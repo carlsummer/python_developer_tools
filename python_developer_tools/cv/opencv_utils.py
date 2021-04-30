@@ -166,6 +166,11 @@ def cv2ToTorch(img):
     img = torch.from_numpy(img)
     return img
 
+def group_consecutive(a, trod=10):
+    """将连续的值分组
+    [1, 2, 3, 7, 8, 9, 10, 100, 101, 102, 103]->[array([1, 2, 3]), array([ 7,  8,  9, 10]), array([100, 101, 102, 103])]
+    """
+    return np.split(a, np.where(np.diff(a) >= trod)[0] + 1)
 
 """
 滤波器
