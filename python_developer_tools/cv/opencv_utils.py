@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
+import torch
 from scipy import signal
 
 
@@ -156,6 +157,15 @@ def crop_image_like(image, crop_bbox):
         ymax = image.shape[0] + 1
     image_crop = image[ymin:ymax + 1, xmin:xmax + 1, ...]
     return image_crop
+
+
+def cv2ToTorch(img):
+    """cv2的格式转torch 的tensor"""
+    img = img[:, :, ::-1].transpose(2, 0, 1)  # BGR to RGB, to cxhxw
+    img = np.ascontiguousarray(img, dtype=np.float32)
+    img = torch.from_numpy(img)
+    return img
+
 
 """
 滤波器

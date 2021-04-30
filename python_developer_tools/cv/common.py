@@ -5,6 +5,7 @@
 # @File:common
 import numpy as np
 
+
 def computeIOU(pred_loc, ground_info):
     # 计算2个框的iou
     xmin1, ymin1, xmax1, ymax1 = [round(float(val)) for val in pred_loc]
@@ -26,6 +27,7 @@ def computeIOU(pred_loc, ground_info):
     inter_area = (xmax - xmin) * (ymax - ymin)
     iou = inter_area / (s - inter_area)
     return round(iou, 2)
+
 
 def bbox_expand(bbox, bbox_scale):
     # 对bbox进行缩放

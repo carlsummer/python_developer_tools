@@ -10,6 +10,7 @@ import socket
 from xlrd import open_workbook
 from xlutils.copy import copy
 
+
 def getiphostname():
     # 获取计算机名称
     hostname = socket.gethostname()
@@ -35,9 +36,10 @@ def get_request_data(url):
     r = requests.get(url)
     return r.text
 
+
 def export_excel(values=["1", "2", "3"]):
     """读取xls模板并写入数据"""
-    export_excel_dir = os.path.join("","")
+    export_excel_dir = os.path.join("", "")
     if not os.path.exists(export_excel_dir):
         os.makedirs(export_excel_dir)
     filename = "统计报表.xls"
