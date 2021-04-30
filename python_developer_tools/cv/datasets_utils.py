@@ -9,7 +9,8 @@ import cv2
 import numpy as np
 from imgaug import augmenters as iaa  # 引入数据增强的包
 
-def resize_image(img,resize_size=[640,640]):
+
+def resize_image(img, resize_size=[640, 640]):
     """对图片进行resize"""
     h0, w0 = img.shape[:2]  # origin hw
     # rh0 = self.opt.img_size[0] / h0  # resize image to img_size
@@ -23,6 +24,7 @@ def resize_image(img,resize_size=[640,640]):
         # interp = cv2.INTER_AREA if r < 1 and not self.augment else cv2.INTER_LINEAR
         img = cv2.resize(img, (int(w0 * r), int(h0 * r)), interpolation=cv2.INTER_LINEAR)
     return img
+
 
 def augment_hsv(img, hgain=0.5, sgain=0.5, vgain=0.5):
     """直方图增强"""
@@ -43,6 +45,7 @@ def augment_hsv(img, hgain=0.5, sgain=0.5, vgain=0.5):
     #     for i in range(3):
     #         img[:, :, i] = cv2.equalizeHist(img[:, :, i])
 
+
 def imgaug_augmenters(img, hyp):
     """imgaug库增强"""
     seq = iaa.Sequential([
@@ -57,12 +60,13 @@ def imgaug_augmenters(img, hyp):
     images_aug = seq.augment_image(img)  # 是处理多张图片augment_images
     return images_aug
 
-def cutout(img,num_holes=1):
+
+def cutout(img, num_holes=1):
     """
     其思想也很简单，就是对训练图像进行随机遮挡，该方法激励神经网络在决策时能够更多考虑次要特征，而不是主要依赖于很少的主要特征，如下图所示：
     Randomly mask out one or more patches from an image.
     """
-    h,w,_ = img.shape
+    h, w, _ = img.shape
 
     scales = [0.5] * 1 + [0.25] * 2 + [0.125] * 4 + [0.0625] * 8 + [0.03125] * 16
     s = random.choice(scales)
@@ -79,8 +83,9 @@ def cutout(img,num_holes=1):
         x2 = np.clip(max(0, x + mask_w // 2), 0, w)
 
         # apply random color mask
-        img[y1: y2, x1: x2,:] = [random.randint(64, 191) for _ in range(3)]
+        img[y1: y2, x1: x2, :] = [random.randint(64, 191) for _ in range(3)]
     return img
+
 
 def random_perspective(img, degrees=10, translate=.1, scale=.1, shear=10, perspective=0.0, border=(0, 0)):
     # torchvision.transforms.RandomAffine(degrees=(-10, 10), translate=(.1, .1), scale=(.9, 1.1), shear=(-10, 10))

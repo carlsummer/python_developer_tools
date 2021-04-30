@@ -69,8 +69,7 @@ class SMBClient(object):
             self.samba.retrieveFile(service_name, os.path.join(dir_name, f_name), f)
             f.close()
 
+
 if __name__ == '__main__':
     smb = SMBClient('chintAI', 'chintAI', '10.20.200.170')
     smb.connect()
-
-

@@ -18,6 +18,7 @@ class WeightedLoss(_Loss):
     def forward(self, *input):
         return self.loss(*input) * self.weight
 
+
 class JointLoss2(_Loss):
     """
     Wrap two loss functions into one. This class computes a weighted sum of two losses.
@@ -31,12 +32,14 @@ class JointLoss2(_Loss):
     def forward(self, *input):
         return self.first(*input) + self.second(*input)
 
+
 class JointLoss3(_Loss):
     """
     Wrap three loss functions into one. This class computes a weighted sum of three losses.
     """
 
-    def __init__(self, first: nn.Module, second: nn.Module, third: nn.Module, first_weight=1.0, second_weight=1.0, third_weight=1.0):
+    def __init__(self, first: nn.Module, second: nn.Module, third: nn.Module, first_weight=1.0, second_weight=1.0,
+                 third_weight=1.0):
         super().__init__()
         self.first = WeightedLoss(first, first_weight)
         self.second = WeightedLoss(second, second_weight)
@@ -47,6 +50,7 @@ class JointLoss3(_Loss):
         second = self.second(*input)
         # third = self.third(*input[0].argmax(dim=1),*input[1])
         return first + second
+
 
 """
 使用例子：
