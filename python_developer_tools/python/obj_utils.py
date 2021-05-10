@@ -3,7 +3,7 @@
 # @Author zengxiaohui
 # Datatime:4/29/2021 8:38 PM
 # @File:obj_utils
-from zengxh_py_tools.python.string_utils import str_is_null
+from python_developer_tools.python.string_utils import str_is_null
 
 
 def obj_is_null(obj):

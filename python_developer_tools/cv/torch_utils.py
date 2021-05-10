@@ -22,6 +22,8 @@ def init_seeds(seed=0):
 
 def cuda2cpu(pred):
     # 将cuda的torch变量转为cpu
+    if type(pred) == list:
+        return pred
     if pred.is_cuda:
         pred_cpu = pred.cpu().numpy()
     else:
