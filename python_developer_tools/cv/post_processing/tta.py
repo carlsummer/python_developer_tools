@@ -15,6 +15,6 @@ def tta_Classification(x, model):
             ttach.VerticalFlip(),  # 垂直翻转
         ]
     )
-    tta_model = ttach.ClassificationTTAWrapper(model, transforms,merge_mode="mean")
+    tta_model = ttach.ClassificationTTAWrapper(model, transforms, merge_mode="mean")
     pre_batch = tta_model(x)
     return pre_batch

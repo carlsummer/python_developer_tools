@@ -26,5 +26,5 @@ pip install -i https://pypi.org/simple/ python_developer_tools==0.0.2
 pip install python_developer_tools==0.0.2
 # 离线安装
 pip install dist/python_developer_tools-0.0.2-py3-none-any.whl
-pip uninstall python_developer_tools
+pip uninstall -y python_developer_tools
 ```

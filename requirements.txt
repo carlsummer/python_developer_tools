@@ -2,3 +2,4 @@ numpy==1.18.2
 opencv-python==4.5.1.48
 ttach==0.0.3
 pysmb==1.2.6
+torch==1.7.0

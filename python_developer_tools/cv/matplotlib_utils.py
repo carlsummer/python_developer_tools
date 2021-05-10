@@ -9,6 +9,7 @@ import numpy as np
 import random
 import cv2
 
+
 def plot_labels(labels, save_dir='', imgname="labels"):
     # plot dataset labels
     c = labels  # classes, boxes
@@ -19,6 +20,7 @@ def plot_labels(labels, save_dir='', imgname="labels"):
     ax.set_ylabel("number")
     plt.savefig(Path(save_dir) / "{}_{}".format(imgname, 'labels.png'), dpi=200)
     plt.close()
+
 
 def plot_one_box(x, img, color=None, label=None, line_thickness=None):
     # Plots one bounding box on image img
