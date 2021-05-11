@@ -43,6 +43,10 @@ setup(
                  "files": "files",
                  "python": "python",
                  "web": "web", },
+    # package_data={"docs": ["/docs/keys/*.txt"]},
+    # data_files=[
+    #     ('docs', ['python_developer_tools/docs/keys/*.txt',]),
+    # ],
     install_requires=["numpy", "scipy", "matplotlib"],
 
 )
