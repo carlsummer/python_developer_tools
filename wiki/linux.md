@@ -42,6 +42,10 @@ mount -t cifs -o username="chintAI",password="chintAI",dir_mode=0777,file_mode=0
 ```shell script
 vim /etc/rc.d/rc.local
 ```
+##### 修改时间
+```shell script
+sudo date -s "2021-05-13 17:07:40"
+```
 
 # centos
 

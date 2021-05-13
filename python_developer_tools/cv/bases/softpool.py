@@ -3,6 +3,13 @@
 # @Author zengxiaohui
 # Datatime:5/11/2021 10:26 AM
 # @File:softpool.py
+
+try:
+    import softpool_cuda
+    from SoftPool import soft_pool2d, SoftPool2d
+except ImportError:
+    print('Please install SoftPool first: https://github.com/alexandrosstergiou/SoftPool')
+
 # 使用softpool
 # nn.MaxPool2d(kernel_size=3, stride=2, padding=1) 可以用下面替换
 # model_ft.maxpool = SoftPool2d(kernel_size=(2,2), stride=(2,2))

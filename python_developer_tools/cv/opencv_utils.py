@@ -142,6 +142,13 @@ def plt_show_cv2(image):
     plt.imshow(image)
     plt.show()
 
+def compress_image(rgbImg_show2,ratio):
+    # 压缩图片
+    return cv2.resize(rgbImg_show2, (0, 0), fx=ratio, fy=ratio)
+
+def opencvToBytes(frame):
+    # opencv 转字节流
+    return cv2.imencode(".jpg",frame)[1].tobytes()
 
 def crop_image_like(image, crop_bbox):
     """

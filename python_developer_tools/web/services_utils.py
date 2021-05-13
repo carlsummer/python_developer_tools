@@ -8,7 +8,7 @@ import time
 
 def get_items_serial_number(prefix, obj):
     """获取物品唯一货号"""
-    date_str = time.strftime("%Y%m%d", time.localtime(time.time()))
+    date_str = time.strftime("%Y%m%d%H%M%S", time.localtime(time.time()))
     # 生成一个固定6位数的流水号
     objmodel = obj.objects.last()
     serial_number = objmodel.id if objmodel else 0
