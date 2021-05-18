@@ -46,6 +46,18 @@ vim /etc/rc.d/rc.local
 ```shell script
 sudo date -s "2021-05-13 17:07:40"
 ```
+##### 删除用户
+```shell script
+userdel zhouhe
+```
+##### 远程linux目录结构
+```shell script
+/home/zengxh
+├── software # 需要安装的软件
+├── workspaces # 工作目录
+├── medias # 媒体文件，如挂载的内容
+
+```
 
 # centos
 

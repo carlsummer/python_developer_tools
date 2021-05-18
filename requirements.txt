@@ -4,3 +4,4 @@ ttach==0.0.3
 pysmb==1.2.6
 torch==1.7.0
 pycryptodome==3.10.1
+scipy==1.6.3

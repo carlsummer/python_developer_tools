@@ -167,7 +167,7 @@ def crop_image_like(image, crop_bbox):
 
 
 def cv2ToTorch(img):
-    """cv2的格式转torch 的tensor"""
+    """单张cv2的格式转torch 的tensor"""
     img = img[:, :, ::-1].transpose(2, 0, 1)  # BGR to RGB, to cxhxw
     img = np.ascontiguousarray(img, dtype=np.float32)
     img = torch.from_numpy(img)
