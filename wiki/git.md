@@ -11,3 +11,15 @@ git reset --hard log...
 ```shell script
 git reset HEAD XXX/XXX/XXX.c 就是对某个文件进行撤销了
 ```
+##### 查看所有分支
+```shell script
+git branch -a 
+```
+##### 查看当前分支
+```shell script
+git branch
+```
+##### 切换分支
+```shell script
+git checkout creepage
+```

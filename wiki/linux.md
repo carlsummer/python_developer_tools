@@ -59,6 +59,28 @@ userdel zhouhe
 
 ```
 
+##### 统计当前目录下，排除venv目录，剩余所有py文件的行数
+```shell script
+wc -l `find  -path ./venv -prune -o -name '*py'`
+```
+##### linux下查看进程运行的时间
+```shell script
+ps -eo pid,tty,user,comm,lstart,etime | grep 28156
+> 28156 pts/4    zhouhe   Enet            Sat May 22 06:30:15 2021  2-15:53:30
+> pid：28156
+> tty：pts/4
+> user：zhouhe
+> comm：Enet
+> lstart： Sat May 22 06:30:15 2021 【开始时间为：2021-5-22  06:30:15 周六】
+> etime：2-15:53:30 【运行时间：2天15个小时53分钟30秒】
+```
+##### 修改文件夹所属用户和组
+```shell script
+# 将文件夹/home/deploy/datasets/coco 修改组为：deploy
+chgrp -R deploy /home/deploy/datasets/coco
+# 修改文件夹以及其子目录的文件使用-R选项 用户
+chown -R deploy /home/deploy/datasets/coco
+```
 # centos
 
 # ubuntu
