@@ -1,0 +1,7 @@
+show_channel_urls: true
+channels:
+  - https://mirrors.aliyun.com/anaconda/pkgs/free/
+  - https://mirrors.aliyun.com/anaconda/pkgs/main/
+  - https://mirrors.aliyun.com/anaconda/cloud/conda-forge/
+  - https://mirrors.aliyun.com/anaconda/cloud/msys2/
+  - https://mirrors.aliyun.com/anaconda/cloud/bioconda/

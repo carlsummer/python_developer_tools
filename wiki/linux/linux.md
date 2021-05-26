@@ -82,6 +82,17 @@ chgrp -R deploy /home/deploy/datasets/coco
 chown -R deploy /home/deploy/datasets/coco
 ```
 # centos
+##### ftp 服务器搭建
+```shell script
+https://blog.csdn.net/qq_36938617/article/details/89077845
+yum install vsftpd ftp
+配置文件在/etc/vsftpd/vsftpd.conf
+我是把匿名用户的权限给guanle
+我把10.123.33.2上的selinux修改成了Permissive
+eg:wget ftp://10.123.33.2/workspaces/ztpanels-haining.tar.gz --ftp-user=admin --ftp-password=Ztadmin2020
+--ftp-user 是ftp用户名
+--ftp-password 是用户密码
+```
 
 # ubuntu
 ##### 开启ssh22端口
