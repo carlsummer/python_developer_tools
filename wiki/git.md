@@ -11,7 +11,7 @@ git reset --hard log...
 ```shell script
 git reset HEAD XXX/XXX/XXX.c 就是对某个文件进行撤销了
 ```
-##### 查看所有分支
+##### 查看所有分支c
 ```shell script
 git branch -a 
 ```
@@ -23,3 +23,8 @@ git branch
 ```shell script
 git checkout creepage
 ```
+##### 查看git项目在哪个路径下?
+> 进入到命令行后,输入git remote -v
+
+##### 查看git项目是从git的哪个分支上拉下来的命令?
+> 如果还想看项目是从git的那个分支上拉下来的,可以在命令行中输入:git remote show origin

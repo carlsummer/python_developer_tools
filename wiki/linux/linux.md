@@ -56,7 +56,7 @@ userdel zhouhe
 ├── software # 需要安装的软件
 ├── workspaces # 工作目录
 ├── medias # 媒体文件，如挂载的内容
-
+├── datasets # 数据集
 ```
 
 ##### 统计当前目录下，排除venv目录，剩余所有py文件的行数
@@ -80,6 +80,19 @@ ps -eo pid,tty,user,comm,lstart,etime | grep 28156
 chgrp -R deploy /home/deploy/datasets/coco
 # 修改文件夹以及其子目录的文件使用-R选项 用户
 chown -R deploy /home/deploy/datasets/coco
+```
+##### ssh连接
+```shell script
+ssh -p 6002 admin@127.0.0.1 
+```
+##### 替换sh文件中的\r
+```shell script
+sed -i 's/\r//' run.sh
+```
+##### 将文件夹打包为gz文件
+```shell script
+cd C:\Users\zengxh\Documents\workspace\git-chint-workspace\PVDefectPlatform
+tar -czvf ztpanels-haining.tar.gz ztpanels-haining
 ```
 # centos
 ##### ftp 服务器搭建

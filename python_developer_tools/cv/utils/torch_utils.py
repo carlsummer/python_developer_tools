@@ -315,4 +315,5 @@ def labels_to_image_weights(labels, nc=80, class_weights=np.ones(80)):
 
 
 if __name__ == '__main__':
+    # from python_developer_tools.cv.utils.torch_utils import collect_env_info
     print(collect_env_info())

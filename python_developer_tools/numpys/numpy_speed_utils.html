@@ -1,0 +1,148 @@
+
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name=viewport content="width=device-width,initial-scale=1">
+		<style>body {max-width: 65em;margin: 20px auto;padding-left: 5%;padding-right: 5%;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;/*font-family:consolas, monaco, courier, "courier new", fixed-width;*/font-size: 14px;line-height: 1.42857143;color: #333;background-color: #fff;}h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {font-family: inherit;font-weight: 1500;line-height: 1.1;color: #061633;}pre {font: 12px/20px Monaco, monospace;border: 1px solid #CCC;border-radius: 3px;background: #F9F9F9;padding: 10px;color: #555;overflow-x:auto; /* add horizontal scroll to code area, if needed */}a {color: #4383f2;}</style>
+		<title>Processing a numpy array in native code</title>
+	</head>
+	<body>
+
+		<a href="https://nenadmarkus.github.io">Home</a> | 
+		<a href="..">Blog</a> | 
+		<a href="https://github.com/nenadmarkus">GitHub</a>
+		</hr>
+
+		<h1>Processing a numpy array in native code</h1>
+		<div id="content">
+			<p>In this post, we show how to process a <code class="language-plaintext highlighter-rouge">numpy</code> array with native code written in C.
+A self-contained example is available <a href="/p/numpy-to-native/test.py">here</a>.</p>
+
+<p>If you prefer a more verbose explanation than going through Python code, please read on.</p>
+
+<h2 id="introduction-and-motivation">Introduction and motivation</h2>
+
+<p>The Python programming language is nowadays a <em>de facto</em> standard for prototyping/research in data science, computer vision, machine learning, etc.
+However, writing algorithms in pure Python is computationally inefficient as it is an <a href="https://en.wikipedia.org/wiki/Interpreted_language">interpreted language</a>.
+Thus, most scientific programs written in it use libraries like <a href="https://en.wikipedia.org/wiki/NumPy"><code class="language-plaintext highlighter-rouge">numpy</code></a> to perform numeric computations.</p>
+
+<p>While <code class="language-plaintext highlighter-rouge">numpy</code> is a great library, some algorithms are difficult (or impossible) to express with its built-in functionalities.
+Thus, for awesome performance, it might be desirable to pass an array to native code for processing.
+To achieve this, we use <a href="https://docs.python.org/3/library/ctypes.html">ctypes</a>, a foreign function library for Python.
+This library provides C compatible data types and allows to wrap functions in DLLs or shared libraries in pure Python.</p>
+
+<p>Let us first formulate a dummy problem through which we will illustrate all the important points.</p>
+
+<h2 id="our-dummy-problem">Our dummy problem</h2>
+
+<p>Let <code class="language-plaintext highlighter-rouge">A</code> be an array consisting of <code class="language-plaintext highlighter-rouge">n</code> 32-bit floating point numbers.
+Our task is to find the mean value of this array, i.e.,</p>
+
+\[\mu=
+	\frac{1}{n}\sum_{i=0}^{n-1} A_i\]
+
+<p>Using pure Python, this can be computed as:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sum=0
+for i in range(0, n):
+	sum += A[i]
+mean = sum/n
+</code></pre></div></div>
+
+<p>Trivial, of course.
+However, it is even simpler using <code class="language-plaintext highlighter-rouge">numpy</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mean = numpy.mean(A)
+</code></pre></div></div>
+
+<p>In the next section, we express this computation in native code.</p>
+
+<h2 id="native-code-for-computing-the-mean-of-an-array">Native code for computing the mean of an array</h2>
+
+<p>The following C function will do the job:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>float compute_mean(float* A, int n)
+{
+	int i;
+	float sum = 0.0f;
+	for(i=0; i&lt;n; ++i)
+		sum += A[i];
+	return sum/n;
+}
+</code></pre></div></div>
+
+<p>If we assume that the above code is in a file <code class="language-plaintext highlighter-rouge">lib.c</code>, we can compile a shared library as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cc lib.c -fPIC -shared -o lib.so
+</code></pre></div></div>
+
+<p>The following section shows how to invoke this function from Python.</p>
+
+<h2 id="using-ctypes-to-call-functions-from-a-native-library">Using <code class="language-plaintext highlighter-rouge">ctypes</code> to call functions from a native library</h2>
+
+<p>To load <code class="language-plaintext highlighter-rouge">lib.so</code> as a Python object, execute the following commands:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import ctypes
+lib = ctypes.cdll.LoadLibrary('./lib.so')
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">compute_mean</code> function expects a pointer to the array and the number of elements within this array as parameters.
+The first parameter can be obtained with <code class="language-plaintext highlighter-rouge">ctypes.c_void_p(A.ctypes.data)</code> and the second as <code class="language-plaintext highlighter-rouge">ctypes.c_int(n)</code>.</p>
+
+<p>Next, we indicate that we expect a float as a return value and call the desired function on our array:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lib.compute_mean.restype = ctypes.c_float
+mean = lib.compute_mean(ctypes.c_void_p(A.ctypes.data), ctypes.c_int(n))
+</code></pre></div></div>
+
+<p>The default <code class="language-plaintext highlighter-rouge">restype</code> is <code class="language-plaintext highlighter-rouge">c_int</code>, so we do not have to set this flag in the case when the native function returns a C <code class="language-plaintext highlighter-rouge">int</code>.</p>
+
+<h2 id="additional-remarks">Additional remarks</h2>
+
+<p>A self-contained code for this tutorial is available <a href="/p/numpy-to-native/test.py">here</a>.</p>
+
+<p>A possible pitfall of this approach is forgetting that a <code class="language-plaintext highlighter-rouge">numpy</code> array can be stored in a non-continuous block of memory
+(e.g., if we perform a <a href="https://www.tutorialspoint.com/numpy/numpy_indexing_and_slicing.htm">slicing operation</a> on a 2D array).
+We can examine whether an array is contiguous by checking its <code class="language-plaintext highlighter-rouge">C_CONTIGUOUS</code> flag and, if required, react accordingly:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if not A.flags['C_CONTIGUOUS']:
+	A = numpy.ascontiguousarray(A)
+</code></pre></div></div>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li><a href="https://docs.python.org/3/library/ctypes.html">https://docs.python.org/3/library/ctypes.html</a></li>
+  <li><a href="https://stackoverflow.com/questions/5862915/passing-numpy-arrays-to-a-c-function-for-input-and-output">https://stackoverflow.com/questions/5862915/passing-numpy-arrays-to-a-c-function-for-input-and-output</a></li>
+  <li><a href="https://stackoverflow.com/questions/29947639/cheapest-way-to-get-a-numpy-array-into-c-contiguous-order">https://stackoverflow.com/questions/29947639/cheapest-way-to-get-a-numpy-array-into-c-contiguous-order</a></li>
+</ul>
+
+		</div>
+
+		
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" crossorigin="anonymous">
+		<style>
+			/* from <https://github.com/KaTeX/KaTeX/issues/327> */
+			.katex-display > .katex {
+				max-width: 100%;
+			}
+			.katex-display > .katex > .katex-html {
+				max-width: 100%;
+				overflow-x: auto;
+				overflow-y: hidden;
+				padding-left: 2px;
+				padding-right: 2px;
+			}
+		</style>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+		<script>
+			const div = document.getElementById("content");
+			renderMathInElement(div);
+		</script>
+		
+
+		<script data-goatcounter="https://nmwebstuff.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+	</body>
+</html>
