@@ -94,6 +94,24 @@ sed -i 's/\r//' run.sh
 cd C:\Users\zengxh\Documents\workspace\git-chint-workspace\PVDefectPlatform
 tar -czvf ztpanels-haining.tar.gz ztpanels-haining
 ```
+##### 查看内存大小
+```shell script
+free -h
+```
+##### 禁止访问百度
+```shell script
+iptables -A OUTPUT -p tcp -d www.baidu.com --dport 80 -j DROP
+iptables -L //生效
+ ```
+##### 允许访问百度
+```shell script
+iptables -A OUTPUT -p tcp -d www.baidu.com --dport 80 -j ACCEPT
+iptables -L
+```
+##### 查看最近1天home目录下修改的python文件
+```shell script
+sudo find /home/ -name '*.py' -ctime 0 -ls
+```
 # centos
 ##### ftp 服务器搭建
 ```shell script

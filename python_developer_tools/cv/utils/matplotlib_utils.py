@@ -8,7 +8,44 @@ from pathlib import Path
 import numpy as np
 import random
 import cv2
+from scipy import signal
 
+def _listornparray_2_plt2(row_histogram):
+    """将list或者nparray画成图 画直方图"""
+    lenth = len(row_histogram)
+    hist_x = np.linspace(0, lenth - 1, lenth)
+    plt.plot(hist_x, row_histogram)
+    plt.show()
+    plt.close()
+
+def _listornparray_2_plt(row_histogram):
+    """将list或者nparray画成图 画直方图"""
+    lenth = len(row_histogram)
+    plt.figure(1)
+    hist_x = np.linspace(0, lenth - 1, lenth)
+    plt.title("row_histogram")
+    plt.rcParams['figure.figsize'] = (lenth, 8)  # 单位是inches
+
+    x_major_locator = plt.MultipleLocator(1)
+    ax = plt.gca()
+    ax.xaxis.set_major_locator(x_major_locator)  # x轴按1刻度显示
+
+    plt.plot(hist_x, row_histogram)
+    higher_q = np.max(row_histogram) * (5 / 8)
+    plt.plot([0, lenth - 1], [higher_q, higher_q])
+    num_peak_3 = signal.find_peaks(row_histogram, distance=1)  # distance表极大值点的距离至少大于等于10个水平单位
+    for ii in range(len(num_peak_3[0])):
+        if (row_histogram[num_peak_3[0][ii]] > np.mean(row_histogram)) and (
+                row_histogram[num_peak_3[0][ii]] != np.max(row_histogram)
+        ) and (
+                num_peak_3[0][ii] > 10
+        ):
+            plt.plot(num_peak_3[0][ii], row_histogram[num_peak_3[0][ii]], '*', markersize=10)
+            plt.axvline(num_peak_3[0][ii])
+            print(num_peak_3[0][ii])
+
+    plt.savefig("row_histogram_peak.jpg")
+    plt.close()
 
 def plot_labels(labels, save_dir='', imgname="labels"):
     # plot dataset labels
