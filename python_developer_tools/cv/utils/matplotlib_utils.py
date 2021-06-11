@@ -10,12 +10,17 @@ import random
 import cv2
 from scipy import signal
 
-def _listornparray_2_plt2(row_histogram):
+def plt_show_histogram(histogram):
     """将list或者nparray画成图 画直方图"""
-    lenth = len(row_histogram)
-    hist_x = np.linspace(0, lenth - 1, lenth)
-    plt.plot(hist_x, row_histogram)
+    hist_x=get_histogram_hist_x(histogram)
+    plt.plot(hist_x, histogram)
     plt.show()
+    plt.close()
+
+def plt_save_histogram(histogram,save_dir='', imgname="labels"):
+    hist_x=get_histogram_hist_x(histogram)
+    plt.plot(hist_x, histogram)
+    plt.savefig(Path(save_dir) / "{}_{}".format(imgname, 'labels.png'), dpi=200)
     plt.close()
 
 def _listornparray_2_plt(row_histogram):
@@ -58,6 +63,10 @@ def plot_labels(labels, save_dir='', imgname="labels"):
     plt.savefig(Path(save_dir) / "{}_{}".format(imgname, 'labels.png'), dpi=200)
     plt.close()
 
+def get_histogram_hist_x(histogram):
+    lenth = len(histogram)
+    hist_x = np.linspace(0, lenth - 1, lenth)
+    return hist_x
 
 def plot_one_box(x, img, color=None, label=None, line_thickness=None):
     # Plots one bounding box on image img

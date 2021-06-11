@@ -7,7 +7,11 @@ import cv2
 import numpy as np
 import base64
 import re
+from imutils import paths
 
+def get_all_images_by_dir(dir):
+    """获取文件夹下面的所有图片"""
+    return list(paths.list_images(dir))
 
 def imgToBase64(imgpath):
     """将图片转base64"""

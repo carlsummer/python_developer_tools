@@ -13,6 +13,8 @@ import torchvision
 from tabulate import tabulate
 from datetime import datetime
 import torch.distributed as dist
+from torchvision import transforms
+
 
 def init_seeds(seed=0):
     if seed is None:
@@ -60,12 +62,31 @@ def init_cudnn(reproducibility_training_speed=True):
         torch.backends.cudnn.benchmark = True
 
 
+
+def tensor_to_PIL(tensor):
+    # 输入tensor变量
+    # 输出PIL格式图片
+    unloader = transforms.ToPILImage()
+    image = tensor.cpu().clone()
+    image = image.squeeze(0)
+    image = unloader(image)
+    return image
+
+def tensor_to_np(tensor):
+    #tensor转numpy
+    img = tensor.mul(255).byte()
+    img = img.cpu().numpy().squeeze(0).transpose((1, 2, 0))
+    return img
+
 def cuda2cpu(pred):
     # 将cuda的torch变量转为cpu
-    if type(pred) == list:
+    if not hasattr(pred, 'is_cuda'):
         return pred
     if pred.is_cuda:
-        pred_cpu = pred.cpu().numpy()
+        try:
+            pred_cpu = pred.cpu().numpy()
+        except Exception as e:
+            pred_cpu = pred.cpu().detach().numpy()
     else:
         pred_cpu = pred.numpy()
     return pred_cpu

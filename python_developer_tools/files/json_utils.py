@@ -1,9 +1,10 @@
 # !/usr/bin/env python
 # -- coding: utf-8 --
 # @Author zengxiaohui
-# Datatime:5/13/2021 4:49 PM
+# Datatime:6/3/2021 4:23 PM
 # @File:json_utils
 import json
+
 
 def str_2_json(str):
     # str = '{"key": "wwww", "word": "qqqq"}'
@@ -11,3 +12,9 @@ def str_2_json(str):
     # print(j)
     # print(type(j))
     return j
+
+
+def read_json_file(filepath):
+    with open(filepath, 'r', encoding="utf-8") as load_f:
+        load_dict = json.load(load_f)
+    return load_dict

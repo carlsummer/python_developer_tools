@@ -5,15 +5,30 @@
 # @File:common
 import os
 import shutil
-
+from pathlib import Path
+import glob
 
 def resetDir(dirpath):
     """判断文件夹是否存在存在那么删除重建，不存在那么创建"""
-    if not os.path.exists(dirpath):
-        os.makedirs(dirpath)
-    else:
+    if mkdir(dirpath):
         shutil.rmtree(dirpath)
         os.makedirs(dirpath)
+
+def mkdir(dirpath):
+    if not os.path.exists(dirpath):
+        os.makedirs(dirpath)
+        return False
+    else:
+        return True
+
+def get_filename_suf_pix(filepath):
+    """
+    :param filepath: '/home/deploy/datasets/creepageDistance/lr/test/0.jpg'
+    :return: 0.jpg /home/deploy/datasets/creepageDistance/lr/test .jpg 0
+    """
+    path_obj = Path(filepath)
+    return path_obj.name,str(path_obj.parent),path_obj.suffix,path_obj.stem
+
 
 
 def get_filelist(dir, Filelist):
@@ -31,3 +46,12 @@ def get_filelist(dir, Filelist):
             newDir = os.path.join(dir, s)
             get_filelist(newDir, Filelist)
     return Filelist
+
+def increment_dir(dir, comment=''):
+    # Increments a directory runs/exp1 --> runs/exp2_comment
+    n = 0  # number
+    dir = str(Path(dir))  # os-agnostic
+    d = sorted(glob.glob(dir + '*'))  # directories
+    if len(d):
+        n = max([int(x[len(dir):x.find('_') if '_' in x else None]) for x in d]) + 1  # increment
+    return dir + str(n) + ('_' + comment if comment else '')
