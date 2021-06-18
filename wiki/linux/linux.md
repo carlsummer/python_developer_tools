@@ -112,6 +112,11 @@ iptables -L
 ```shell script
 sudo find /home/ -name '*.py' -ctime 0 -ls
 ```
+##### xshell上传文件，下载文件
+```shell script
+rz
+sz work.txt
+```
 # centos
 ##### ftp 服务器搭建
 ```shell script

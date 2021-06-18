@@ -5,8 +5,11 @@
 # @File:txt_utils
 import ast
 
+def save_str_txt(strings,save_path):
+    with open(save_path, 'a', encoding='utf-8') as f:
+        f.write(strings)  # label format
 
-def save_txt(json, save_path):
+def save_jsondata_txt(json, save_path):
     # 将内容保存为txt
     if json is not None:
         with open(save_path, 'a+', encoding='utf-8') as f:
