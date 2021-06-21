@@ -2,6 +2,12 @@
 > python 开发过程中常用到的工具;包括网站开发,人工智能,文件，数据类型转换
 > 支付接口对接，外挂，bat,sh等我在工作中常用到的开发工具
 
+## 安装和使用
+```shell script
+pip install git+https://github.com/carlsummer/python_developer_tools.git
+from python_developer_tools import cv
+```
+## 目录结构
 ```
 ├─cv
 │  │  common.py

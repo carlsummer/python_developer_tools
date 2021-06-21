@@ -7,3 +7,7 @@ torch==1.7.0
 pycryptodome==3.10.1
 scipy==1.6.3
 qcloudsms-py==0.1.4
+scikit-learn
+seaborn
+torchsummary
+tensorboardX

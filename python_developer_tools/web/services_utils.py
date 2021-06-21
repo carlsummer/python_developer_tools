@@ -7,6 +7,9 @@ import random
 import time
 from random import choice
 
+from common.constants import SMS_CODE_LENGTH
+
+
 def get_items_serial_number(prefix, obj):
     """获取物品唯一货号"""
     date_str = time.strftime("%Y%m%d%H%M%S", time.localtime(time.time()))
@@ -33,7 +36,7 @@ def make_code():
     :return: code 6位随机数
     """
     code = ''
-    for item in range(6):
+    for item in range(SMS_CODE_LENGTH):
         code += str(random.randint(0, 9))
     return code
 
