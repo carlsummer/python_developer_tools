@@ -25,8 +25,11 @@ def computeIOU(pred_loc, ground_info):
     s = s1 + s2
     # 计算交集
     inter_area = (xmax - xmin) * (ymax - ymin)
-    iou = inter_area / (s - inter_area)
-    return round(iou, 2)
+    if s - inter_area == 0:
+        return 1
+    else:
+        iou = inter_area / (s - inter_area)
+        return round(iou, 2)
 
 
 def bbox_expand(bbox, bbox_scale):
