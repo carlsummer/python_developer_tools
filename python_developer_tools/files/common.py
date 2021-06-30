@@ -27,7 +27,8 @@ def get_filename_suf_pix(filepath):
     :return: 0.jpg /home/deploy/datasets/creepageDistance/lr/test .jpg 0
     """
     path_obj = Path(filepath)
-    return path_obj.name,str(path_obj.parent),path_obj.suffix,path_obj.stem
+    filename, filedir, filesuffix, filenamestem = path_obj.name,str(path_obj.parent),path_obj.suffix,path_obj.stem
+    return filename, filedir, filesuffix, filenamestem
 
 
 
