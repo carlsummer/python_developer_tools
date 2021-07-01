@@ -162,3 +162,43 @@ def line2hough(line, numAngle, numRho, size=(32, 32)):
     if alpha >= numAngle:
         alpha = numAngle - 1
     return alpha, r
+
+"""
+import cv2
+import numpy as np
+# 1.加载图片，转为二值图
+img = cv2.imread('shapes.jpg')
+drawing = np.zeros(img.shape[:], dtype=np.uint8)
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+edges = cv2.Canny(gray, 50, 150)
+# 2.霍夫直线变换
+lines = cv2.HoughLines(edges, 0.8, np.pi / 180, 90)
+参数1：要检测的二值图（一般是阈值分割或边缘检测后的图）
+参数2：距离 ρ 的精度，值越大，考虑越多的线
+参数3：角度 θ 的精度，值越小，考虑越多的线
+参数4：累加数阈值，值越小，考虑越多的线
+# 3.将检测的线画出来（注意是极坐标噢）
+for line in lines:
+    rho, theta = line[0]
+    a = np.cos(theta)
+    b = np.sin(theta)
+    x0 = a * rho
+    y0 = b * rho
+    x1 = int(x0 + 1000 * (-b))
+    y1 = int(y0 + 1000 * (a))
+    x2 = int(x0 - 1000 * (-b))
+    y2 = int(y0 - 1000 * (a))
+    cv2.line(drawing, (x1, y1), (x2, y2), (0, 0, 255))
+    
+drawing = np.zeros(img.shape[:], dtype=np.uint8)
+# 统计概率霍夫线变换
+lines = cv2.HoughLinesP(edges, 0.8, np.pi / 180, 90, minLineLength=50, maxLineGap=10)
+# 将检测的线画出来
+for line in lines:
+    x1, y1, x2, y2 = line[0]
+    cv2.line(drawing, (x1, y1), (x2, y2), (0, 255, 0), 1, lineType = cv2.LINE_AA)
+cv2.imwrite('houghlines4.jpg', drawing)
+
+minLineLength：最短长度阈值，比这个长度短的线会被排除
+maxLineGap：同一直线两点之间的最大距离
+"""

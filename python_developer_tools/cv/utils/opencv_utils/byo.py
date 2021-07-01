@@ -111,6 +111,9 @@ def get_open_morph(img):
     opening = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
     return opening
 
+def opencv_channel_split_merge(img):
+    r, g, b = cv2.split(img)  # 图像的拆分，将彩色图像划分为三种颜色
+    img23 = cv2.merge([r, g, b])  # 将三种颜色通道的图片融合
 
 def get_close_morph(img):
     # 闭运算 先膨胀后腐蚀
