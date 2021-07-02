@@ -4,6 +4,7 @@
 
 ## 安装和使用
 ```shell script
+pip uninstall python_developer_tools
 pip install git+https://github.com/carlsummer/python_developer_tools.git
 from python_developer_tools import cv
 ```

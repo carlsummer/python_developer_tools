@@ -15,6 +15,9 @@ folder, imgName = os.path.split(fullName)
 src = cv2.imread(fullName, cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 lines = lsd(gray)
+lines = np.concatenate((lines, np.abs(lines[:, 0] - lines[:, 2])[:, None], np.abs(lines[:, 1] - lines[:, 3])[:, None]),axis=1)
+angle = np.arctan(lines[:, 6] / lines[:, 5])
+lines = np.concatenate((lines, angle[:, None]), axis=1)  # x1,y1,x2,y2,line_width,width,height,angle
 for i in range(lines.shape[0]):
     pt1 = (int(lines[i, 0]), int(lines[i, 1]))
     pt2 = (int(lines[i, 2]), int(lines[i, 3]))
