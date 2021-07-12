@@ -7,6 +7,7 @@ import multiprocessing
 
 """
 多线程同时处理批量数据的方法
+https://github.com/zhou13/lcnn/blob/88f281ab5421d51a62f1f84f97fea05afbf0c8d8/lcnn/utils.py#L78
 例子：
 for (key, data_dict_tmp) in data_dict["datasets"].items():
     nameImgs = list(paths.list_images(os.path.join(data_dict_tmp["allDatas"])))
