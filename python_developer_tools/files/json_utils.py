@@ -18,3 +18,8 @@ def read_json_file(filepath):
     with open(filepath, 'r', encoding="utf-8") as load_f:
         load_dict = json.load(load_f)
     return load_dict
+
+def save_json_file(filepath,datas):
+    # datas = ['joker', 'joe', 'nacy', 'timi']
+    with open(filepath,'w') as file_obj:
+        json.dump(datas,file_obj)

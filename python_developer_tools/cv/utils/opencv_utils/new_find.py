@@ -326,3 +326,14 @@ def detect_best_drop_line(col_histogram):
     return nInteral + np.argmax(left_scope_diff)
 
 
+def skimage2opencv(src):
+    src *= 255
+    src.astype(int)
+    cv2.cvtColor(src,cv2.COLOR_RGB2BGR)
+    return src
+
+def opencv2skimage(src):
+    cv2.cvtColor(src,cv2.COLOR_BGR2RGB)
+    src.astype(np.float32)
+    src /= 255
+    return src

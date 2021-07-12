@@ -117,6 +117,16 @@ sudo find /home/ -name '*.py' -ctime 0 -ls
 rz
 sz work.txt
 ```
+##### 查看当前目录下python3的文件大小
+```shell script
+du -sh python3
+```
+##### 查看CPU信息
+```shell script
+cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+free -h # 查看内存
+sudo dmidecode |grep -A16 "System Information$" # 查看主板型号
+```
 # centos
 ##### ftp 服务器搭建
 ```shell script
