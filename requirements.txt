@@ -23,3 +23,4 @@ imutils
 imgaug
 tqdm
 tensorboard
+python-alipay-sdk==3.0.1
