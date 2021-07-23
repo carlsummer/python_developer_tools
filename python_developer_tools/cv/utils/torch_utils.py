@@ -15,6 +15,20 @@ from datetime import datetime
 import torch.distributed as dist
 from torchvision import transforms
 
+def recursive_to(input, device):
+    """将输入的值转到设备cpu或者gpu中"""
+    if isinstance(input, torch.Tensor):
+        return input.to(device)
+    if isinstance(input, dict):
+        for name in input:
+            if isinstance(input[name], torch.Tensor):
+                input[name] = input[name].to(device)
+        return input
+    if isinstance(input, list):
+        for i, item in enumerate(input):
+            input[i] = recursive_to(item, device)
+        return input
+    assert False
 
 def init_seeds(seed=0):
     if seed is None:
@@ -25,7 +39,8 @@ def init_seeds(seed=0):
         )
     np.random.seed(seed)
     random.seed(seed)
-    torch.cuda.manual_seed_all(seed)  # gpu
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)  # gpu
     # 设置随机种子  rank = -1
     # 在神经网络中，参数默认是进行随机初始化的。如果不设置的话每次训练时的初始化都是随机的，
     # 导致结果不确定。如果设置初始化，则每次初始化都是固定的

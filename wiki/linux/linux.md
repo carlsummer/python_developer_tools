@@ -3,6 +3,8 @@
 ```shell script
 [root@VM-32-11-centos ~]# useradd admin
 [root@VM-32-11-centos ~]# passwd admin
+# 删除用户
+[root@VM-32-11-centos ~]# userdel -r shenjh    
 ```
 ##### 赋予sudo权限
 ```shell script
@@ -25,6 +27,7 @@ rsync -avzu --progress root@10.20.200.170:/home/chintAI/ext  /home/deploy/zengxi
 ```
 ##### 挖矿
 ```shell script
+PhoenixMiner_5.6a_Linux
 # 2快V100 184
 sudo ./Yolov5 -epool eth.f2pool.com:6688 -ewal zengxiaohui -worker 997 -pass x -gpus 1,2
 # 1快v100新华81
@@ -127,6 +130,12 @@ cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
 free -h # 查看内存
 sudo dmidecode |grep -A16 "System Information$" # 查看主板型号
 ```
+
+##### 查看最近用户是在那台ip上登录的
+```shell script
+lastlog
+```
+
 # centos
 ##### ftp 服务器搭建
 ```shell script
@@ -138,6 +147,22 @@ yum install vsftpd ftp
 eg:wget ftp://10.123.33.2/workspaces/ztpanels-haining.tar.gz --ftp-user=admin --ftp-password=Ztadmin2020
 --ftp-user 是ftp用户名
 --ftp-password 是用户密码
+
+wget -nH -m ftp://10.123.33.2/.cache/pip/ --ftp-user=admin --ftp-password=Ztadmin2020
+```
+
+#### 开启8001端口
+> 首先centos7的防火墙由iptables改为了firewalld
+> 1. 执行命令：firewall-cmd --zone=public --add-port=80/tcp  --permanent
+>     命令含义：
+>     --zone #作用域
+>     --add-port=80/tcp   #添加端口  格式为：端口/协议
+>    --parmanent  #永久生效  没有此参数重启后失效
+> 2. 重启防火墙：systemctl restart firewalld
+```shell script
+[root@localhost ~]# firewall-cmd --zone=public --add-port=8001/tcp  --permanent
+success
+[root@localhost ~]# systemctl restart firewalld
 ```
 
 # ubuntu
