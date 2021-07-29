@@ -26,3 +26,6 @@ def parseYamlCfg(cfg_path):
 
 cfg = parseYamlCfg(config_file)
 pprint.pprint(C, indent=4)
+
+# 将yaml进行保存
+# C.to_yaml(osp.join(outdir, "config.yaml"))

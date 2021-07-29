@@ -25,3 +25,6 @@ tqdm
 tensorboard
 python-alipay-sdk==3.0.1
 glob2
+onnx
+onnxruntime
+onnxruntime-gpu==1.6.0

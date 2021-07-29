@@ -103,3 +103,8 @@ np.random.permutation()
 ```python
 np.linalg.norm(求范数)
 ```
+
+### 求范数
+```python
+A[[i, j], :] = A[[j, i], :] # 实现了第i行与第j行的互换
+```

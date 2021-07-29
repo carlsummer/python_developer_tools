@@ -14,7 +14,23 @@ vim /etc/sudoers
 ## Allow root to run any commands anywhere 
 root    ALL=(ALL)       ALL
 admin   ALL=(ALL)       ALL
+
+# 方法二
+# 将xiaoming添加到root组（wheel）
+# 命令：
+usermod -g root deploy
+# 之后xiaoming就拥有root的权限了
+
+查看Linux某用户属于哪个组
+id  deploy
+groups deploy
 ```
+
+##### 修改history
+```shell script
+修改文件~/.bash_history
+```
+
 ##### 实时查看linux某条命令
 ```shell script
 watch -n 1 nvidia-smi

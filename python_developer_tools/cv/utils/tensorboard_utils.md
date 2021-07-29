@@ -19,4 +19,15 @@ def run_tensorboard(self):
         os.kill(p.pid, signal.SIGTERM)
 
     atexit.register(killme)
+
+
+def _launch_tensorboard(board_out, port, out):
+    os.environ["CUDA_VISIBLE_DEVICES"] = ""
+    mkdir(board_out)
+    p = subprocess.Popen(["tensorboard", f"--logdir={board_out}", f"--port={port}"])
+
+    def kill():
+        os.kill(p.pid, signal.SIGTERM)
+
+    atexit.register(kill)
 ```
