@@ -38,3 +38,12 @@ source D:/www/sql/back.sql;
 > 我把数据库的安装包文件放在了/home/admin/software/mysql这个，里面有一个tar包，
 > 使用命令tar -xvf mysql-8.0.21-1.el7.x86_64.rpm-bundle.tar进行解压缩，
 > 得到几个rpm安装包，在解压缩目录里使用yum -y localinstall *.rpm进行安装
+
+### 启动mysql：
+```shell script
+#使用 service 启动
+service mysqld restart 
+systemctl start  mysqld.service
+# 启动失败打开日志查看
+cat /var/log/mysqld.log
+```

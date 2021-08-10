@@ -6,15 +6,19 @@
 #https://github.com/primetang/LSD-OpenCV-MATLAB/tree/master/pylsd
 #pip install ocrd-fork-pylsd==0.0.3
 #pip install pylsd
+import time
+
 import cv2
 import numpy as np
 import os
 from pylsd.lsd import lsd
-fullName = "/home/deploy/zengxiaohui/data/ext/creepageDistance/20210621/sunchangzhen/lr/org/750763926004462_1_l.jpg"
+fullName = "/home/zengxh/medias/data/ext/creepageDistance/label_datasets/20210621/sunchangzhen/lr/org/750763926004462_1_l.jpg"
 folder, imgName = os.path.split(fullName)
 src = cv2.imread(fullName, cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+start = time.time()
 lines = lsd(gray)
+print(time.time()-start)
 lines = np.concatenate((lines, np.abs(lines[:, 0] - lines[:, 2])[:, None], np.abs(lines[:, 1] - lines[:, 3])[:, None]),axis=1)
 angle = np.arctan(lines[:, 6] / lines[:, 5])
 lines = np.concatenate((lines, angle[:, None]), axis=1)  # x1,y1,x2,y2,line_width,width,height,angle

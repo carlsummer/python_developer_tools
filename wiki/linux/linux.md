@@ -16,10 +16,10 @@ root    ALL=(ALL)       ALL
 admin   ALL=(ALL)       ALL
 
 # 方法二
-# 将xiaoming添加到root组（wheel）
+# 将deploy添加到root组（wheel）
 # 命令：
-usermod -g root deploy
-# 之后xiaoming就拥有root的权限了
+usermod -g root deploy   # -u root
+# 之后deploy就拥有root的权限了
 
 查看Linux某用户属于哪个组
 id  deploy
@@ -152,6 +152,11 @@ sudo dmidecode |grep -A16 "System Information$" # 查看主板型号
 lastlog
 ```
 
+##### 查看端口占用情况
+```shell script
+netstat -anp|grep 80
+```
+
 # centos
 ##### ftp 服务器搭建
 ```shell script
@@ -187,3 +192,4 @@ success
 apt-get install -y openssh-server
 apt-get install -y openssh-client
 ```
+

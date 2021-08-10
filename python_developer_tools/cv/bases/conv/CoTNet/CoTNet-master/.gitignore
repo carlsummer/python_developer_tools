@@ -1,0 +1,8 @@
+*.pyc
+.vscode
+__pycache__
+test.py
+test_bn.py
+speed.*
+tests.yml
+experiments/*
