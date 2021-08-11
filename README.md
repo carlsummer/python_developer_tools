@@ -24,6 +24,8 @@ from python_developer_tools import cv
             - [Depthwise Separable Convolution Usage](#Depthwise-Separable-Convolution-Usage)
             - [MBConv](#MBConv)
             - [Involution](#Involution)
+        - [全连接FC]
+            - [SSM](#SSM)
     - [分类模型classnetwork]
         - [AlexNet](#AlexNet)
         - [DenseNet](#DenseNet)
@@ -107,6 +109,22 @@ out=involution(input)
 print(out.shape)
 ```
 ***
+
+#### SSM
+##### Paper
+[Exploiting Featureswith Split-and-Share Module](https://arxiv.org/abs/2108.04500)
+##### Overview
+![](./temimg/SSM.png)
+##### code
+```python
+from python_developer_tools.cv.bases.FC.SSM import SSM
+import torch
+x = torch.randn(2, 2048, 1, 1)
+x = x.view(x.size(0), -1)
+model = SSM()
+out = model(x)
+print(out.shape)
+```
 
 ***
 ### AlexNet
