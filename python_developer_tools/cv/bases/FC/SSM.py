@@ -33,7 +33,10 @@ class SSM(nn.Module):
         for i in range(self.num_heads):
             in_features = i * self.n
             out_features = (i + 1) * self.n
-            x = features[:,:out_features]
+            if i == self.num_heads -1:
+                x = features
+            else:
+                x = features[:,:out_features]
             if i == 0:
                 result = self.ssm_layers[i](x)
             else:
