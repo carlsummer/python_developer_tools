@@ -1,9 +1,3 @@
-# !/usr/bin/env python
-# -- coding: utf-8 --
-# @Time : 2021/3/10 10:00
-# @Author : liumin
-# @File : Efficientnet.py
-
 import math
 import torch
 import torch.nn as nn

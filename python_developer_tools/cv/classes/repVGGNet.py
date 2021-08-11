@@ -1,9 +1,3 @@
-# !/usr/bin/env python
-# -- coding: utf-8 --
-# @Time : 2021/2/25 15:45
-# @Author : liumin
-# @File : repVGGNet.py
-
 import numpy as np
 import torch
 import torch.nn as nn

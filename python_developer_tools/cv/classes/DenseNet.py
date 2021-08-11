@@ -2,10 +2,6 @@ import torch
 import torch.nn as nn
 import torchvision
 
-print("PyTorch Version: ",torch.__version__)
-print("Torchvision Version: ",torchvision.__version__)
-
-__all__ = ['DenseNet121', 'DenseNet169','DenseNet201','DenseNet264']
 
 def Conv1(in_planes, places, stride=2):
     return nn.Sequential(

@@ -2,11 +2,6 @@ import torch
 import torch.nn as nn
 import torchvision
 
-print("PyTorch Version: ",torch.__version__)
-print("Torchvision Version: ",torchvision.__version__)
-
-__all__ = ['ResNet50', 'ResNet101','ResNet152']
-
 def Conv1(in_planes, places, stride=2):
     return nn.Sequential(
         nn.Conv2d(in_channels=in_planes,out_channels=places,kernel_size=7,stride=stride,padding=3, bias=False),
