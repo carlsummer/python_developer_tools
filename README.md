@@ -72,3 +72,253 @@ out = model(input)
 print(out.shape)
 ```
 ***
+
+***
+### DenseNet
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.DenseNet import DenseNet121
+model = DenseNet121()
+input = torch.randn(1, 3, 224, 224)
+out = model(input)
+print(out.shape)
+```
+***
+
+***
+### Efficientnet
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.Efficientnet import EfficientNet
+model = EfficientNet('efficientnet_b0')
+input = torch.randn(1, 3, 224, 224)
+out = model(input)
+print(out.shape)
+```
+***
+
+***
+### InceptionV1
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.InceptionV1 import InceptionV1
+model = InceptionV1()
+input = torch.randn(1, 3, 224, 224)
+aux1, aux2, out = model(input)
+print(aux1.shape)
+print(aux2.shape)
+print(out.shape)
+```
+***
+
+***
+### InceptionV2
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.InceptionV2 import InceptionV2
+model = InceptionV2()
+input = torch.randn(1, 3, 224, 224)
+out = model(input)
+print(out.shape)
+```
+***
+
+***
+### InceptionV3
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.InceptionV3 import InceptionV3
+model = InceptionV3()
+input = torch.randn(1, 3, 299, 299)
+aux,out = model(input)
+print(aux.shape)
+print(out.shape)
+```
+***
+
+***
+### repVGGNet
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.repVGGNet import RepVGG_A1
+model = RepVGG_A1()
+input = torch.randn(1,3,224,224)
+out = model(input)
+print(out.shape)
+```
+***
+
+***
+### ResNet
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.ResNet import ResNet50
+model = ResNet50()
+input = torch.randn(1, 3, 224, 224)
+out = model(input)
+print(out.shape)
+```
+***
+
+***
+### ResNeXt
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.ResNeXt import ResNeXtBlock
+model = ResNeXtBlock(in_places=256, places=128)
+input = torch.randn(1,256,64,64)
+out = model(input)
+print(out.shape)
+```
+***
+
+***
+### VGGNet
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.VGGNet import VGG16
+model = VGG16()
+input = torch.randn(1,3,224,224)
+out = model(input)
+print(out.shape)
+```
+***
+
+***
+### GhostNet
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.GhostNet import GhostNet
+model = GhostNet()
+input = torch.randn(1, 3, 224, 224)
+out = model(input)
+print(out.shape)
+```
+***
+
+***
+### MixNet
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.MixNet import MixNet
+model = MixNet(type ='mixnet_m')
+input = torch.randn(1, 3, 224, 224)
+out = model(input)
+print(out.shape)
+```
+***
+
+***
+### MobileNetV1
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.MobileNetV1 import MobileNetV1
+model = MobileNetV1()
+input = torch.randn(1, 3, 224, 224)
+out = model(input)
+print(out.shape)
+```
+***
+
+***
+### MobileNetV2
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.MobileNetV2 import MobileNetV2
+model = MobileNetV2()
+input = torch.randn(1, 3, 224, 224)
+out = model(input)
+print(out.shape)
+```
+***
+
+***
+### MobileNetV3
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.MobileNetV3 import MobileNetV3
+model = MobileNetV3(type='small')
+input = torch.randn(1, 3, 224, 224)
+out = model(input)
+print(out.shape)
+```
+***
+
+***
+### MobileNetXt
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.MobileNetXt import MobileNetXt
+model = MobileNetXt()
+input = torch.randn(1, 3, 224, 224)
+out = model(input)
+print(out.shape)
+```
+***
+
+***
+### ShuffleNet
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.ShuffleNet import shufflenet_g1
+model = shufflenet_g1()
+input = torch.randn(1, 3, 224, 224)
+out = model(input)
+print(out.shape)
+```
+***
+
+***
+### ShuffleNetV2
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.ShuffleNetV2 import shufflenet_v2_x2_0
+model = shufflenet_v2_x2_0()
+input = torch.randn(1, 3, 224, 224)
+out = model(input)
+print(out.shape)
+```
+***
+
+***
+### SqueezeNet
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.SqueezeNet import SqueezeNet
+model = SqueezeNet()
+input = torch.rand(1,3,224,224)
+out = model(input)
+print(out.shape)
+```
+***
+
+***
+### Xception
+##### Code
+```python
+import torch
+from python_developer_tools.cv.classes.Xception import Xception
+model = Xception()
+input = torch.randn(1,3,299,299)
+output = model(input)
+print(output.shape)
+```
+***
