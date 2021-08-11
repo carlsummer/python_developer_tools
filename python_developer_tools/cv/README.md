@@ -31,7 +31,8 @@
 │  │  └─20210802
 │  │  └─.....
 │  ├─lab_datasets 用来实验用的数据集train，test，val比例
-│  ├─deploy_question_datasets 用来评判发布那个版本的数据集
+|  |    └─训练完用模型找识别不对的图片，进行分析
+│  ├─deploy_question_datasets 每次新的有问题的图片
 │  ├─model 用来存放每次实验的模型
 
 

@@ -1,3 +1,10 @@
+<div align="center">
+<img src="https://img.shields.io/badge/-Python-brightgreen">
+<img src="https://img.shields.io/badge/-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-yellowgreen">
+<img src="https://img.shields.io/badge/-%E7%AE%97%E6%B3%95-yellow">
+<img src="https://img.shields.io/badge/-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-lightgrey">
+</div>
+
 # python_developer_tools
 > python 开发过程中常用到的工具;包括网站开发,人工智能,文件，数据类型转换
 > 支付接口对接，外挂，bat,sh等我在工作中常用到的开发工具
@@ -15,6 +22,8 @@ from python_developer_tools import cv
     - [基础组成成分](#基础组成成分)
         - [Convolution Series](#Convolution-series)
             - [Depthwise Separable Convolution Usage](#Depthwise-Separable-Convolution-Usage)
+            - [MBConv](#MBConv)
+            - [Involution](#Involution)
     - [分类模型classnetwork]
         - [AlexNet](#AlexNet)
         - [DenseNet](#DenseNet)
@@ -37,8 +46,7 @@ from python_developer_tools import cv
         - [SqueezeNet](#SqueezeNet)
         - [Xception](#Xception)
 - [files](#files)
-    - [common](#常用)
-        - [get_filename_suf_pix](#get_filename_suf_pix)
+    - [common](#common)
 ***
 
 ***
@@ -61,8 +69,48 @@ out=dsconv(input)
 ***
 
 ***
-### AlexNet
+#### MBConv
+##### Paper
+[Rethinking model scaling for convolutional neural networks](http://proceedings.mlr.press/v97/tan19a.html)
+
+##### Overview
+![](https://github.com/xmu-xiaoma666/External-Attention-pytorch/blob/master/img/MBConv.jpg)
+
 ##### Code
+感谢[代码来源External-Attention-pytorch](https://github.com/xmu-xiaoma666/External-Attention-pytorch#1-Depthwise-Separable-Convolution-Usage)
+```python
+from python_developer_tools.cv.bases.conv.MBConv import MBConvBlock
+import torch
+input=torch.randn(1,3,112,112)
+mbconv=MBConvBlock(ksize=3,input_filters=3,output_filters=3,image_size=112)
+out=mbconv(input)
+print(out.shape)
+```
+***
+
+***
+#### Involution
+##### Paper
+[Inverting the Inherence of Convolution for Visual Recognition](https://arxiv.org/abs/2103.06255)
+
+##### Overview
+![](https://github.com/xmu-xiaoma666/External-Attention-pytorch/blob/master/img/Involution.png)
+
+##### Code
+感谢[代码来源External-Attention-pytorch](https://github.com/xmu-xiaoma666/External-Attention-pytorch#1-Depthwise-Separable-Convolution-Usage)
+```python
+from python_developer_tools.cv.bases.conv.Involution import Involution
+import torch
+input=torch.randn(1,4,64,64)
+involution=Involution(kernel_size=3,in_channel=4,stride=2)
+out=involution(input)
+print(out.shape)
+```
+***
+
+***
+### AlexNet
+#### Code
 ```python
 import torch
 from python_developer_tools.cv.classes.AlexNet import AlexNet
@@ -75,7 +123,7 @@ print(out.shape)
 
 ***
 ### DenseNet
-##### Code
+#### Code
 ```python
 import torch
 from python_developer_tools.cv.classes.DenseNet import DenseNet121
@@ -101,7 +149,7 @@ print(out.shape)
 
 ***
 ### InceptionV1
-##### Code
+#### Code
 ```python
 import torch
 from python_developer_tools.cv.classes.InceptionV1 import InceptionV1
@@ -116,7 +164,7 @@ print(out.shape)
 
 ***
 ### InceptionV2
-##### Code
+#### Code
 ```python
 import torch
 from python_developer_tools.cv.classes.InceptionV2 import InceptionV2
@@ -129,7 +177,7 @@ print(out.shape)
 
 ***
 ### InceptionV3
-##### Code
+#### Code
 ```python
 import torch
 from python_developer_tools.cv.classes.InceptionV3 import InceptionV3
@@ -143,7 +191,7 @@ print(out.shape)
 
 ***
 ### repVGGNet
-##### Code
+#### Code
 ```python
 import torch
 from python_developer_tools.cv.classes.repVGGNet import RepVGG_A1
@@ -156,7 +204,7 @@ print(out.shape)
 
 ***
 ### ResNet
-##### Code
+#### Code
 ```python
 import torch
 from python_developer_tools.cv.classes.ResNet import ResNet50
@@ -169,7 +217,7 @@ print(out.shape)
 
 ***
 ### ResNeXt
-##### Code
+#### Code
 ```python
 import torch
 from python_developer_tools.cv.classes.ResNeXt import ResNeXtBlock
@@ -195,7 +243,7 @@ print(out.shape)
 
 ***
 ### GhostNet
-##### Code
+#### Code
 ```python
 import torch
 from python_developer_tools.cv.classes.GhostNet import GhostNet
@@ -208,7 +256,7 @@ print(out.shape)
 
 ***
 ### MixNet
-##### Code
+#### Code
 ```python
 import torch
 from python_developer_tools.cv.classes.MixNet import MixNet
@@ -221,7 +269,7 @@ print(out.shape)
 
 ***
 ### MobileNetV1
-##### Code
+#### Code
 ```python
 import torch
 from python_developer_tools.cv.classes.MobileNetV1 import MobileNetV1
@@ -234,7 +282,7 @@ print(out.shape)
 
 ***
 ### MobileNetV2
-##### Code
+#### Code
 ```python
 import torch
 from python_developer_tools.cv.classes.MobileNetV2 import MobileNetV2
@@ -247,7 +295,7 @@ print(out.shape)
 
 ***
 ### MobileNetV3
-##### Code
+#### Code
 ```python
 import torch
 from python_developer_tools.cv.classes.MobileNetV3 import MobileNetV3
@@ -260,7 +308,7 @@ print(out.shape)
 
 ***
 ### MobileNetXt
-##### Code
+#### Code
 ```python
 import torch
 from python_developer_tools.cv.classes.MobileNetXt import MobileNetXt
@@ -273,7 +321,7 @@ print(out.shape)
 
 ***
 ### ShuffleNet
-##### Code
+#### Code
 ```python
 import torch
 from python_developer_tools.cv.classes.ShuffleNet import shufflenet_g1
@@ -299,7 +347,7 @@ print(out.shape)
 
 ***
 ### SqueezeNet
-##### Code
+#### Code
 ```python
 import torch
 from python_developer_tools.cv.classes.SqueezeNet import SqueezeNet
@@ -312,7 +360,7 @@ print(out.shape)
 
 ***
 ### Xception
-##### Code
+#### Code
 ```python
 import torch
 from python_developer_tools.cv.classes.Xception import Xception
@@ -321,4 +369,17 @@ input = torch.randn(1,3,299,299)
 output = model(input)
 print(output.shape)
 ```
+***
+
+***
+# files
+## common
+<table>
+    <thead>
+        <tr><th>名称</th><th>功能</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>get_filename_suf_pix</td><td>获取路径的文件名,后缀,父路径</td></tr>
+    </tbody>
+</table>
 ***
