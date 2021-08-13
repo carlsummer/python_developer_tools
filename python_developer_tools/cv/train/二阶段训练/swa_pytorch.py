@@ -3,6 +3,7 @@
 # @Author zengxiaohui
 # Datatime:8/13/2021 11:08 AM
 # @File:swa_pytorch
+# https://pytorch.org/docs/master/optim.html?highlight=swa_utils
 import os
 import torch
 import torchvision

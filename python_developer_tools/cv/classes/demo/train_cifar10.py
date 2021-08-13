@@ -11,6 +11,8 @@ import torch.optim as optim
 import torch.nn as nn
 from tqdm import tqdm
 
+from python_developer_tools.cv.utils.torch_utils import init_seeds
+
 transform = transforms.Compose(
     [transforms.ToTensor(),
      transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
@@ -28,10 +30,12 @@ def shufflenet_v2_x0_5(nc, pretrained):
 
 if __name__ == '__main__':
     os.environ['CUDA_VISIBLE_DEVICES'] = '1'
-    epochs = 5
-    batch_size = 256
+    epochs = 50
+    batch_size = 1024
     num_workers = 8
     classes = 10
+
+    init_seeds(1024)
 
     trainset = torchvision.datasets.CIFAR10(root=os.getcwd(), train=True, download=True, transform=transform)
     trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size, shuffle=True, num_workers=num_workers,
@@ -47,9 +51,10 @@ if __name__ == '__main__':
     criterion = nn.CrossEntropyLoss()
     # SGD with momentum
     optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
 
     for epoch in range(epochs):
-        running_loss = 0.0
+        train_loss = 0.0
         for i, (inputs, labels) in tqdm(enumerate(trainloader)):
             inputs, labels = inputs.cuda(), labels.cuda()
 
@@ -66,8 +71,10 @@ if __name__ == '__main__':
             optimizer.step()
 
             # print statistics
-            running_loss += loss
-        print('%d/%d loss: %.3f' % (epochs, epoch + 1, running_loss / len(trainset)))
+            train_loss += loss
+
+        scheduler.step()
+        print('%d/%d loss: %.3f' % (epochs, epoch + 1, train_loss / len(trainset)))
 
     correct = 0
     model.eval()
