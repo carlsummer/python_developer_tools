@@ -26,6 +26,12 @@ from python_developer_tools import cv
             - [Involution](#Involution)
         - [全连接FC]
             - [SSM](#SSM)
+    - 分类classes
+        - demo
+            - [训练cifar10数据集](./python_developer_tools/cv/classes/demo/train_cifar10.py)
+    - train
+        - 二阶段训练
+            - [swa](./python_developer_tools/cv/train/二阶段训练/swa_pytorch.py)
     - [分类模型classnetwork]
         - [AlexNet](#AlexNet)
         - [DenseNet](#DenseNet)
