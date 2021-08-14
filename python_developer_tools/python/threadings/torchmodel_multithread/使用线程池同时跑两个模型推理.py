@@ -36,7 +36,7 @@ def init_seed(seed):
 
 def inference(model, x, name):
     y = model(x)
-    return name
+    return y
 
 
 def main():
