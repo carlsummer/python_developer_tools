@@ -39,4 +39,5 @@
 ### 其他可能有用的tricks集合
 > https://github.com/shanglianlm0525/CvPytorch
 > https://github.com/shanglianlm0525/PyTorch-Networks
+> https://github.com/bobo0810/PytorchNetHub
 > [tricks 收集](https://github.com/xmu-xiaoma666/External-Attention-pytorch#23-Residual-Attention-Usage)

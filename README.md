@@ -32,6 +32,8 @@ from python_developer_tools import cv
     - train
         - 二阶段训练
             - [swa](./python_developer_tools/cv/train/二阶段训练/swa_pytorch.py)
+    - utils
+        - [tensorboard](./python_developer_tools/cv/utils/tensorboard_demo.py)
     - [分类模型classnetwork]
         - [AlexNet](#AlexNet)
         - [DenseNet](#DenseNet)
