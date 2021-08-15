@@ -172,3 +172,13 @@ end (float) - 区间的终点
 steps (int) - 在start和end间生成的样本数
 out (Tensor, optional) - 结果张量
 ```
+
+### 替换模型中的某一层
+```python
+def convert_relu_to_softplus(model):
+    for child_name, child in model.named_children():
+        if isinstance(child, nn.ReLU):
+            setattr(model, child_name, nn.Softplus())
+        else:
+            convert_relu_to_softplus(child)
+```

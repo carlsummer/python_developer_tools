@@ -28,6 +28,8 @@ from python_developer_tools import cv
             - [Involution](#Involution)
         - [attentions注意力机制](./python_developer_tools/cv/bases/attentions/README.md)
             - Squeeze-and-Excitation Networks
+        - [activates 激活函数](./python_developer_tools/cv/bases/activates/README.md)
+            - [DynamicReLU](./python_developer_tools/cv/bases/activates/DynamicReLU.py)
         - [全连接FC]
             - [SSM](#SSM)
     - 分类classes

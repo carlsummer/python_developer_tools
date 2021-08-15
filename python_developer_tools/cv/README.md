@@ -37,6 +37,7 @@
 
 
 ### 其他可能有用的tricks集合
+> https://liumin.blog.csdn.net/
 > https://github.com/shanglianlm0525/CvPytorch
 > https://github.com/shanglianlm0525/PyTorch-Networks
 > https://github.com/bobo0810/PytorchNetHub
