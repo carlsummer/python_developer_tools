@@ -157,6 +157,9 @@ def convert_relu_to_DyReLU(model,dyrelutype="A"):
                 channels = t_layers.num_features
             if hasattr(t_layers, "out_channels"):
                 channels = t_layers.out_channels
+            if hasattr(t_layers, "out_features"):
+                channels = t_layers.out_features
+
             if dyrelutype == "A":
                 dyReluchannels.append({"name": name, "dyrelu": DyReLUA(channels)})
             if dyrelutype == "B":

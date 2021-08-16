@@ -9,7 +9,8 @@
 > python 开发过程中常用到的工具;包括网站开发,人工智能,文件，数据类型转换
 > 支付接口对接，外挂，bat,sh等我在工作中常用到的开发工具
 > 1. 制作一个可插拔的python开发工具
-> 2. 论文复现，tricks收集
+> 2. 论文复现
+> 3. 深度学习tricks收集
 
 ## 安装和使用
 ```shell script
@@ -23,13 +24,13 @@ from python_developer_tools import cv
 - [cv 计算机视觉](#cv-计算机视觉)
     - [基础组成成分](#基础组成成分)
         - [Convolution Series](#Convolution-series)
-            - [Depthwise Separable Convolution Usage](#Depthwise-Separable-Convolution-Usage)
-            - [MBConv](#MBConv)
-            - [Involution](#Involution)
+            - Depthwise Separable Convolution Usage
+            - MBConv
+            - Involution
         - [attentions注意力机制](./python_developer_tools/cv/bases/attentions/README.md)
             - Squeeze-and-Excitation Networks
-        - [activates 激活函数](./python_developer_tools/cv/bases/activates/README.md)
-            - [DynamicReLU](./python_developer_tools/cv/bases/activates/DynamicReLU.py)
+        - [activates 激活函数](#activates)
+            - DynamicReLU
         - [全连接FC]
             - [SSM](#SSM)
     - 分类classes
@@ -46,64 +47,18 @@ from python_developer_tools import cv
     - [common](#common)
 ***
 
-***
-#### Depthwise Separable Convolution Usage
-##### Paper
-["MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications"](https://arxiv.org/abs/1704.04861)
+### [Convolution-series](./python_developer_tools/cv/bases/conv/README.md)
+| 名称      |    csdn | 
+| :-------- | --------:| 
+| [Depthwise Separable Convolution](./python_developer_tools/cv/bases/conv/DepthwiseSeparableConvolution.py)  | |
+| [MBConv](./python_developer_tools/cv/bases/conv/MBConv.py)  | |
+| [Involution](./python_developer_tools/cv/bases/conv/Involution.py)  | |
 
-##### Overview
-![](https://github.com/xmu-xiaoma666/External-Attention-pytorch/blob/master/img/DepthwiseSeparableConv.png)
+### [activates](./python_developer_tools/cv/bases/activates/README.md)
+| 名称      |    csdn | 
+| :-------- | --------:| 
+| [DynamicReLU](./python_developer_tools/cv/bases/activates/DynamicReLU.py)  | [解析](https://blog.csdn.net/Carlsummer/article/details/119730645)|
 
-##### Code
-感谢[代码来源External-Attention-pytorch](https://github.com/xmu-xiaoma666/External-Attention-pytorch#1-Depthwise-Separable-Convolution-Usage)
-```python
-import torch
-from python_developer_tools.cv.bases.conv.DepthwiseSeparableConvolution import DepthwiseSeparableConvolution
-input=torch.randn(1,3,224,224)
-dsconv=DepthwiseSeparableConvolution(3,64)
-out=dsconv(input)
-```
-***
-
-***
-#### MBConv
-##### Paper
-[Rethinking model scaling for convolutional neural networks](http://proceedings.mlr.press/v97/tan19a.html)
-
-##### Overview
-![](https://github.com/xmu-xiaoma666/External-Attention-pytorch/blob/master/img/MBConv.jpg)
-
-##### Code
-感谢[代码来源External-Attention-pytorch](https://github.com/xmu-xiaoma666/External-Attention-pytorch#1-Depthwise-Separable-Convolution-Usage)
-```python
-from python_developer_tools.cv.bases.conv.MBConv import MBConvBlock
-import torch
-input=torch.randn(1,3,112,112)
-mbconv=MBConvBlock(ksize=3,input_filters=3,output_filters=3,image_size=112)
-out=mbconv(input)
-print(out.shape)
-```
-***
-
-***
-#### Involution
-##### Paper
-[Inverting the Inherence of Convolution for Visual Recognition](https://arxiv.org/abs/2103.06255)
-
-##### Overview
-![](https://github.com/xmu-xiaoma666/External-Attention-pytorch/blob/master/img/Involution.png)
-
-##### Code
-感谢[代码来源External-Attention-pytorch](https://github.com/xmu-xiaoma666/External-Attention-pytorch#1-Depthwise-Separable-Convolution-Usage)
-```python
-from python_developer_tools.cv.bases.conv.Involution import Involution
-import torch
-input=torch.randn(1,4,64,64)
-involution=Involution(kernel_size=3,in_channel=4,stride=2)
-out=involution(input)
-print(out.shape)
-```
-***
 
 #### SSM
 ##### Paper
