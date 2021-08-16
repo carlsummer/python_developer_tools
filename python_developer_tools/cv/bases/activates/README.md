@@ -23,3 +23,16 @@ Swish
 3. [使用demo代码](DynamicReLUdemo.py)
 ***
 
+***
+# APReLU (Adaptively-Parametric-ReLU)
+## Paper
+[Adaptively-Parametric-ReLU](https://ieeexplore.ieee.org/document/8998530)
+
+## Overview
+![Adaptively-Parametric-ReLU](Basic-idea-of-APReLU.png)
+
+##### Code
+1. 感谢[代码来源PlumedSerpent/Adaptively-Parametric-RELU-pytorch](https://github.com/PlumedSerpent/Adaptively-Parametric-RELU-pytorch/blob/master/APReLU.py) 
+2. [本库代码](APReLU.py)
+3. [使用demo代码](APReLUdemo.py)
+***

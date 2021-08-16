@@ -30,6 +30,7 @@ from python_developer_tools import cv
         - [attentions注意力机制](./python_developer_tools/cv/bases/attentions/README.md)
             - Squeeze-and-Excitation Networks
         - [activates 激活函数](#activates)
+            - Adaptively-Parametric-ReLU
             - DynamicReLU
         - [全连接FC]
             - [SSM](#SSM)
@@ -57,6 +58,7 @@ from python_developer_tools import cv
 ### [activates](./python_developer_tools/cv/bases/activates/README.md)
 | 名称      |    csdn | 
 | :-------- | --------:| 
+| [Adaptively-Parametric-ReLU](./python_developer_tools/cv/bases/activates/APReLU.py)  | |
 | [DynamicReLU](./python_developer_tools/cv/bases/activates/DynamicReLU.py)  | [解析](https://blog.csdn.net/Carlsummer/article/details/119730645)|
 
 
