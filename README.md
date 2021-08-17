@@ -24,20 +24,41 @@ from python_developer_tools import cv
 - [cv 计算机视觉](#cv-计算机视觉)
     - [基础组成成分](#基础组成成分)
         - [Convolution Series](#Convolution-series)
-            - Depthwise Separable Convolution Usage
-            - MBConv
-            - Involution
+            - **Depthwise Separable Convolution Usage**
+            - **MBConv**
+            - **Involution**
         - [attentions注意力机制](./python_developer_tools/cv/bases/attentions/README.md)
-            - Squeeze-and-Excitation Networks
+            - **Squeeze-and-Excitation Networks**
         - [activates 激活函数](#activates)
-            - Adaptively-Parametric-ReLU
-            - DynamicReLU
+            - **Adaptively-Parametric-ReLU**
+            - **DynamicReLU**
         - [全连接FC]
             - [SSM](#SSM)
     - 分类classes
         - demo
-            - [训练cifar10数据集](./python_developer_tools/cv/classes/demo/train_cifar10.py)
+            - [训练cifar10数据集](test/train_cifar10.py)
         - [分类模型classnetwork](#classnetwork)
+    - datasets
+        - [数据增强](./python_developer_tools/cv/datasets/README.md)
+            - 分类任务数据增强
+                - 图片自动对比度
+                - 直方图增强
+            - 直线检测数据增强
+                - **cutout**
+                - 旋转透视变换
+        - 数据集读取
+    - [scheduler](./python_developer_tools/cv/scheduler/README.md)
+        - **ExpLR**
+        - **StepLR**
+        - **MultiStepLR**
+        - **CosineLR**
+        - **LambdaLR**
+        - **ReduceLROnPlateau**
+        - **CosineAnnealingWarmRestarts**
+        - **CyclicLR**
+        - **OneCycleLR**
+        - **PolyLR**
+    - [optimizer](./python_developer_tools/cv/optimizer/README.md)
     - train
         - 二阶段训练
             - [swa](./python_developer_tools/cv/train/二阶段训练/swa_pytorch.py)
@@ -46,6 +67,9 @@ from python_developer_tools import cv
     
 - [files](#files)
     - [common](#common)
+- [python]
+    - [threadings](#threadings)
+        - multiprocessing_utils
 ***
 
 ### [Convolution-series](./python_developer_tools/cv/bases/conv/README.md)

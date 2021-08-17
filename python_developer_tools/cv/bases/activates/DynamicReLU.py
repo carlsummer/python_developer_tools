@@ -3,7 +3,6 @@
 # @Author zengxiaohui
 # Datatime:8/15/2021 3:24 PM
 # @File:DynamicReLU
-# https://zhuanlan.zhihu.com/p/142650829
 # https://github.com/Islanna/DynamicReLU
 import torch
 import torch.nn as nn
