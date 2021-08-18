@@ -49,9 +49,13 @@ from python_developer_tools import cv
         - 数据集读取
     - [scheduler](./python_developer_tools/cv/scheduler/README.md)
         - **ExpLR**
+        - **WarmupExponentialLR**
         - **StepLR**
+        - **WarmupStepLR**
         - **MultiStepLR**
+        - **WarmupMultiStepLR**
         - **CosineLR**
+        - **WarmupCosineAnnealingLR**
         - **LambdaLR**
         - **ReduceLROnPlateau**
         - **CosineAnnealingWarmRestarts**
@@ -59,6 +63,13 @@ from python_developer_tools import cv
         - **OneCycleLR**
         - **PolyLR**
     - [optimizer](./python_developer_tools/cv/optimizer/README.md)
+        - **SGD**
+        - **Adam**
+        - **AdamW**
+        - **Adadelta**
+        - **RMSprop**
+        - **RAdam**
+        - **Ranger**
     - train
         - 二阶段训练
             - [swa](./python_developer_tools/cv/train/二阶段训练/swa_pytorch.py)
@@ -67,6 +78,7 @@ from python_developer_tools import cv
     
 - [files](#files)
     - [common](#common)
+    - [pickle](#pickle)
 - [python]
     - [threadings](#threadings)
         - multiprocessing_utils
@@ -128,12 +140,23 @@ print(out.shape)
 
 
 # files
-## common
+## [common](./python_developer_tools/files/common.py)
 <table>
     <thead>
         <tr><th>名称</th><th>功能</th></tr>
     </thead>
     <tbody>
         <tr><td>get_filename_suf_pix</td><td>获取路径的文件名,后缀,父路径</td></tr>
+    </tbody>
+</table>
+
+## [pickle](./python_developer_tools/files/pickle_utils.py)
+<table>
+    <thead>
+        <tr><th>名称</th><th>功能</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>write_pkl</td><td>将数据存储为pkl</td></tr>
+        <tr><td>read_pkl</td><td>读取pkl文件的内容</td></tr>
     </tbody>
 </table>
