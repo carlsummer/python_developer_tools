@@ -64,10 +64,16 @@ from python_developer_tools import cv
         - **PolyLR**
     - [optimizer](./python_developer_tools/cv/optimizer/README.md)
         - **SGD**
-        - **Adam**
-        - **AdamW**
+        - **ASGD**
+        - **Adagrad**
         - **Adadelta**
         - **RMSprop**
+        - **Adam**
+        - **Adamax**
+        - **SparseAdam**
+        - **L-BFGS**
+        - **Rprop**
+        - **AdamW**
         - **RAdam**
         - **Ranger**
     - train
