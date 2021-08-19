@@ -14,6 +14,21 @@ FROM
 LIMIT 1000
 ```
 
+### like
+```sql
+SELECT	pvpbatch.id,
+	pvpp.image_name,
+	pvpai.id AS ai_resultId,
+	pvpp.id AS photovoltaicId /*http://10.123.33.2:8001/pv/back/ai_result_view/?id=448571*/
+FROM
+	pv_p_batchforecast AS pvpbatch
+	INNER JOIN pv_p_photovoltaic AS pvpp ON pvpbatch.id = pvpp.batch_forecast_id
+	INNER JOIN pv_p_ai_result AS pvpai ON pvpp.ai_result_id = pvpai.id 
+WHERE
+	pvpbatch.id IN ( 333, 334, 335, 336, 337, 338 ) 
+	AND pvpp.image_name LIKE "%6501039267000993%"
+```
+
 ### 配置远程访问
 ```sql
 use mysql;

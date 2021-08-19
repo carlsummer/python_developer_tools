@@ -31,6 +31,7 @@ def recursive_to(input, device):
     assert False
 
 def init_seeds(seed=0):
+    """eg:init_seeds(seed=0)"""
     if seed is None:
         seed = (
             os.getpid()
@@ -52,6 +53,7 @@ def init_cudnn(reproducibility_training_speed=True):
     # torch.backends.cudnn.deterministic将这个 flag 置为True的话，每次返回的卷积算法将是确定的，即默认算法
 
     """
+    reproducibility_training_speed为True表示训练速度加快，复现性;为false不能复现，提升网络性能
     https://blog.csdn.net/byron123456sfsfsfa/article/details/96003317
     设置 torch.backends.cudnn.benchmark=True 将会让程序在开始时花费一点额外时间，为整个网络的每个卷积层搜索最适合它的卷积实现算法，
     进而实现网络的加速。适用场景是网络结构固定（不是动态变化的），网络的输入形状（包括 batch size，图片大小，输入的通道）是不变的，
@@ -94,7 +96,9 @@ def tensor_to_np(tensor):
     return img
 
 def cuda2cpu(pred):
-    # 将cuda的torch变量转为cpu
+    """
+    将cuda的torch变量转为cpu
+    eg:cuda2cpu(pred)"""
     if not hasattr(pred, 'is_cuda'):
         return pred
     if pred.is_cuda:
@@ -314,7 +318,8 @@ def view_version_cuda_torch():
 
 
 def select_device(device=''):
-    """选择训练设备"""
+    """选择训练设备
+    eg:select_device("0")"""
     return torch.device('cuda:{}'.format(device) if torch.cuda.is_available() else 'cpu')
 
 """

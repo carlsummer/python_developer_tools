@@ -73,3 +73,7 @@ swish = Swish()
 4. https://zhuanlan.zhihu.com/p/274898817
 5. https://github.com/zhao62/Adaptively-Parametric-ReLU
 ***
+
+softmax
+https://github.com/slwang9353/Period-alternatives-of-Softmax
+https://arxiv.org/pdf/2108.07153.pdf

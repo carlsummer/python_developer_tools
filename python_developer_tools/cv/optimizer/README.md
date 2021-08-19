@@ -181,5 +181,17 @@ from .Ranger import Ranger
 optimizer = Ranger(filter(lambda p: p.requires_grad, model.parameters()), lr=0.01, betas=(0.95, 0.999), eps=1e-08, weight_decay=1e-4)
 ```
 
+
+------------------------------------------------
+# [utils](utils.py)
+<table>
+    <thead>
+        <tr><th>名称</th><th>功能</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>get_current_lr</td><td>获取当前lr</td></tr>
+    </tbody>
+</table>
+
 # 参考链接
 1. https://www.zhihu.com/question/340834465

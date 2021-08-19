@@ -30,6 +30,7 @@ from python_developer_tools import cv
         - [attentions注意力机制](./python_developer_tools/cv/bases/attentions/README.md)
             - **Squeeze-and-Excitation Networks**
         - [activates 激活函数](#activates)
+            - **ReLU**
             - **Adaptively-Parametric-ReLU**
             - **DynamicReLU**
         - [全连接FC]
@@ -81,7 +82,8 @@ from python_developer_tools import cv
             - [swa](./python_developer_tools/cv/train/二阶段训练/swa_pytorch.py)
     - utils
         - [tensorboard](./python_developer_tools/cv/utils/tensorboard_demo.py)
-    
+        - [torch_utils](#torch_utils)
+    - [label标准工具](./python_developer_tools/cv/label_tools.md)
 - [files](#files)
     - [common](#common)
     - [pickle](#pickle)
@@ -144,6 +146,22 @@ print(out.shape)
 | SqueezeNet  | [实现](./python_developer_tools/cv/classes/SqueezeNet.py)|
 | Xception  | [实现](./python_developer_tools/cv/classes/Xception.py)|
 
+### [torch_utils](./python_developer_tools/cv/utils/torch_utils.py)
+<table>
+    <thead>
+        <tr><th>名称</th><th>功能</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>init_seeds</td><td>固定pytorch训练时所有的随机种子</td></tr>
+        <tr><td>cuda2cpu</td><td>将pytorch的变量从cuda内存中移动到cpu的内存中</td></tr>
+        <tr><td>select_device</td><td>选择训练设备</td></tr>
+        <tr><td>collect_env_info</td><td>打印python，cuda，cudnn，torch等版本</td></tr>
+        <tr><td>labels_to_image_weights</td><td>根据图片样本数量计算weights</td></tr>
+        <tr><td>init_cudnn</td><td>加速训练还是追求模型性能</td></tr>
+        <tr><td>get_world_size</td><td>返回全局的整个的进程数</td></tr>
+        <tr><td>get_rank</td><td>执行该脚本的进程的rank</td></tr>
+    </tbody>
+</table>
 
 # files
 ## [common](./python_developer_tools/files/common.py)

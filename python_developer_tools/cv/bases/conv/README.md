@@ -86,3 +86,7 @@ print(out.shape)
 分离注意力模块(ResNeSt Block)
 
 ## res2net
+
+## CoConv
+1. [github代码](https://github.com/iduta/coconv)
+2. [论文](https://arxiv.org/abs/2108.07387)
