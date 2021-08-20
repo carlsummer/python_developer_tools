@@ -31,8 +31,28 @@ from python_developer_tools import cv
             - **Squeeze-and-Excitation Networks**
         - [activates 激活函数](#activates)
             - **ReLU**
+            - **LeakyReLU**
+            - **relu6**
+            - **SiLU**
+            - **sigmoid**
+            - **Swish**
             - **Adaptively-Parametric-ReLU**
             - **DynamicReLU**
+            - **softmax序列**
+                - **softmax**
+                - **norm_softmax**
+                - **sinmax**
+                - **norm_sinmax**
+                - **cosmax**
+                - **norm_cosmax**
+                - **sin_2_max**
+                - **norm_sin_2_max**
+                - **sin_2_max_move**
+                - **norm_sin_2_max_move**
+                - **sirenmax**
+                - **norm_sirenmax**
+                - **sin_softmax**
+                - **norm_sin_softmax**
         - [全连接FC]
             - [SSM](#SSM)
     - 分类classes
@@ -44,6 +64,19 @@ from python_developer_tools import cv
             - 分类任务数据增强
                 - 图片自动对比度
                 - 直方图增强
+                - mix_data
+                - [APR](./python_developer_tools/cv/datasets/classes/APR.py)
+                    - **posterize**
+                    - **rotate**
+                    - **solarize**
+                    - **shear_x**
+                    - **shear_y**
+                    - **translate_x**
+                    - **translate_y**
+                    - **color**
+                    - **contrast**
+                    - **brightness**
+                    - **sharpness**
             - 直线检测数据增强
                 - **cutout**
                 - 旋转透视变换
@@ -80,6 +113,7 @@ from python_developer_tools import cv
     - train
         - 二阶段训练
             - [swa](./python_developer_tools/cv/train/二阶段训练/swa_pytorch.py)
+            - [swaoffline](./python_developer_tools/cv/train/二阶段训练/swaoffline.py)
     - utils
         - [tensorboard](./python_developer_tools/cv/utils/tensorboard_demo.py)
         - [torch_utils](#torch_utils)
@@ -87,6 +121,10 @@ from python_developer_tools import cv
 - [files](#files)
     - [common](#common)
     - [pickle](#pickle)
+- [machinelearning](./python_developer_tools/machinelearning/README.md)
+    - **KFold**
+    - **SVM**
+    - **knn**
 - [python]
     - [threadings](#threadings)
         - multiprocessing_utils

@@ -1,7 +1,7 @@
 # ExpLR指数衰减
 > 学习率按照指数的形式衰减是比较常用的策略，
 > 我们首先需要确定需要针对哪个优化器执行学习率动态调整策略，
-> 其中参数gamma表示衰减的底数，选择不同的gamma值可以获得幅度不同的衰减曲线
+> 其中参数gamma表示衰减的底数，选择不同的gamma值可以获得幅度不同的衰减曲线<br/>
 > ![](ExpLR.jpg)
 ## code 
 ```python
@@ -11,7 +11,7 @@ ExpLR = torch.optim.lr_scheduler.ExponentialLR(optimizer_ExpLR, gamma=0.98)
 
 # StepLR 固定步长衰减
 > 有时我们希望学习率每隔一定步数（或者epoch）就减少为原来的gamma分之一，使用固定步长衰减依旧先定义优化器
-> 其中gamma参数表示衰减的程度，step_size参数表示每隔多少个step进行一次学习率调整
+> 其中gamma参数表示衰减的程度，step_size参数表示每隔多少个step进行一次学习率调整<br/>
 > ![](StepLR.jpg)
 ## code 
 ```python
@@ -25,7 +25,7 @@ StepLR = torch.optim.lr_scheduler.StepLR(optimizer_StepLR, step_size=step_size, 
 > 有的区间不更新学习率，这就需要使用MultiStepLR来实现动态区间长度控制：
 > 其中milestones参数为表示学习率更新的起止区间，在区间[0. 200]内学习率不更新，
 > 而在[200, 300]、[300, 320].....[340, 400]的右侧值都进行一次更新；
-> gamma参数表示学习率衰减为上次的gamma分之一。
+> gamma参数表示学习率衰减为上次的gamma分之一。<br/>
 > ![](MultiStepLR.jpg)
 ## code 
 ```python
@@ -39,9 +39,12 @@ torch.optim.lr_scheduler.MultiStepLR(optimizer_MultiStepLR,
 > 其包含的参数和余弦知识一致，参数T_max表示余弦函数周期；
 > eta_min表示学习率的最小值，默认它是0表示学习率至少为正值。
 > 确定一个余弦函数需要知道最值和周期，其中周期就是T_max，最值是初试学习率。
-> 下图展示了不同周期下的余弦学习率更新曲线：
-> ![](CosineLR.jpg)
-> [demo](../../../test/test_CosineAnnealingLR.py)
+> 下图展示了不同周期下的余弦学习率更新曲线：<br/>
+> ![](CosineLR.jpg)<br/>
+> [demo](../../../test/test_CosineAnnealingLR.py)<br/>
+> T_max(int)	一次学习率周期的迭代次数，即 T_max 个 epoch 之后重新设置学习率。<br/>
+eta_min(float)	最小学习率，即在一个周期中，学习率最小会下降到 eta_min，默认值为 0。<br/>
+last_epoch	最后一个EPOCH 默认-1，可不设置
 ## code 
 ```python
 optimizer_CosineLR = torch.optim.SGD(net.parameters(), lr=0.1)

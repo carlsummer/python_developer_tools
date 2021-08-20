@@ -37,7 +37,7 @@ watch -n 1 nvidia-smi
 ```
 ##### scp copy文件
 ```shell script
-scp -r root@10.20.200.170:/home/chintAI/ext /home/deploy/zengxiaohui/chintAIdata-bak/
+scp  -P 22 -r root@10.20.200.170:/home/chintAI/ext /home/deploy/zengxiaohui/chintAIdata-bak/
 #linux远程scp，但是不覆盖已经存在文件的方法
 rsync -avzu --progress root@10.20.200.170:/home/chintAI/ext  /home/deploy/zengxiaohui/chintAIdata-bak/
 ```

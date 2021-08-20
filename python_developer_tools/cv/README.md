@@ -42,3 +42,4 @@
 > https://github.com/shanglianlm0525/PyTorch-Networks
 > https://github.com/bobo0810/PytorchNetHub
 > [tricks 收集](https://github.com/xmu-xiaoma666/External-Attention-pytorch#23-Residual-Attention-Usage)
+> [代码解读](https://blog.csdn.net/shenjianhua005/article/details/117414292)
