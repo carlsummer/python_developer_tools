@@ -29,7 +29,8 @@ def shufflenet_v2_x0_5(nc, pretrained):
 
 
 if __name__ == '__main__':
-    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+    root_dir = "/home/zengxh/datasets"
+    # os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     epochs = 50
     batch_size = 1024
     num_workers = 8
@@ -37,11 +38,11 @@ if __name__ == '__main__':
 
     init_seeds(1024)
 
-    trainset = torchvision.datasets.CIFAR10(root=os.getcwd(), train=True, download=True, transform=transform)
+    trainset = torchvision.datasets.CIFAR10(root=root_dir, train=True, download=True, transform=transform)
     trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size, shuffle=True, num_workers=num_workers,
                                               pin_memory=True)
 
-    testset = torchvision.datasets.CIFAR10(root=os.getcwd(), train=False, download=True, transform=transform)
+    testset = torchvision.datasets.CIFAR10(root=root_dir, train=False, download=True, transform=transform)
     testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size, shuffle=False, num_workers=num_workers)
 
     model = shufflenet_v2_x0_5(classes, True)

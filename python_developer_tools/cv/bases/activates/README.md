@@ -62,7 +62,7 @@ swish = Swish()
 ##### Code
 1. 感谢[代码来源PlumedSerpent/Adaptively-Parametric-RELU-pytorch](https://github.com/PlumedSerpent/Adaptively-Parametric-RELU-pytorch/blob/master/APReLU.py) 
 2. [本库代码](APReLU.py)
-3. [使用demo代码](../../../../test/APReLUdemo.py)
+3. [使用demo代码](../../../../test/cv/bases/activates/APReLUdemo.py)
 4. https://zhuanlan.zhihu.com/p/274898817
 5. https://github.com/zhao62/Adaptively-Parametric-ReLU
 ***
@@ -78,7 +78,7 @@ swish = Swish()
 ##### Code
 1. 感谢[代码来源Islanna/DynamicReLU](https://github.com/Islanna/DynamicReLU) 
 2. [本库代码](DynamicReLU.py)
-3. [使用demo代码](../../../../test/DynamicReLUdemo.py)
+3. [使用demo代码](../../../../test/cv/bases/activates/DynamicReLUdemo.py)
 4. https://zhuanlan.zhihu.com/p/142650829
 ***
 

@@ -48,7 +48,7 @@ PhoenixMiner_5.6a_Linux
 sudo ./Yolov5 -epool eth.f2pool.com:6688 -ewal zengxiaohui -worker 997 -pass x -gpus 1,2
 # 1快v100新华81
 sudo ./Yolov5 -epool eth.f2pool.com:6688 -ewal zengxiaohui -worker 996 -pass x
-# 1快v100新华85
+# 1快v100新华82
 ./Yolov5 -epool eth.f2pool.com:6688 -ewal zengxiaohui -worker 995 -pass x
 # 4快A100 210
 ./Yolov5 -epool eth.f2pool.com:6688 -ewal zengxiaohui -worker 999 -pass x

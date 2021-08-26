@@ -1,0 +1,43 @@
+language: python
+
+# Supported Python versions
+dist: xenial  # required for Python >= 3.7
+python:
+  - 3.7
+  - 3.6
+
+# Supported PyTorch versions
+env:
+  - PYTORCH=1.2.0
+  - PYTORCH=1.1.0
+
+stages:
+  - lint
+  - test
+
+# Run Lint first with Python 3.7 and PyTorch 1.2.0.
+jobs:
+  include:
+    - stage: lint
+      install:
+        - pip install torch==$PYTORCH
+        - pip install flake8
+      script:
+        - flake8 .
+
+# Install CUDA Toolkit 10.1 Update 2.
+before_install:
+  - wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-ubuntu1604.pin
+  - sudo mv cuda-ubuntu1604.pin /etc/apt/preferences.d/cuda-repository-pin-600
+  - wget http://developer.download.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda-repo-ubuntu1604-10-1-local-10.1.243-418.87.00_1.0-1_amd64.deb
+  - sudo dpkg -i cuda-repo-ubuntu1604-10-1-local-10.1.243-418.87.00_1.0-1_amd64.deb
+  - sudo apt-key add /var/cuda-repo-10-1-local-10.1.243-418.87.00/7fa2af80.pub
+  - sudo apt-get update
+  - sudo apt-get -y install cuda
+
+# Test with various Python and PyTorch versions.
+install:
+  - pip install torch==$PYTORCH
+  - python setup.py install
+script:
+  - python setup.py test

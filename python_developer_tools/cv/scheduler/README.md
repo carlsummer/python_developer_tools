@@ -41,7 +41,7 @@ torch.optim.lr_scheduler.MultiStepLR(optimizer_MultiStepLR,
 > 确定一个余弦函数需要知道最值和周期，其中周期就是T_max，最值是初试学习率。
 > 下图展示了不同周期下的余弦学习率更新曲线：<br/>
 > ![](CosineLR.jpg)<br/>
-> [demo](../../../test/test_CosineAnnealingLR.py)<br/>
+> [demo](../../../test/cv/scheduler/test_CosineAnnealingLR.py)<br/>
 > T_max(int)	一次学习率周期的迭代次数，即 T_max 个 epoch 之后重新设置学习率。<br/>
 eta_min(float)	最小学习率，即在一个周期中，学习率最小会下降到 eta_min，默认值为 0。<br/>
 last_epoch	最后一个EPOCH 默认-1，可不设置
@@ -97,5 +97,5 @@ scheduler = torch.optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.01,
 ```
 
 # PolyLR
-> [demo](../../../test/test_PolyLR.py)
+> [demo](../../../test/cv/scheduler/test_PolyLR.py)
 ## [code](poly_lr.py)

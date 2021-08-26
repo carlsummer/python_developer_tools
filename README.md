@@ -55,6 +55,7 @@ from python_developer_tools import cv
                 - **norm_sin_softmax**
         - [全连接FC]
             - [SSM](#SSM)
+        - [regularization](./python_developer_tools/cv/bases/regularization.py)
     - 分类classes
         - demo
             - [训练cifar10数据集](test/train_cifar10.py)
@@ -110,10 +111,14 @@ from python_developer_tools import cv
         - **AdamW**
         - **RAdam**
         - **Ranger**
+        - **LARS**
     - train
         - 二阶段训练
             - [swa](./python_developer_tools/cv/train/二阶段训练/swa_pytorch.py)
             - [swaoffline](./python_developer_tools/cv/train/二阶段训练/swaoffline.py)
+        - [对抗训练](./python_developer_tools/cv/train/对抗训练/README.md)
+            - **FGSM**
+            - **PGD**
     - utils
         - [tensorboard](./python_developer_tools/cv/utils/tensorboard_demo.py)
         - [torch_utils](#torch_utils)

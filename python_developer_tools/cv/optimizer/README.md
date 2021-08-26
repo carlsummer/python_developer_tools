@@ -161,8 +161,11 @@ import torch
 optimizer = torch.optim.AdamW(params, lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=0.01, amsgrad=False)
 ```
 
+# Lookahead
+## [paper](https://arxiv.org/abs/1907.08610)
+
 # [radam](RAdam.py)
-## [paper](https://arxiv.org/pdf/1908.03265v1.pdf)
+## [paper](https://arxiv.org/abs/1908.03265)
 > [作者源码](https://github.com/LiyuanLucasLiu/RAdam)
 > [讲解参考](https://lessw.medium.com/new-state-of-the-art-ai-optimizer-rectified-adam-radam-5d854730807b)
 > ![](RAdam.jpeg)
@@ -174,6 +177,12 @@ optimizer = RAdam(filter(lambda p: p.requires_grad, model.parameters()), lr=0.01
 ```
 
 # [ranger](Ranger.py)
+> 将最新的LookAhead和RAdam优化器结合，产生了一个新的算法ranger
+> [代码](https://github.com/lessw2020/Ranger-Deep-Learning-Optimizer)
+> [代码2](https://github.com/lessw2020/Ranger21)
+> [本地代码](Ranger21)<br/>
+> ![](ranger21/ranger21.jpg)
+> [本地代码2](Ranger.py)
 ## code
 ```python
 import torch
@@ -181,6 +190,17 @@ from .Ranger import Ranger
 optimizer = Ranger(filter(lambda p: p.requires_grad, model.parameters()), lr=0.01, betas=(0.95, 0.999), eps=1e-08, weight_decay=1e-4)
 ```
 
+# LARS
+> [介绍](https://www.jianshu.com/p/e430620d3acf)
+> 将最新的LookAhead和RAdam优化器结合，产生了一个新的算法——Ranger，获得了比单独使用RAdam要好的效果。
+> 后来有人将LARS与Ranger结合，效果取得了进一步[提升](https://github.com/mgrankin/over9000)。
+> 最近，Ranger的提出者又将[GC](https://arxiv.org/abs/2004.01461) (Gradient Centralization)方法与Ranger结合，
+> [也取得了比Ranger好的效果](https://github.com/lessw2020/Ranger-Deep-Learning-Optimizer)。
+> 这里我会分四篇文章分享在阅读这四个方法的论文时我个人的总结和体会。
+> 由于LookAhead优化器与SWA比较相似，所以还会开辟一篇文章介绍SWA和[Fast SWA](https://arxiv.org/abs/1806.05594)优化器。本篇文章为该系列文章第一篇。
+## [paper](https://arxiv.org/abs/1708.03888)
+## [code](https://github.com/kakaobrain/torchlars)
+> [本地代码](torchlars)
 
 ------------------------------------------------
 # [utils](utils.py)
