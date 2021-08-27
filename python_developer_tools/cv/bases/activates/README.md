@@ -106,6 +106,7 @@ print(y1)
 > [本库代码](softmax_sequence.py)
     
 # serf
+> ![](serf.png)
 ## [paper](https://arxiv.org/pdf/2108.09598.pdf)
 ## [code](Serf.py)
 ## [demo](../../../../test/cv/bases/activates/test_serf.py)

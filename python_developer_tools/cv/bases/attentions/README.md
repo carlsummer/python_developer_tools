@@ -43,3 +43,10 @@ GC
 # ACTION
 1. [github代码](https://github.com/V-Sense/ACTION-Net)
 2. [论文](https://arxiv.org/abs/2103.07372)
+
+## CSRA [Residual Attention: A Simple but Effective Method for Multi-Label Recognition---ICCV2021]
+1. 论文地址：https://arxiv.org/abs/2108.02456
+2. 核心代码（第三方）：https://github.com/xmu-xiaoma666/External-Attention-pytorch#23-Residual-Attention-Usage
+> ![](ResidualAttention.png)<br/>
+>[本库代码](ResidualAttention.py)<br/>
+>[本库代码demo](../../../../test/cv/bases/attentions/test_ResidualAttention.py)
