@@ -108,3 +108,4 @@ print(y1)
 # serf
 ## [paper](https://arxiv.org/pdf/2108.09598.pdf)
 ## [code](Serf.py)
+## [demo](../../../../test/cv/bases/activates/test_serf.py)

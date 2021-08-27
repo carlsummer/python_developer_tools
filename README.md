@@ -53,6 +53,7 @@ from python_developer_tools import cv
                 - **norm_sirenmax**
                 - **sin_softmax**
                 - **norm_sin_softmax**
+            - **serf**
         - [全连接FC]
             - [SSM](#SSM)
         - [regularization](./python_developer_tools/cv/bases/regularization.py)
