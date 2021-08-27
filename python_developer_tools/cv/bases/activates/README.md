@@ -105,4 +105,6 @@ print(y1)
 ### [code](https://github.com/slwang9353/Period-alternatives-of-Softmax)
 > [本库代码](softmax_sequence.py)
     
-
+# serf
+## [paper](https://arxiv.org/pdf/2108.09598.pdf)
+## [code](Serf.py)

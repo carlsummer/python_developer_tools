@@ -11,6 +11,7 @@ import torch.optim as optim
 import torch.nn as nn
 from tqdm import tqdm
 
+from python_developer_tools.cv.classes.transferTorch import shufflenet_v2_x0_5
 from python_developer_tools.cv.utils.torch_utils import init_seeds
 
 transform = transforms.Compose(
@@ -19,14 +20,6 @@ transform = transforms.Compose(
 
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
-
-
-def shufflenet_v2_x0_5(nc, pretrained):
-    model_ft = torchvision.models.shufflenet_v2_x0_5(pretrained=pretrained)
-    num_ftrs = model_ft.fc.in_features
-    model_ft.fc = nn.Linear(num_ftrs, nc)
-    return model_ft
-
 
 if __name__ == '__main__':
     root_dir = "/home/zengxh/datasets"
@@ -75,7 +68,7 @@ if __name__ == '__main__':
             train_loss += loss
 
         scheduler.step()
-        print('%d/%d loss: %.3f' % (epochs, epoch + 1, train_loss / len(trainset)))
+        print('%d/%d loss: %.6f' % (epochs, epoch + 1, train_loss / len(trainset)))
 
     correct = 0
     model.eval()

@@ -11,7 +11,8 @@ import torch.optim as optim
 import torch.nn as nn
 from tqdm import tqdm
 
-from python_developer_tools.cv.bases.activates.APReLU import convert_relu_to_APReLU
+from python_developer_tools.cv.bases.activates.DynamicReLU import DyReLUA, DyReLUB, DyReLUC, convert_relu_to_DyReLU
+from python_developer_tools.cv.bases.activates.Serf import Serf, convert_relu_to_serf
 from python_developer_tools.cv.utils.torch_utils import init_seeds
 
 transform = transforms.Compose(
@@ -21,12 +22,14 @@ transform = transforms.Compose(
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
+
+
 class shufflenet_v2_x0_5M(nn.Module):
     def __init__(self,nc,pretrained=True):
         super(shufflenet_v2_x0_5M, self).__init__()
         self.model_ft = torchvision.models.shufflenet_v2_x0_5(pretrained=pretrained)
         # 将relu替换为DyReLUA
-        self.model_ft = convert_relu_to_APReLU(self.model_ft)
+        self.model_ft = convert_relu_to_serf(self.model_ft)
 
         num_ftrs = self.model_ft.fc.in_features
         self.model_ft.fc = nn.Linear(num_ftrs, nc)
@@ -47,7 +50,9 @@ class shufflenet_v2_x0_5M(nn.Module):
 if __name__ == '__main__':
     """
     ReLU 41%
-    APReLU 41 %
+    DyReLUA 42 %
+    DyReLUB 41 %
+    DyReLUC 40 %
     """
     root_dir = "/home/zengxh/datasets"
     # os.environ['CUDA_VISIBLE_DEVICES'] = '1'

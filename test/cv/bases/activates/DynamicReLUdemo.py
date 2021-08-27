@@ -96,7 +96,7 @@ if __name__ == '__main__':
             train_loss += loss
 
         scheduler.step()
-        print('%d/%d loss: %.3f' % (epochs, epoch + 1, train_loss / len(trainset)))
+        print('%d/%d loss: %.6f' % (epochs, epoch + 1, train_loss / len(trainset)))
 
     correct = 0
     model.eval()

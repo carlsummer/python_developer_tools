@@ -1,8 +1,8 @@
 # !/usr/bin/env python
 # -- coding: utf-8 --
 # @Author zengxiaohui
-# Datatime:8/14/2021 3:19 PM
-# @File:demo
+# Datatime:8/13/2021 11:20 AM
+# @File:train_cifar10
 import os
 import torch
 import torchvision
@@ -11,7 +11,7 @@ import torch.optim as optim
 import torch.nn as nn
 from tqdm import tqdm
 
-from python_developer_tools.cv.bases.activates.APReLU import convert_relu_to_APReLU
+from python_developer_tools.cv.bases.FC.SSM import SSM
 from python_developer_tools.cv.utils.torch_utils import init_seeds
 
 transform = transforms.Compose(
@@ -21,34 +21,14 @@ transform = transforms.Compose(
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-class shufflenet_v2_x0_5M(nn.Module):
-    def __init__(self,nc,pretrained=True):
-        super(shufflenet_v2_x0_5M, self).__init__()
-        self.model_ft = torchvision.models.shufflenet_v2_x0_5(pretrained=pretrained)
-        # 将relu替换为DyReLUA
-        self.model_ft = convert_relu_to_APReLU(self.model_ft)
-
-        num_ftrs = self.model_ft.fc.in_features
-        self.model_ft.fc = nn.Linear(num_ftrs, nc)
-
-    def forward(self,x):
-        x = self.model_ft.conv1(x)
-        x = self.model_ft.maxpool(x)
-        x = self.model_ft.stage2(x)
-        x = self.model_ft.stage3(x)
-        x = self.model_ft.stage4(x)
-        x = self.model_ft.conv5(x)
-        x = x.mean([2, 3])  # globalpool
-        out = self.model_ft.fc(x)
-        return out
-
-
+def shufflenet_v2_x0_5(nc, pretrained):
+    model_ft = torchvision.models.shufflenet_v2_x0_5(pretrained=pretrained)
+    num_ftrs = model_ft.fc.in_features
+    model_ft.fc = SSM(num_ftrs,nc)
+    return model_ft
 
 if __name__ == '__main__':
-    """
-    ReLU 41%
-    APReLU 41 %
-    """
+    # 52 %
     root_dir = "/home/zengxh/datasets"
     # os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     epochs = 50
@@ -65,7 +45,7 @@ if __name__ == '__main__':
     testset = torchvision.datasets.CIFAR10(root=root_dir, train=False, download=True, transform=transform)
     testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size, shuffle=False, num_workers=num_workers)
 
-    model = shufflenet_v2_x0_5M(classes, True)
+    model = shufflenet_v2_x0_5(classes, True)
     model.cuda()
     model.train()
 

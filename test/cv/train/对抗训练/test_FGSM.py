@@ -10,6 +10,7 @@ import torch.optim as optim
 import torch.nn as nn
 from tqdm import tqdm
 
+from python_developer_tools.cv.classes.transferTorch import resnet152, resnet18
 from python_developer_tools.cv.utils.torch_utils import init_seeds
 from python_developer_tools.cv.train.对抗训练.adversarialattackspytorchmaster.torchattacks import *
 
@@ -20,13 +21,6 @@ transform = transforms.Compose(
 
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
-
-
-def shufflenet_v2_x0_5(nc, pretrained):
-    model_ft = torchvision.models.shufflenet_v2_x0_5(pretrained=pretrained)
-    num_ftrs = model_ft.fc.in_features
-    model_ft.fc = nn.Linear(num_ftrs, nc)
-    return model_ft
 
 
 if __name__ == '__main__':
@@ -47,7 +41,7 @@ if __name__ == '__main__':
     testset = torchvision.datasets.CIFAR10(root=root_dir, train=False, download=True, transform=transform)
     testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size, shuffle=False, num_workers=num_workers)
 
-    model = shufflenet_v2_x0_5(classes, True)
+    model = resnet18(classes, True)
     model.cuda()
     model.train()
 
@@ -103,20 +97,12 @@ if __name__ == '__main__':
 
     # 使用带个对抗方式
     atk = GN(model, sigma=0.1)
-    correct = 0
-    model.eval()
-    for j, (images, labels) in tqdm(enumerate(trainloader)):
-        adv_images = atk(images, labels)
-        outputs = model(adv_images.cuda())
-        _, predicted = torch.max(outputs.data, 1)
-        correct += (predicted.cpu() == labels).sum()
-    bestRobustAcc_now = correct / len(trainset)
-    print('Robust Accuracy: %.4f %%' % (bestRobustAcc_now))
-
+    model.train()
     for epoch in range(epochs):
         train_loss = 0.0
         for i, (inputs, labels) in tqdm(enumerate(trainloader)):
-            inputs = atk(inputs, labels).cuda()
+            inputs = atk(inputs, labels).cuda() # 64% 73%
+            # inputs = inputs.cuda() # 72%
             labels = labels.cuda()
 
             # zero the parameter gradients
@@ -135,7 +121,7 @@ if __name__ == '__main__':
             train_loss += loss
 
         scheduler.step()
-        print('%d/%d loss: %.3f' % (epochs, epoch + 1, train_loss / len(trainset)))
+        print('%d/%d loss: %.6f' % (epochs, epoch + 1, train_loss / len(trainset)))
 
     # Standard Accuracy
     correct = 0
