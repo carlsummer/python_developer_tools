@@ -22,6 +22,7 @@ classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
 if __name__ == '__main__':
+    #41.189999 %
     root_dir = "/home/zengxh/datasets"
     # os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     epochs = 50
@@ -76,4 +77,4 @@ if __name__ == '__main__':
         outputs = model(images.cuda())
         _, predicted = torch.max(outputs.data, 1)
         correct += (predicted.cpu() == labels).sum()
-    print('Accuracy of the network on the 10000 test images: %d %%' % (100 * correct / len(testset)))
+    print('Accuracy of the network on the 10000 test images: %.6f %%' % (100 * correct / len(testset)))

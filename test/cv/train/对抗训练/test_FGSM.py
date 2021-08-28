@@ -3,14 +3,18 @@
 # @Author zengxiaohui
 # Datatime:8/26/2021 8:56 AM
 # @File:test_FGSM
+import copy
+
 import torch
 import torchvision
 import torchvision.transforms as transforms
 import torch.optim as optim
 import torch.nn as nn
+from torch.utils.data import TensorDataset, DataLoader
 from tqdm import tqdm
 
-from python_developer_tools.cv.classes.transferTorch import resnet152, resnet18
+from python_developer_tools.cv.classes.transferTorch import resnet152, resnet18, shufflenet_v2_x0_5
+from python_developer_tools.cv.train.对抗训练.FGSM import fgsm_attack
 from python_developer_tools.cv.utils.torch_utils import init_seeds
 from python_developer_tools.cv.train.对抗训练.adversarialattackspytorchmaster.torchattacks import *
 
@@ -23,8 +27,9 @@ classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
 
+
 if __name__ == '__main__':
-    # 48 %
+    # GN 40.820000 %
     root_dir = "/home/zengxh/datasets"
     # os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     epochs = 50
@@ -41,9 +46,7 @@ if __name__ == '__main__':
     testset = torchvision.datasets.CIFAR10(root=root_dir, train=False, download=True, transform=transform)
     testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size, shuffle=False, num_workers=num_workers)
 
-    model = resnet18(classes, True)
-    model.cuda()
-    model.train()
+    model = resnet18(classes, True).cuda().train()
 
     criterion = nn.CrossEntropyLoss()
     # SGD with momentum
@@ -96,13 +99,24 @@ if __name__ == '__main__':
     """
 
     # 使用带个对抗方式
+    model.eval()
     atk = GN(model, sigma=0.1)
-    model.train()
+    atk.set_return_type('int')  # Save as integer.
+    # atk.save(data_loader=trainloader, save_path="trainloader.pt", verbose=True)
+    atk.save(data_loader=testloader, save_path="testloader.pt", verbose=True)
+    # adv_images, adv_labels = torch.load("trainloader.pt")
+    # adv_data = TensorDataset(adv_images.float() / 255, adv_labels)
+    # adv_trainloader = DataLoader(adv_data, batch_size=batch_size, shuffle=True, num_workers=num_workers,pin_memory=True)
+    adv_images, adv_labels = torch.load("testloader.pt")
+    adv_data = TensorDataset(adv_images.float() / 255, adv_labels)
+    adv_testloader = DataLoader(adv_data, batch_size=batch_size, shuffle=False, num_workers=num_workers)
+
+
     for epoch in range(epochs):
         train_loss = 0.0
         for i, (inputs, labels) in tqdm(enumerate(trainloader)):
-            inputs = atk(inputs, labels).cuda() # 64% 73%
-            # inputs = inputs.cuda() # 72%
+            model.train()
+            inputs = inputs.cuda()  # 72.070000 %
             labels = labels.cuda()
 
             # zero the parameter gradients
@@ -120,6 +134,9 @@ if __name__ == '__main__':
             # print statistics
             train_loss += loss
 
+            model.eval()
+            inputs = atk(inputs, labels) #72.190002 %
+
         scheduler.step()
         print('%d/%d loss: %.6f' % (epochs, epoch + 1, train_loss / len(trainset)))
 
@@ -130,15 +147,14 @@ if __name__ == '__main__':
         outputs = model(images.cuda())
         _, predicted = torch.max(outputs.data, 1)
         correct += (predicted.cpu() == labels).sum()
-    print('Accuracy of the network on the 10000 test images: %d %%' % (100 * correct / len(testset)))
+    print('Accuracy of the network on the 10000 test images: %.6f %%' % (100 * correct / len(testset)))
 
     # Robust Accuracy
     correct = 0
     model.eval()
     atk.set_training_mode(training=False)
-    for j, (images, labels) in tqdm(enumerate(testloader)):
-        images = atk(images, labels).cuda()
-        outputs = model(images)
+    for j, (images, labels) in tqdm(enumerate(adv_testloader)):
+        outputs = model(images.cuda())
         _, predicted = torch.max(outputs.data, 1)
         correct += (predicted.cpu() == labels).sum()
-    print('Robust Accuracy of the network on the 10000 test images: %d %%' % (100 * correct / len(testset)))
+    print('Robust Accuracy of the network on the 10000 test images: %.6f %%' % (100 * correct / len(testset)))

@@ -29,6 +29,7 @@ from python_developer_tools import cv
             - **Involution**
         - [attentions注意力机制](./python_developer_tools/cv/bases/attentions/README.md)
             - **Squeeze-and-Excitation Networks**
+            - **Residual Attention**
         - [activates 激活函数](#activates)
             - **ReLU**
             - **LeakyReLU**
