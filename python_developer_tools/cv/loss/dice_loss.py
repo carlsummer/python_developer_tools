@@ -9,6 +9,7 @@ import torch.nn as nn
 
 
 class DiceLoss(nn.Module):
+    # BinaryDiceLoss
     def __init__(self):
         super(DiceLoss, self).__init__()
 

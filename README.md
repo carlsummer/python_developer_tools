@@ -23,6 +23,8 @@ from python_developer_tools import cv
 # Contents
 - [cv 计算机视觉](#cv-计算机视觉)
     - [基础组成成分](#基础组成成分)
+        - [input_conv 输入给网络之前的一步操作](./python_developer_tools/cv/bases/input_conv/README.md)
+            - **SpaceToDepth**
         - [Convolution Series](#Convolution-series)
             - **Depthwise Separable Convolution Usage**
             - **MBConv**
@@ -30,6 +32,8 @@ from python_developer_tools import cv
         - [attentions注意力机制](./python_developer_tools/cv/bases/attentions/README.md)
             - **Squeeze-and-Excitation Networks**
             - **Residual Attention**
+        - [BN](./python_developer_tools/cv/bases/BatchNormalization/README.md)
+            - **inplace_abn**
         - [activates 激活函数](#activates)
             - **ReLU**
             - **LeakyReLU**
@@ -57,6 +61,11 @@ from python_developer_tools import cv
             - **serf**
         - [全连接FC]
             - [SSM](#SSM)
+        - [池化pool](./python_developer_tools/cv/bases/pool/README.md)
+            - **SoftPool**
+            - **GlobalAvgPool2d**
+            - **BlurPool**
+            - **SPP**
         - [regularization](./python_developer_tools/cv/bases/regularization.py)
     - 分类classes
         - demo
