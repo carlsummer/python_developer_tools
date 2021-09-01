@@ -52,7 +52,7 @@ class NLL_OHEM(torch.nn.NLLLoss):
         y_hn = y.index_select(0, idxs)
         return torch.nn.functional.nll_loss(x_hn, y_hn)
 
-    #------------------------------------------start cutmix mixup 数据增强对应用ohemloss------------------------------#
+#------------------------------------------start cutmix mixup 数据增强对应用ohemloss------------------------------#
 def ohem_loss(rate, cls_pred, cls_target):
     batch_size = cls_pred.size(0)
     ohem_cls_loss = F.cross_entropy(cls_pred, cls_target, reduction='none', ignore_index=-1)

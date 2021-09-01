@@ -7,4 +7,7 @@
 > [使用demo](adversarialattackspytorchmaster/demos/White Box Attack (ImageNet).ipynb)
 
 # FGSM
-## [code](FGSM.py)
+1. [code](FGSM.py)
+
+# [所有能用并且验证过的对抗训练使用demo代码](../../../../test/cv/train/对抗训练/test_GN_shufflenet.py)
+# [所有能用并且验证过的对抗训练使用demo代码](../../../../test/cv/train/对抗训练/test_GN_resnet18.py)
