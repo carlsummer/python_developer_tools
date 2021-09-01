@@ -29,3 +29,4 @@ onnx
 onnxruntime
 onnxruntime-gpu==1.6.0
 wmi
+pymem

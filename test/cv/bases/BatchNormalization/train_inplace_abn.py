@@ -50,7 +50,7 @@ class shufflenet_v2_x0_5M(nn.Module):
 
 if __name__ == '__main__':
     # 32.750000 % leaky_relu
-    # elu
+    # 32.700001 % elu
     root_dir = "/home/zengxh/datasets"
     # os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     epochs = 50

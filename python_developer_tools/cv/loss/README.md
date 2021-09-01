@@ -1,3 +1,28 @@
+# CenterLoss
+## 说明
+1. [本库代码](CenterLoss.py)
+2. [使用demo](../../../test/cv/loss/train_centerloss.py)
+3. [代码来源](https://github.com/jxgu1016/MNIST_center_loss_pytorch)
+
+### CrossEntropyLoss
+> CrossEntropyLoss就是把以上Softmax–Log–NLLLoss合并成一步
+
+# Diceloss
+
+# focalloss
+
+### LabelSmoothingCrossEntropy
+> 有利于缓解过拟合
+
+# OHEMloss
+1. [paper](https://arxiv.org/abs/1604.03540)
+
+# OIMloss
+
+#topk_crossEntrophy
+1. [使用demo](../../../test/cv/loss/train_topk_crossEntrophy.py)
+2. [本库代码](topk_crossEntrophy.py)
+
 # TripletLoss
 > ![](TripletLoss.png)<br/>
 > 如上图所示，Triplet Loss 是有一个三元组<a, p, n>构成，其中<br/>
@@ -13,25 +38,17 @@ n: negative 表示预测为负样本。<br/>
 3. [代码来源](https://github.com/Cysu/open-reid/blob/master/reid/loss/triplet.py)
 4. [使用demo](../../../test/cv/loss/train_tripletloss.py)
 
-# CenterLoss
-## 说明
-1. [本库代码](CenterLoss.py)
-2. [使用demo](../../../test/cv/loss/train_centerloss.py)
-3. [代码来源](https://github.com/jxgu1016/MNIST_center_loss_pytorch)
-
 ### 自己手写常用loss
 https://blog.csdn.net/weixin_45209433/article/details/105141457
 
 ### NLLLoss
 > https://blog.csdn.net/weixin_43593330/article/details/108622747
 
-### CrossEntropyLoss
-> CrossEntropyLoss就是把以上Softmax–Log–NLLLoss合并成一步
 
-### LabelSmoothingCrossEntropy
-> 有利于缓解过拟合
 
-Diceloss
+
+
+
 
 Lovasz-SoftMax Loss
 

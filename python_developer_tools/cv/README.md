@@ -46,3 +46,4 @@
 > https://github.com/YehLi/xmodaler--https://xmodaler.readthedocs.io/en/latest/
 > https://github.com/Cysu/open-reid
 > https://github.com/KevinMusgrave/pytorch-metric-learning
+> https://github.com/CoinCheung/pytorch-loss

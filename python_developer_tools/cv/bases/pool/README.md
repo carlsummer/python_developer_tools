@@ -11,6 +11,7 @@
 3. [论文代码](https://github.com/adobe/antialiased-cnns)
 
 # SPP
+> ![](SPP.png)
 1. [code](SPP.py)
 2. [使用demo](../../../../test/cv/bases/pool/train_spppool.py)
 3. [论文](https://arxiv.org/pdf/1406.4729.pdf)

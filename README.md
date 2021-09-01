@@ -123,6 +123,17 @@ from python_developer_tools import cv
         - **RAdam**
         - **Ranger**
         - **LARS**
+    - [loss](./python_developer_tools/cv/loss/README.md)
+        - **CenterLoss**
+        - **CrossEntropyLoss**
+        - **Diceloss**
+        - **focalloss**
+        - **LabelSmoothingCrossEntropy**
+        - **OHEMloss**
+        - **OIMloss**
+        - **topk_crossEntrophy**
+        - **TripletLoss**
+        - **NLLLoss**
     - train
         - 二阶段训练
             - [swa](./python_developer_tools/cv/train/二阶段训练/swa_pytorch.py)
