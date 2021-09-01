@@ -3,6 +3,7 @@
 # @Author zengxiaohui
 # Datatime:8/13/2021 11:20 AM
 # @File:train_cifar10
+import os
 import torch
 import torchvision
 import torchvision.transforms as transforms
@@ -10,7 +11,8 @@ import torch.optim as optim
 import torch.nn as nn
 from tqdm import tqdm
 
-from python_developer_tools.cv.loss.OIMloss import OIMLoss
+from python_developer_tools.cv.bases.conv.CoordConv2d import CoordConv2d
+from python_developer_tools.cv.bases.conv.DY_Conv2d import DY_Conv2d
 from python_developer_tools.cv.utils.torch_utils import init_seeds
 
 transform = transforms.Compose(
@@ -20,10 +22,23 @@ transform = transforms.Compose(
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
+def convert_relu_to_BlurPool(model):
+    model_ft_modules = list(model.modules())
+    dyReluchannels = []
+    for i, (m, name) in enumerate(zip(model.modules(), model.named_modules())):
+        if type(m) is nn.Conv2d and m.in_channels // m.groups == 0:
+            dyReluchannels.append({"name": name, "dyrelu": CoordConv2d(m.in_channels,m.out_channels,kernel_size=m.kernel_size,stride=m.stride,padding=m.padding,dilation=m.dilation,groups=m.groups,bias=m.bias)})
+    for dictsss in dyReluchannels:
+        setattr(model, dictsss["name"][0], dictsss["dyrelu"])
+    return model
+
 class shufflenet_v2_x0_5M(nn.Module):
     def __init__(self,nc,pretrained=True):
         super(shufflenet_v2_x0_5M, self).__init__()
         self.model_ft = torchvision.models.shufflenet_v2_x0_5(pretrained=pretrained)
+        # 将MaxPool替换为BlurPool
+        self.model_ft = convert_relu_to_BlurPool(self.model_ft)
+
         num_ftrs = self.model_ft.fc.in_features
         self.model_ft.fc = nn.Linear(num_ftrs, nc)
 
@@ -35,11 +50,11 @@ class shufflenet_v2_x0_5M(nn.Module):
         x = self.model_ft.stage4(x)
         x = self.model_ft.conv5(x)
         x = x.mean([2, 3])  # globalpool
-        # out = self.model_ft.fc(x)
-        return x
+        out = self.model_ft.fc(x)
+        return out
 
 if __name__ == '__main__':
-    #28.110001 % %
+    # 41.139999 %
     root_dir = "/home/zengxh/datasets"
     # os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     epochs = 50
@@ -60,11 +75,9 @@ if __name__ == '__main__':
     model.cuda()
     model.train()
 
-    criterion = OIMLoss(num_features=1024, num_classes=classes).cuda()
-    lut = None
+    criterion = nn.CrossEntropyLoss()
     # SGD with momentum
     optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
-    optimzer4center = optim.SGD(criterion.parameters(), lr=0.5)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
 
     for epoch in range(epochs):
@@ -74,17 +87,15 @@ if __name__ == '__main__':
 
             # zero the parameter gradients
             optimizer.zero_grad()
-            optimzer4center.zero_grad()
 
             # forward
             outputs = model(inputs)
             # loss
-            loss,outputs,lut = criterion(outputs, labels)
+            loss = criterion(outputs, labels)
             # backward
             loss.backward()
             # update weights
             optimizer.step()
-            optimzer4center.step()
 
             # print statistics
             train_loss += loss
@@ -96,7 +107,6 @@ if __name__ == '__main__':
     model.eval()
     for j, (images, labels) in tqdm(enumerate(testloader)):
         outputs = model(images.cuda())
-        outputs= outputs.mm(lut.t())
         _, predicted = torch.max(outputs.data, 1)
         correct += (predicted.cpu() == labels).sum()
     print('Accuracy of the network on the 10000 test images: %.6f %%' % (100 * correct / len(testset)))

@@ -3,17 +3,14 @@
 # @Author zengxiaohui
 # Datatime:8/13/2021 11:20 AM
 # @File:train_cifar10
-import os
 import torch
 import torchvision
 import torchvision.transforms as transforms
 import torch.optim as optim
-import torch.nn as nn
 from tqdm import tqdm
 
 from python_developer_tools.cv.classes.transferTorch import shufflenet_v2_x0_5
-from python_developer_tools.cv.loss.OHEMloss import OhemLoss, NLL_OHEM
-from python_developer_tools.cv.loss.focalloss import FocalLoss2
+from python_developer_tools.cv.loss.ohem_loss import NLL_OHEM
 from python_developer_tools.cv.utils.torch_utils import init_seeds
 
 transform = transforms.Compose(

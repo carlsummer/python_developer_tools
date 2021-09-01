@@ -28,7 +28,7 @@ classes = ('plane', 'car', 'bird', 'cat',
 
 
 if __name__ == '__main__':
-    # GN 42.759998 %  FGSM 43.939999 %
+    # GN 42.759998 %  FGSM 43.939999 %  FFGSM 44.450001 %
     root_dir = "/home/zengxh/datasets"
     # os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     epochs = 50
@@ -72,7 +72,7 @@ if __name__ == '__main__':
             # train_loss += loss
 
             model.eval()
-            atk = FGSM(model, eps=8 / 255)
+            atk = FFGSM(model, eps=8 / 255, alpha=10 / 255)
             inputs2 = atk(inputs, labels)  # 72.190002 %
             model.train()
             # zero the parameter gradients

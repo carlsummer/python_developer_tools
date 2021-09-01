@@ -57,6 +57,14 @@ print(out.shape)
 ```
 ***
 
+# DY_Conv2d
+1. [本库代码](DY_Conv2d.py)
+2. [使用demo](../../../../test/cv/bases/conv/train_dy_conv.py)
+
+# CoordConv2d
+1. [本库代码](CoordConv2d.py)
+2. [使用demo](../../../../test/cv/bases/conv/train_coordConv2d.py)
+
 ## 一文看尽深度学习中的20种卷积（附源码整理和论文解读）
 > https://mp.weixin.qq.com/s/B1IDfCG4WqHYxsPkoVKEjg
 

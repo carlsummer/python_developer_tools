@@ -29,6 +29,8 @@ from python_developer_tools import cv
             - **Depthwise Separable Convolution Usage**
             - **MBConv**
             - **Involution**
+            - **DY_Conv2d**
+            - **CoordConv2d**
         - [attentions注意力机制](./python_developer_tools/cv/bases/attentions/README.md)
             - **Squeeze-and-Excitation Networks**
             - **Residual Attention**
@@ -140,7 +142,25 @@ from python_developer_tools import cv
             - [swaoffline](./python_developer_tools/cv/train/二阶段训练/swaoffline.py)
         - [对抗训练](./python_developer_tools/cv/train/对抗训练/README.md)
             - **FGSM**
+            - **BIM**
+            - **RFGSM**
+            - **CW**
             - **PGD**
+            - **PGDL2**
+            - **EOTPGD**
+            - **FFGSM**
+            - **TPGD**
+            - **MIFGSM**
+            - **VANILA**
+            - **GN**
+            - **APGD**
+            - **APGDT**
+            - **FAB**
+            - **Square**
+            - **AutoAttack**
+            - **OnePixel**
+            - **DeepFool**
+            - **DIFGSM**
     - utils
         - [tensorboard](./python_developer_tools/cv/utils/tensorboard_demo.py)
         - [torch_utils](#torch_utils)

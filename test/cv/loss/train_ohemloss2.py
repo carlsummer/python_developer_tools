@@ -7,12 +7,11 @@ import torch
 import torchvision
 import torchvision.transforms as transforms
 import torch.optim as optim
-import torch.nn as nn
 from tqdm import tqdm
 
-from python_developer_tools.cv.loss.OIMloss import OIMLoss
+from python_developer_tools.cv.classes.transferTorch import resnet18
 from python_developer_tools.cv.utils.torch_utils import init_seeds
-
+from python_developer_tools.cv.loss.ohem_loss import OhemLargeMarginLoss,OhemCELoss
 transform = transforms.Compose(
     [transforms.ToTensor(),
      transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
@@ -20,32 +19,15 @@ transform = transforms.Compose(
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-class shufflenet_v2_x0_5M(nn.Module):
-    def __init__(self,nc,pretrained=True):
-        super(shufflenet_v2_x0_5M, self).__init__()
-        self.model_ft = torchvision.models.shufflenet_v2_x0_5(pretrained=pretrained)
-        num_ftrs = self.model_ft.fc.in_features
-        self.model_ft.fc = nn.Linear(num_ftrs, nc)
-
-    def forward(self,x):
-        x = self.model_ft.conv1(x)
-        x = self.model_ft.maxpool(x)
-        x = self.model_ft.stage2(x)
-        x = self.model_ft.stage3(x)
-        x = self.model_ft.stage4(x)
-        x = self.model_ft.conv5(x)
-        x = x.mean([2, 3])  # globalpool
-        # out = self.model_ft.fc(x)
-        return x
-
 if __name__ == '__main__':
-    #28.110001 % %
+    # model1 73.919998 % model2  72.720001 %
     root_dir = "/home/zengxh/datasets"
     # os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     epochs = 50
     batch_size = 1024
     num_workers = 8
     classes = 10
+    img_width,img_height = 32,32
 
     init_seeds(1024)
 
@@ -56,47 +38,64 @@ if __name__ == '__main__':
     testset = torchvision.datasets.CIFAR10(root=root_dir, train=False, download=True, transform=transform)
     testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size, shuffle=False, num_workers=num_workers)
 
-    model = shufflenet_v2_x0_5M(classes, True)
-    model.cuda()
-    model.train()
+    model1 = resnet18(classes, True)
+    model1.cuda()
+    model1.train()
 
-    criterion = OIMLoss(num_features=1024, num_classes=classes).cuda()
-    lut = None
+    model2 = resnet18(classes, True)
+    model2.cuda()
+    model2.train()
+
+    criteria1 = OhemLargeMarginLoss(score_thresh=0.7, n_min=batch_size*img_width*img_height//batch_size).cuda()
+    criteria2 = OhemCELoss(score_thresh=0.7, n_min=batch_size*img_width*img_height//batch_size).cuda()
     # SGD with momentum
-    optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
-    optimzer4center = optim.SGD(criterion.parameters(), lr=0.5)
-    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
+    optimizer1 = optim.SGD(model1.parameters(), lr=0.001, momentum=0.9)
+    optimizer2 = optim.SGD(model2.parameters(), lr=0.001, momentum=0.9)
+    scheduler1 = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer1, T_max=epochs)
+    scheduler2 = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer2, T_max=epochs)
 
+    torch.autograd.set_detect_anomaly(True)
     for epoch in range(epochs):
         train_loss = 0.0
         for i, (inputs, labels) in tqdm(enumerate(trainloader)):
             inputs, labels = inputs.cuda(), labels.cuda()
 
             # zero the parameter gradients
-            optimizer.zero_grad()
-            optimzer4center.zero_grad()
+            optimizer1.zero_grad()
+            optimizer2.zero_grad()
 
             # forward
-            outputs = model(inputs)
+            outputs1 = model1(inputs)
+            outputs2 = model2(inputs)
             # loss
-            loss,outputs,lut = criterion(outputs, labels)
+            loss1 = criteria1(outputs1, labels)
+            loss2 = criteria2(outputs2, labels)
+            loss = loss1 + loss2
             # backward
             loss.backward()
             # update weights
-            optimizer.step()
-            optimzer4center.step()
+            optimizer1.step()
+            optimizer2.step()
 
             # print statistics
             train_loss += loss
 
-        scheduler.step()
+        scheduler1.step()
+        scheduler2.step()
         print('%d/%d loss: %.6f' % (epochs, epoch + 1, train_loss / len(trainset)))
 
     correct = 0
-    model.eval()
+    model1.eval()
     for j, (images, labels) in tqdm(enumerate(testloader)):
-        outputs = model(images.cuda())
-        outputs= outputs.mm(lut.t())
+        outputs = model1(images.cuda())
+        _, predicted = torch.max(outputs.data, 1)
+        correct += (predicted.cpu() == labels).sum()
+    print('Accuracy of the network on the 10000 test images: %.6f %%' % (100 * correct / len(testset)))
+
+    correct = 0
+    model2.eval()
+    for j, (images, labels) in tqdm(enumerate(testloader)):
+        outputs = model2(images.cuda())
         _, predicted = torch.max(outputs.data, 1)
         correct += (predicted.cpu() == labels).sum()
     print('Accuracy of the network on the 10000 test images: %.6f %%' % (100 * correct / len(testset)))
