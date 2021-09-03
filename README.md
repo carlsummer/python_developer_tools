@@ -95,6 +95,9 @@ from python_developer_tools import cv
                 - **cutout**
                 - 旋转透视变换
         - 数据集读取
+    - [detection]
+        - **YOLOX**
+            - [YOLOX训练自己的数据集](./python_developer_tools/cv/detection/yolovx/训练自己的数据集.md)
     - [scheduler](./python_developer_tools/cv/scheduler/README.md)
         - **ExpLR**
         - **WarmupExponentialLR**
@@ -125,6 +128,8 @@ from python_developer_tools import cv
         - **RAdam**
         - **Ranger**
         - **LARS**
+    - [post_processing后处理](./python_developer_tools/cv/post_processing/README.md)
+        - **tta**
     - [loss](./python_developer_tools/cv/loss/README.md)
         - **CenterLoss**
         - **CrossEntropyLoss**

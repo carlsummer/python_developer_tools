@@ -156,7 +156,10 @@ lastlog
 ```shell script
 netstat -anp|grep 80
 ```
-
+#### 查看显卡数量和信息
+```shell script
+nvidia-smi -L
+```
 # centos
 ##### ftp 服务器搭建
 ```shell script

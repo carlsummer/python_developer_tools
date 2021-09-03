@@ -11,6 +11,22 @@ from tensorboardX import SummaryWriter
 import subprocess
 import sys
 
+import socket
+
+def get_host_ip():
+    """
+    查询本机ip地址
+    :return:
+    """
+    try:
+        s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+        s.connect(('8.8.8.8',80))
+        ip=s.getsockname()[0]
+    finally:
+        s.close()
+
+    return ip
+
 def run_tensorboard(out,port=6006):
     """创建并且运行"""
     board_out = osp.join(out, "tensorboard")
@@ -21,6 +37,7 @@ def run_tensorboard(out,port=6006):
     tensorboard_bin_path = os.path.join(os.path.dirname(sys.executable), "tensorboard")
     cmdlist = [f"{tensorboard_bin_path}", f"--logdir={os.path.abspath(board_out)}", f"--port={port}","--host=0.0.0.0"]
     print(' '.join(cmdlist))
+    print("Browser open URL: {}://{}:{}".format("http", get_host_ip(), port))
     p = subprocess.Popen(cmdlist)
 
     def killme():

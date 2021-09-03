@@ -1,0 +1,22 @@
+{
+    "handaipianyi":{
+      "yolov5LabelNum": 0,
+      "labelname": "偏移"
+    },
+    "yiwu": {
+      "yolov5LabelNum": 1,
+      "labelname": "异物"
+    },
+    "quejiao": {
+      "yolov5LabelNum": 2,
+      "labelname": "缺角"
+    },
+    "handaiqueshi": {
+      "yolov5LabelNum": 3,
+      "labelname": "缺失"
+    },
+    "handaichaochuhuiliutiao": {
+      "yolov5LabelNum": 4,
+      "labelname": "超出"
+    }
+}
