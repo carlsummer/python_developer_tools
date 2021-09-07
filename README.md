@@ -10,7 +10,8 @@
 > 支付接口对接，外挂，bat,sh等我在工作中常用到的开发工具
 > 1. 制作一个可插拔的python开发工具
 > 2. 论文复现
-> 3. 深度学习tricks收集
+> 3. 深度学习tricks收集 <br/>
+> [所有的论文代码都在这里](https://paperswithcode.com/)
 
 ## 安装和使用
 ```shell script
@@ -142,6 +143,10 @@ from python_developer_tools import cv
         - **TripletLoss**
         - **NLLLoss**
     - train
+        - [不同数量卡训练](./python_developer_tools/cv/train/不同数量卡训练/README.md)
+            - [单机单卡](./python_developer_tools/cv/train/不同数量卡训练/单机单卡.py)
+            - [单机多卡](./python_developer_tools/cv/train/不同数量卡训练/单机多卡.py)
+            - [多机多卡](./python_developer_tools/cv/train/不同数量卡训练/多机多卡.py)
         - 二阶段训练
             - [swa](./python_developer_tools/cv/train/二阶段训练/swa_pytorch.py)
             - [swaoffline](./python_developer_tools/cv/train/二阶段训练/swaoffline.py)

@@ -317,10 +317,37 @@ def view_version_cuda_torch():
     print('CUDNN Version ', str(n1) + '.' + str(n2) + '.' + str(n3))
 
 
-def select_device(device=''):
+def select_device(device='',batch_size=None):
     """选择训练设备
     eg:select_device("0")"""
-    return torch.device('cuda:{}'.format(device) if torch.cuda.is_available() else 'cpu')
+    # device = 'cpu' or '0' or '0,1,2,3'
+    cpu_request = device.lower() == 'cpu'
+    if device and not cpu_request:  # if device requested other than 'cpu'
+        os.environ['CUDA_VISIBLE_DEVICES'] = device  # set environment variable
+        assert torch.cuda.is_available(), 'CUDA unavailable, invalid device %s requested' % device  # check availablity
+
+    cuda = False if cpu_request else torch.cuda.is_available()
+    if cuda:
+        c = 1024 ** 2  # bytes to MB
+        ng = torch.cuda.device_count()
+        if ng > 1 and batch_size:  # check that batch_size is compatible with device_count
+            assert batch_size % ng == 0, 'batch-size %g not multiple of GPU count %g' % (batch_size, ng)
+        x = [torch.cuda.get_device_properties(i) for i in range(ng)]
+        s = f'Using torch {torch.__version__} '
+        for i in range(0, ng):
+            if i == 1:
+                s = ' ' * len(s)
+            print("%sCUDA:%g (%s, %dMB)" % (s, i, x[i].name, x[i].total_memory / c))
+    else:
+        print(f'Using torch {torch.__version__} CPU')
+
+    if cuda:
+        if "," in device:
+            return torch.device('cuda:0') #如果是多卡那么返回第一张卡
+        else:
+            return torch.device('cuda:{}'.format(device)) # 如果单卡并且是指定的卡号，那么直接返回
+    else:
+        return torch.device("cpu")
 
 """
 torch.distributed.get_backend(group=group) # group是可选参数，返回字符串表示的后端 group表示的是ProcessGroup类
