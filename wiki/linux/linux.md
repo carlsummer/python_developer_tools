@@ -174,6 +174,13 @@ eg:wget ftp://10.123.33.2/workspaces/ztpanels-haining.tar.gz --ftp-user=admin --
 
 wget -nH -m ftp://10.123.33.2/.cache/pip/ --ftp-user=admin --ftp-password=Ztadmin2020
 ```
+#### rpm 安装
+```shell script
+# 安装 example.rpm 包并在安装过程中显示正在安装的文件信息及安装进度；
+rpm -ivh example.rpm 
+# 卸载 tomcat4 软件包
+rpm -e tomcat4 
+```
 
 #### 开启8001端口
 > 首先centos7的防火墙由iptables改为了firewalld

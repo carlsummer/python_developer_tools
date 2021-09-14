@@ -43,7 +43,7 @@ def main():
     # 41.139999
     starttime = time.time()
     epochs = 50
-    batch_size = 1024
+    batch_size = 1536
     num_workers = 8
     classes = 10
 

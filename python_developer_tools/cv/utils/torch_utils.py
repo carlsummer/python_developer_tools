@@ -14,6 +14,19 @@ from tabulate import tabulate
 from datetime import datetime
 import torch.distributed as dist
 from torchvision import transforms
+from thop import profile
+from copy import deepcopy
+
+def get_model_info(model, tsize=(640,640)): # h,w
+    """计算模型的参数量和计算一张图片的计算量"""
+    stride = 64
+    img = torch.zeros((1, 3, stride, stride), device=next(model.parameters()).device)
+    flops, params = profile(deepcopy(model), inputs=(img,), verbose=False)
+    params /= 1e6
+    flops /= 1e9
+    flops *= tsize[0] * tsize[1] / stride / stride * 2  # Gflops
+    info = "Params: {:.6f}M, Gflops: {:.6f}".format(params, flops)
+    return info
 
 def recursive_to(input, device):
     """将输入的值转到设备cpu或者gpu中"""

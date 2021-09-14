@@ -47,3 +47,8 @@
 > https://github.com/Cysu/open-reid
 > https://github.com/KevinMusgrave/pytorch-metric-learning
 > https://github.com/CoinCheung/pytorch-loss
+
+### 模型结构名词
+1. backone 特征提取
+2. neck 检测脖子
+3. head 检测头

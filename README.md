@@ -255,6 +255,7 @@ print(out.shape)
         <tr><td>init_cudnn</td><td>加速训练还是追求模型性能</td></tr>
         <tr><td>get_world_size</td><td>返回全局的整个的进程数</td></tr>
         <tr><td>get_rank</td><td>执行该脚本的进程的rank</td></tr>
+        <tr><td>get_model_info</td><td>计算模型的参数量和计算一张图片的计算量</td></tr>
     </tbody>
 </table>
 
