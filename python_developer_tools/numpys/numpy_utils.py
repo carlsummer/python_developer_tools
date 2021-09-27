@@ -27,3 +27,34 @@ def np_softmax(x, axis=0):
     e_x = np.exp(x - np.max(x))
     return e_x / e_x.sum(axis=axis, keepdims=True)
 
+def get_mode(distancelist=[6, 7, 7, 6, 7, 8, 8, 4, 6, 5, 5,
+                           5, 5, 5, 4, 5, 5, 5, 5, 5, 5, 5, 4, 4,
+                           5, 5, 5, 5, 5, 7, 7, 8, 8, 6, 6, 5, 5, 5,
+                           4, 6, 6, 7, 7, 7, 4, 5, 5, 5, 5, 5]):
+    """求list的众数"""
+    counts = np.bincount(np.array(distancelist))
+    label_classnum = np.argmax(counts)  # 众数为classnum对应label中的分类
+    return label_classnum
+
+def remove_discrete_values_quantile_ms(distancelist=[6, 7, 7, 6, 7, 8, 8, 4, 6, 5, 5,
+                           5, 5, 5, 4, 5, 5, 5, 5, 5, 5, 5, 4, 4,
+                           5, 5, 5, 5, 5, 7, 7, 8, 8, 6, 6, 5, 5, 5,
+                           4, 6, 6, 7, 7, 7, 4, 5, 5, 5, 5, 5],iqr_throld=1.5):
+    """采用标准差法去除离散值"""
+    dnp = np.array(distancelist)
+    xbar = np.mean(dnp)
+    xstd = np.std(dnp)
+    dnpnew = dnp[np.where((dnp  < xbar + iqr_throld * xstd ) & (dnp > xbar - iqr_throld * xstd))]
+    return dnpnew
+
+def remove_discrete_values_quantile(distancelist=[6, 7, 7, 6, 7, 8, 8, 4, 6, 5, 5,
+                           5, 5, 5, 4, 5, 5, 5, 5, 5, 5, 5, 4, 4,
+                           5, 5, 5, 5, 5, 7, 7, 8, 8, 6, 6, 5, 5, 5,
+                           4, 6, 6, 7, 7, 7, 4, 5, 5, 5, 5, 5],iqr_throld=1.5):
+    """采用箱线图法去除离散值"""
+    dnp = np.array(distancelist)
+    Q1 = np.quantile(dnp, q=0.25)
+    Q3 = np.quantile(dnp, q=0.75)
+    IQR = Q3 - Q1
+    dnpnew = dnp[np.where((dnp < Q3 + iqr_throld * IQR) & (dnp > Q1 - iqr_throld * IQR))]
+    return dnpnew

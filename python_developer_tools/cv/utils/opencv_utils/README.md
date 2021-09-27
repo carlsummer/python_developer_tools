@@ -1,1 +1,5 @@
-[opencv 大部分内容集合](https://github.com/makelove/OpenCV-Python-Tutorial)
+1. [opencv 大部分内容集合](https://github.com/makelove/OpenCV-Python-Tutorial)
+2. [opencv实战](https://github.com/tinyzqh/Opencv-Computer-Vision-Practice-Python-)
+3. [opencv实战2](https://github.com/crackwitz/metrology-demo)
+4. [opencv实战3](https://github.com/murtazahassan/Document-Scanner)
+5. [opencv实战4](https://github.com/murtazahassan/OpenCV-Python-Tutorials-and-Projects)

@@ -299,7 +299,7 @@ def group_consecutive(a, trod=10):
     return np.split(a, np.where(np.diff(a) >= trod)[0] + 1)
 
 
-def detect_best_drop_line(col_histogram):
+def detect_best_drop_line(col_histogram,nInteral=5):
     # 求突然上升很大值的位置
     """
     求突然上升很大值和突然下降很大值的位置
@@ -317,9 +317,8 @@ def detect_best_drop_line(col_histogram):
                         for idx in range(subImg2.shape[1] - cols_minInterval + nInteral, subImg2.shape[1] - nInteral)]
     right_edge = subImg2.shape[1] - cols_minInterval + nInteral + np.argmin(right_scope_diff)
     """
-    nInteral= 5
     # col_histogram = np.sum(vector, axis=0)
-    cols_minInterval = col_histogram.shape[1] // nInteral
+    cols_minInterval = col_histogram.shape[0] // nInteral
     left_scope_diff = [np.sum(col_histogram[idx - nInteral:idx].astype(np.int)) - np.sum(
         col_histogram[idx:idx + nInteral].astype(np.int))
                        for idx in range(nInteral, cols_minInterval - nInteral)]

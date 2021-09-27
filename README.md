@@ -150,6 +150,7 @@ from python_developer_tools import cv
         - 二阶段训练
             - [swa](./python_developer_tools/cv/train/二阶段训练/swa_pytorch.py)
             - [swaoffline](./python_developer_tools/cv/train/二阶段训练/swaoffline.py)
+        - [自动混合精度训练](./python_developer_tools/cv/train/自动混合精度训练/README.md)
         - [对抗训练](./python_developer_tools/cv/train/对抗训练/README.md)
             - **FGSM**
             - **BIM**

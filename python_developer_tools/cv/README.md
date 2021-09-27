@@ -4,13 +4,14 @@
 3. 对每一次采用的测量进行写execl记录
 
 ### 读论文源代码的方法
-1. 先将代码跑通
-2. 将utils等工具类方法理解并且，提取出来
-3. 理解datasets，如何进行数据处理，也就是数据预处理
-4. 理解网络模型 [结合论文一起]
-5. 理解loss
-6. 理解网络结果出来的后处理
-7. 最重要的是[耐心分析解读]。
+1. 先读懂论文获取作者使用的方法
+2. 先将代码跑通
+3. 将utils等工具类方法理解并且，提取出来
+4. 理解datasets，如何进行数据处理，也就是数据预处理
+5. 理解网络模型 [结合论文一起]
+6. 理解loss
+7. 理解网络结果出来的后处理
+8. 最重要的是[耐心分析解读]。
 
 ### 推理加速
 1. 优化代码细节
@@ -45,8 +46,22 @@
 > [代码解读](https://blog.csdn.net/shenjianhua005/article/details/117414292)
 > https://github.com/YehLi/xmodaler--https://xmodaler.readthedocs.io/en/latest/
 > https://github.com/Cysu/open-reid
-> https://github.com/KevinMusgrave/pytorch-metric-learning
 > https://github.com/CoinCheung/pytorch-loss
+> https://github.com/rwightman/pytorch-image-models
+#### Object Detection, Instance and Semantic Segmentation
+* Detectron2 - https://github.com/facebookresearch/detectron2
+* Segmentation Models (Semantic) - https://github.com/qubvel/segmentation_models.pytorch
+* EfficientDet (Obj Det, Semantic soon) - https://github.com/rwightman/efficientdet-pytorch
+#### Computer Vision / Image Augmentation
+* Albumentations - https://github.com/albumentations-team/albumentations
+* Kornia - https://github.com/kornia/kornia
+#### Knowledge Distillation
+* RepDistiller - https://github.com/HobbitLong/RepDistiller
+* torchdistill - https://github.com/yoshitomo-matsubara/torchdistill
+#### Metric Learning
+* PyTorch Metric Learning - https://github.com/KevinMusgrave/pytorch-metric-learning
+#### Training / Frameworks
+* fastai - https://github.com/fastai/fastai
 
 ### 模型结构名词
 1. backone 特征提取

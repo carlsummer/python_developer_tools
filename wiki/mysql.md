@@ -62,3 +62,7 @@ systemctl start  mysqld.service
 # 启动失败打开日志查看
 cat /var/log/mysqld.log
 ```
+
+```shell script
+mysql -uroot -p -h10.123.32.49 -P3306
+```
