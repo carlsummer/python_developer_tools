@@ -33,11 +33,11 @@ class labelme2coco(object):
         self.images = []
         self.categories = []
         self.annotations = []
-        self.data_coco_label_map = {"yiwu":1,
-                                    "handaipianyi":2,
-                                    "handaiqueshi":3,
-                                    "quejiao":4,
-                                    "handaichaochuhuiliutiao":5,
+        self.data_coco_label_map = {"silie": 1,  # 撕裂
+                                    "dazhe": 2,  # 打褶
+                                    "kong": 3,  # 孔
+                                    "qipao": 4,  # 气泡
+                                    # "handaichaochuhuiliutiao":5,
                                     }
         self.label = []
         self.annID = 1
@@ -64,7 +64,7 @@ class labelme2coco(object):
 
     def image(self, xmlpath, num):
         image = {}
-        imgpath = xmlpath.replace('.xml', '.jpg')
+        imgpath = xmlpath.replace('.xml', '.bmp')
         filename, filedir, filesuffix, filenamestem = get_filename_suf_pix(imgpath)
         imagecv = cv2.imread(imgpath)
         height, width, _ = imagecv.shape
@@ -82,7 +82,7 @@ class labelme2coco(object):
     def categorie(self, label):
         categorie = {}
         categorie['supercategory'] = label
-        categorie['id'] = self.data_coco_label_map[label] # len(self.label) + 1  # 0 默认为背景
+        categorie['id'] = self.data_coco_label_map[label]  # len(self.label) + 1  # 0 默认为背景
         categorie['name'] = label
         return categorie
 

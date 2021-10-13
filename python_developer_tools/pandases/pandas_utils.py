@@ -46,3 +46,17 @@ for file in allfile:
     feature = pd.read_csv(filepath + file, encoding='ANSI')
     features = features.append(feature)
 features.to_csv(outpath, index=False)
+
+#插入某一列
+# data.insert(2,'c','')
+# 2 ：插入的列的位置
+# ‘c'：待插入列的列名
+# ‘ ’：插入的值，这里插入的是空值
+
+# 在最后一列添加值
+# data['d'] = [5,6]
+
+# 遍历
+# iterrows(): 按行遍历，将DataFrame的每一行迭代为(index, Series)对，可以通过row[name]对元素进行访问。
+# itertuples(): 按行遍历，将DataFrame的每一行迭代为元祖，可以通过row[name]对元素进行访问，比iterrows()效率高。
+# iteritems():按列遍历，将DataFrame的每一列迭代为(列名, Series)对，可以通过row[index]对元素进行访问。

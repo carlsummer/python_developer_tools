@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 
 from python_developer_tools.cv.detection.yolovx.labelme2YoloXdatasets.txt2jsoncoco import labelme2coco
-from python_developer_tools.files.common import resetDir
+from python_developer_tools.files.common import resetDir, get_filename_suf_pix
 from python_developer_tools.python.threadings.multiprocessing_utils import parmap
 
 
@@ -50,7 +50,7 @@ def xmlImg2coco(bigImgallPathList, bigXmlallPathList, datasetsDir):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="将人工复判的img和xml 重新画图并保存到一个新的文件夹中")
     parser.add_argument('--sourceDir',
-                        default=r'/home/zengxh/medias/data/ext/PVDefectData/haining/peiyu/9bb/danjing/banpian/166/daojiao/24/update_0825/',
+                        default=r'/home/zengxh/workspace/YOLOX/datasets/coco/org/',
                         help="复判好的文件夹")
     parser.add_argument('--cocodatasetDir',
                         default=r'/home/zengxh/workspace/YOLOX/datasets/coco/',
@@ -61,5 +61,9 @@ if __name__ == '__main__':
     # cocodatasetDir = os.path.abspath(os.path.join(sourceDir, "..")) if cocodatasetDir == "" else cocodatasetDir
 
     imglist = list(paths.list_images(sourceDir))
-    xmlList = [imgpath.replace(".jpg", ".xml") for imgpath in imglist]
+    xmlList = []
+    for imgpath in imglist:
+        filename, filedir, filesuffix, filenamestem = get_filename_suf_pix(imgpath)
+        xmlpath = imgpath.replace(filesuffix,".xml")
+        xmlList.append(xmlpath)
     xmlImg2coco(imglist, xmlList, cocodatasetDir)
