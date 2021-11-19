@@ -13,6 +13,19 @@ from python_developer_tools.cv.utils.matplotlib_utils import plt_show_histogram
 import scipy.ndimage
 
 
+def get_edge_by_Diff(subImg1, axis):
+    """subImg1 为灰度图
+    https://blog.csdn.net/hong3731/article/details/119649418
+    """
+    subImg1 = 255 - subImg1
+    subImg1 = subImg1.astype(np.float32)
+    histogram = np.sum(subImg1, axis=axis)
+    samples = scipy.ndimage.gaussian_filter1d(histogram, sigma=1)
+    gradient = np.diff(samples)
+    i_falling = np.argmin(gradient)  # in samples
+    i_rising = np.argmax(gradient)  # in samples
+    return i_falling, i_rising
+
 if __name__ == '__main__':
     # command line argument parsing
     # change defaults here

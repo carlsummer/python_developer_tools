@@ -19,15 +19,24 @@ LIMIT 1000
 SELECT	pvpbatch.id,
 	pvpp.image_name,
 	pvpai.id AS ai_resultId,
-	pvpp.id AS photovoltaicId /*http://10.123.33.2:8001/pv/back/ai_result_view/?id=448571*/
+	concat(":8001/pv/back/ai_result_view/?id=",pvpp.id) AS photovoltaicId,
+	CONCAT(":8001/pv/back/downloadOriginImg/?originPath=",pvpai.origin_image) as downloadOriginUrl
+/*http://10.123.33.2:8001/pv/back/ai_result_view/?id=448571*/
 FROM
 	pv_p_batchforecast AS pvpbatch
 	INNER JOIN pv_p_photovoltaic AS pvpp ON pvpbatch.id = pvpp.batch_forecast_id
 	INNER JOIN pv_p_ai_result AS pvpai ON pvpp.ai_result_id = pvpai.id 
 WHERE
-	pvpbatch.id IN ( 333, 334, 335, 336, 337, 338 ) 
-	AND pvpp.image_name LIKE "%6501039267000993%"
+	pvpp.image_name LIKE "%6507639277002748-1%"
+	OR pvpp.image_name LIKE "%6506139277007066%"
+	OR pvpp.image_name LIKE "%6507639277003224%"
+	OR pvpp.image_name LIKE "%7521039277019682%"
+	OR pvpp.image_name LIKE "%6507739277000611%"
+	OR pvpp.image_name LIKE "%6507739277000607%"
+	OR pvpp.image_name LIKE "%6507739277000599%"
 ```
+
+show databases; 显示数据库
 
 ### 配置远程访问
 ```sql
@@ -43,6 +52,10 @@ SELECT `Host`,`User` FROM user;
 ### 创建数据库
 ```sql
 CREATE database `ztpanels-haining` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+```
+### 导出数据库
+```sql
+mysqldump -u 用户名 -p 数据库名 > 导出的文件名
 ```
 ### 导入数据库
 ```sql
@@ -65,4 +78,20 @@ cat /var/log/mysqld.log
 
 ```shell script
 mysql -uroot -p -h10.123.32.49 -P3306
+
+alter table pv_p_ai_result add column server_ip varchar(50) null; # 给表pv_p_ai_result插入一列server_ip
+```
+
+## update 和select结合使用
+```sql
+UPDATE pv_p_photovoltaic as A INNER JOIN(
+    SELECT	
+			pvpp.id,pvpp.server_ip
+		FROM
+			pv_p_batchforecast AS pvpbatch
+			INNER JOIN pv_p_photovoltaic AS pvpp ON pvpbatch.id = pvpp.batch_forecast_id
+			INNER JOIN pv_p_ai_result AS pvpai ON pvpp.ai_result_id = pvpai.id 
+		WHERE
+		pvpbatch.id IN (509,510,511,512,513)
+) c ON A.id = c.id SET A.server_ip = "10.123.32.49"; 
 ```

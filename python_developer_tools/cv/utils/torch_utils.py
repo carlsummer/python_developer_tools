@@ -110,15 +110,16 @@ def tensor_to_np(tensor):
 
 def cuda2cpu(pred):
     """
-    将cuda的torch变量转为cpu
-    eg:cuda2cpu(pred)"""
+        将cuda的torch变量转为cpu
+        eg:cuda2cpu(pred)"""
     if not hasattr(pred, 'is_cuda'):
         return pred
     if pred.is_cuda:
-        try:
-            pred_cpu = pred.cpu().numpy()
-        except Exception as e:
-            pred_cpu = pred.cpu().detach().numpy()
+        pred_cpu = pred.cpu()
+        if not hasattr(pred_cpu, 'detach'):
+            pred_cpu = pred_cpu.numpy()
+        else:
+            pred_cpu = pred_cpu.detach().numpy()
     else:
         pred_cpu = pred.numpy()
     return pred_cpu

@@ -70,6 +70,34 @@ def mix_data(x, use_cuda=True, prob=0.6):
 
     return mixed_x
 
+
+### mixup start ###
+def mixup_data(x, y, alpha=1.0, device="cpu"):
+    '''Compute the mixup data. Return mixed inputs, pairs of targets, and lambda'''
+    if alpha > 0.:
+        lam = np.random.beta(alpha, alpha)
+    else:
+        lam = 1.
+    batch_size = x.size()[0]
+    if str(device) != "cpu":
+        index = torch.randperm(batch_size).to(device)
+    else:
+        index = torch.randperm(batch_size)
+
+    mixed_x = lam * x + (1 - lam) * x[index, :]
+    y_a, y_b = y, y[index]
+    return mixed_x, y_a, y_b, lam
+
+
+def mixup_criterion(y_a, y_b, lam):
+    return lambda criterion, pred: lam * criterion(pred, y_a) + (1 - lam) * criterion(pred, y_b)
+# eg:
+# train_inputs, targets_a, targets_b, lam = mixup_data(train_inputs, labels, hyp["mixup_alpha"], device)
+# outputs = model(train_inputs)
+# loss_func = mixup_criterion(targets_a, targets_b, lam)
+# loss = loss_func(criterion, outputs)
+### mixup end ###
+
 if __name__ == '__main__':
     img_path = r'/home/zengxh/medias/data/ext/creepageDistance/lab_datasets/lr/org/6319938267001088_0_l..jpg'
     PIL_origin_image = Image.open(img_path)

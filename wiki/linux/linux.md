@@ -30,6 +30,31 @@ groups deploy
 ```shell script
 修改文件~/.bash_history
 ```
+#### 记录用户最后一次登录记录
+```shell script
+cd /var/log/
+sudo rm -rf lastlog
+sudo vim lastlog
+```
+```shell script
+sudo rm -rf /var/run/utmp
+sudo vim /var/run/utmp
+who
+sudo rm -rf /var/log/wtmp
+sudo vim /var/log/wtmp
+last 
+sudo rm -rf /var/log/btmp
+sudo vim /var/log/btmp
+lastb
+sudo rm -rf /var/log/lastlog
+sudo vim /var/log/lastlog
+lastlog
+其中 utmp 对应w 和 who命令； wtmp 对应last命令；btmp对应lastb命令；lastlog 对应lastlog命令
+```
+##### 查看最近用户是在那台ip上登录的
+```shell script
+lastlog
+```
 
 ##### 实时查看linux某条命令
 ```shell script
@@ -113,6 +138,10 @@ sed -i 's/\r//' run.sh
 cd C:\Users\zengxh\Documents\workspace\git-chint-workspace\PVDefectPlatform
 tar -czvf ztpanels-haining.tar.gz ztpanels-haining
 ```
+##### 将/home/data 这个目录下的所有文件打包压缩为当前目录下的data.zip
+```shell script
+zip -q -r data.zip /home/data
+```
 ##### 查看内存大小
 ```shell script
 free -h
@@ -147,10 +176,7 @@ free -h # 查看内存
 sudo dmidecode |grep -A16 "System Information$" # 查看主板型号
 ```
 
-##### 查看最近用户是在那台ip上登录的
-```shell script
-lastlog
-```
+
 
 ##### 查看端口占用情况
 ```shell script
@@ -180,6 +206,10 @@ wget -nH -m ftp://10.123.33.2/.cache/pip/ --ftp-user=admin --ftp-password=Ztadmi
 rpm -ivh example.rpm 
 # 卸载 tomcat4 软件包
 rpm -e tomcat4 
+```
+#### 强制移动覆盖
+```shell script
+mv -f A B
 ```
 
 #### 开启8001端口

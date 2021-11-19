@@ -67,3 +67,16 @@
 1. backone 特征提取
 2. neck 检测脖子
 3. head 检测头
+
+### 各个框架的wh
+> cv=h,w,c(BGR)
+cv.resize(w,h)
+torch c(RGB),h,w
+
+### 工业质检
+> https://mp.weixin.qq.com/s/2g895JwVAN1RC0CBai_qpA
+
+### 传统视觉和深度学习
+1. 传统视觉是辅助深度学习
+2. 用传统opencv视觉有利于收集数据
+3. 设计和改造网络结构使其可以适用于当前业务

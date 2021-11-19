@@ -7,6 +7,8 @@ import random
 import time
 from random import choice
 
+import socket
+
 from common.constants import SMS_CODE_LENGTH
 
 
@@ -39,6 +41,13 @@ def make_code():
     for item in range(SMS_CODE_LENGTH):
         code += str(random.randint(0, 9))
     return code
+
+def get_host_ip():
+    """获取主机ip"""
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(('8.8.8.8', 80))
+    ip = s.getsockname()[0]
+    return ip
 
 if __name__ == '__main__':
     get_items_serial_number("items", 32)

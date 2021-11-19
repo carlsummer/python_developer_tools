@@ -39,6 +39,7 @@
 >> ### 1.2 Mask
 >> - **[labelme](https://github.com/wkentaro/labelme)**
 >>      * labelme是基于python和Qt的跨平台标注工具，支持**图像分割**标注，操作方便、快捷、实用，应用广泛。
+>>      * 分类labelme --flags demote,NG,OK
 >> - **[pylabelme](https://github.com/wkentaro/labelme)**
 >>      * pylabelme是基于python和Qt的跨平台标注工具，支持**图像分割**标注，操作方便、快捷、实用，应用广泛。
 >> - **[Labelbox](https://github.com/Labelbox/Labelbox)**

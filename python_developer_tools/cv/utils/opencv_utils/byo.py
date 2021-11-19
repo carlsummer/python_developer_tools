@@ -142,7 +142,10 @@ def get_blackhat(img):
     blackhat = cv2.morphologyEx(img, cv2.MORPH_BLACKHAT, kernel)
     return blackhat
 
-
+def equalizeHist(gray):
+    "直方图均衡化"
+    dst = cv2.equalizeHist(gray)
+    return dst
 """
 # Rectangular Kernel
 cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))

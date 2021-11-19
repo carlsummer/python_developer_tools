@@ -12,7 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 initial_lr = 0.1
-max_epoch = 100
+max_epoch = 300
 
 class model(nn.Module):
     def __init__(self):
@@ -36,11 +36,11 @@ for epoch in range(0, max_epoch):
         optimizer_1.zero_grad()
         optimizer_1.step()
         lr_list1.append(optimizer_1.param_groups[0]['lr'])
-        scheduler_1.step(epoch)
+    scheduler_1.step(epoch)
 
 # 画出lr的变化
 fig = plt.figure(num=1, figsize=(15, 8),dpi=80)
-plt.plot(list(range(500)), lr_list1)
+plt.plot(list(range(len(lr_list1))), lr_list1)
 plt.xlabel("epoch")
 plt.ylabel("lr")
 plt.show()

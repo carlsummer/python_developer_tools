@@ -190,6 +190,12 @@ from .Ranger import Ranger
 optimizer = Ranger(filter(lambda p: p.requires_grad, model.parameters()), lr=0.01, betas=(0.95, 0.999), eps=1e-08, weight_decay=1e-4)
 ```
 
+# adabound
+```shell script
+pip install adabound
+optimizer = adabound.AdaBound(model.parameters(), lr=1e-3, final_lr=0.1)
+```
+
 # LARS
 > [介绍](https://www.jianshu.com/p/e430620d3acf)
 > 将最新的LookAhead和RAdam优化器结合，产生了一个新的算法——Ranger，获得了比单独使用RAdam要好的效果。

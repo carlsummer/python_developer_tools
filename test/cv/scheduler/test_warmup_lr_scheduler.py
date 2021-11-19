@@ -52,8 +52,8 @@ for epoch in range(0, max_epoch):
 
 # 画出lr的变化
 fig = plt.figure(num=1, figsize=(15, 8),dpi=80)
-plt.plot(list(range(500)), lr_list1)
-plt.plot(list(range(500)), lr_list2)
+plt.plot(list(range(len(lr_list1))), lr_list1)
+plt.plot(list(range(len(lr_list2))), lr_list2)
 plt.xlabel("epoch")
 plt.ylabel("lr")
 plt.show()
