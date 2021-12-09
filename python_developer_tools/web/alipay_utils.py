@@ -7,8 +7,8 @@ if __name__ == "__main__":
     alipay = AliPay(
         appid="2021000117656061",  # 应用id
         app_notify_url=None,  # 默认回调url
-        app_private_key_string=open("../docs/alipay/keys/private_2048.txt").read(),
-        alipay_public_key_string=open("../docs/alipay/keys/alipay_key_2048.txt").read(),
+        app_private_key_string=open("../../docs/alipay/keys/private_2048.txt").read(),
+        alipay_public_key_string=open("../../docs/alipay/keys/alipay_key_2048.txt").read(),
         # 支付宝的公钥，验证支付宝回传消息使用，不是你自己的公钥,
         sign_type="RSA2",  # RSA 或者 RSA2
         debug=True  # 默认False

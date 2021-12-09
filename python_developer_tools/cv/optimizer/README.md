@@ -208,6 +208,55 @@ optimizer = adabound.AdaBound(model.parameters(), lr=1e-3, final_lr=0.1)
 ## [code](https://github.com/kakaobrain/torchlars)
 > [本地代码](torchlars)
 
+# torch-optimizer
+> https://github.com/jettify/pytorch-optimizer
+> [whl包](../../../docs/whls/torch_optimizer-0.3.0-py3-none-any.whl)
+```shell script
+pip install torch_optimizer
+```
+```python
+import torch_optimizer as optim
+# model = ...
+optimizer = optim.DiffGrad(model.parameters(), lr=0.001)
+optimizer.step()
+```
+<table>
+    <thead>
+        <tr><th>名称</th><th>论文</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>A2GradExp</td><td>https://arxiv.org/abs/1810.00553</td></tr>
+        <tr><td>A2GradInc</td><td>https://arxiv.org/abs/1810.00553</td></tr>
+        <tr><td>A2GradUni</td><td>https://arxiv.org/abs/1810.00553</td></tr>
+        <tr><td>AccSGD</td><td>https://arxiv.org/abs/1803.05591</td></tr>
+        <tr><td>AdaBelief</td><td>https://arxiv.org/abs/2010.07468</td></tr>
+        <tr><td>AdaBound</td><td>https://arxiv.org/abs/1902.09843</td></tr>
+        <tr><td>AdaMod</td><td>https://arxiv.org/abs/1910.12249</td></tr>
+        <tr><td>Adafactor</td><td>https://arxiv.org/abs/1804.04235</td></tr>
+        <tr><td>Adahessian</td><td>https://arxiv.org/abs/2006.00719</td></tr>
+        <tr><td>AdamP</td><td>https://arxiv.org/abs/2006.08217</td></tr>
+        <tr><td>AggMo</td><td>https://arxiv.org/abs/1804.00325</td></tr>
+        <tr><td>Apollo</td><td>https://arxiv.org/abs/2009.13586</td></tr>
+        <tr><td>DiffGrad</td><td>https://arxiv.org/abs/1909.11015</td></tr>
+        <tr><td>Lamb</td><td>https://arxiv.org/abs/1904.00962</td></tr>
+        <tr><td>Lookahead</td><td>https://arxiv.org/abs/1907.08610</td></tr>
+        <tr><td>MADGRAD</td><td>https://arxiv.org/abs/2101.11075</td></tr>
+        <tr><td>NovoGrad</td><td>https://arxiv.org/abs/1905.11286</td></tr>
+        <tr><td>PID</td><td>https://www4.comp.polyu.edu.hk/~cslzhang/paper/CVPR18_PID.pdf</td></tr>
+        <tr><td>QHAdam</td><td>https://arxiv.org/abs/1810.06801</td></tr>
+        <tr><td>QHM</td><td>https://arxiv.org/abs/1810.06801</td></tr>
+        <tr><td>RAdam</td><td>https://arxiv.org/abs/1908.03265</td></tr>
+        <tr><td>Ranger</td><td>https://medium.com/@lessw/new-deep-learning-optimizer-ranger-synergistic-combination-of-radam-lookahead-for-the-best-of-2dc83f79a48d</td></tr>
+        <tr><td>RangerQH</td><td>https://arxiv.org/abs/1810.06801</td></tr>
+        <tr><td>RangerVA</td><td>https://arxiv.org/abs/1908.00700v2</td></tr>
+        <tr><td>SGDP</td><td>https://arxiv.org/abs/2006.08217</td></tr>
+        <tr><td>SGDW</td><td>https://arxiv.org/abs/1608.03983</td></tr>
+        <tr><td>SWATS</td><td>https://arxiv.org/abs/1712.07628</td></tr>
+        <tr><td>Shampoo</td><td>https://arxiv.org/abs/1802.09568</td></tr>
+        <tr><td>Yogi</td><td>https://papers.nips.cc/paper/8186-adaptive-methods-for-nonconvex-optimization</td></tr>
+    </tbody>
+</table>
+
 ------------------------------------------------
 # [utils](utils.py)
 <table>

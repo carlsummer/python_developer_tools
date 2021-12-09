@@ -48,6 +48,7 @@
 > https://github.com/Cysu/open-reid
 > https://github.com/CoinCheung/pytorch-loss
 > https://github.com/rwightman/pytorch-image-models
+> https://github.com/jettify/pytorch-optimizer
 #### Object Detection, Instance and Semantic Segmentation
 * Detectron2 - https://github.com/facebookresearch/detectron2
 * Segmentation Models (Semantic) - https://github.com/qubvel/segmentation_models.pytorch

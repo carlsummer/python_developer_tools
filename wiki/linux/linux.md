@@ -186,6 +186,16 @@ netstat -anp|grep 80
 ```shell script
 nvidia-smi -L
 ```
+
+#### 统计文件夹下文件个数，包括子文件
+```shell script
+ls -lR | grep "^-"| wc -l
+```
+#### 统计文件夹下目录个数，包括子目录
+```shell script
+ls -lR | grep "^d"| wc -l
+```
+
 # centos
 ##### ftp 服务器搭建
 ```shell script

@@ -39,6 +39,7 @@ from python_developer_tools import cv
             - **inplace_abn**
         - [activates 激活函数](#activates)
             - **ReLU**
+            - **GELU**
             - **LeakyReLU**
             - **relu6**
             - **SiLU**
@@ -132,15 +133,19 @@ from python_developer_tools import cv
     - [post_processing后处理](./python_developer_tools/cv/post_processing/README.md)
         - **tta**
     - [loss](./python_developer_tools/cv/loss/README.md)
+        - classes
+            - **CrossEntropyLoss**
+            - **focalloss**
+            - **LabelSmoothingCrossEntropy**
+            - **TripletLoss**
+        - detection
+        - lines
         - **CenterLoss**
-        - **CrossEntropyLoss**
         - **Diceloss**
         - **focalloss**
-        - **LabelSmoothingCrossEntropy**
         - **OHEMloss**
         - **OIMloss**
         - **topk_crossEntrophy**
-        - **TripletLoss**
         - **NLLLoss**
     - train
         - [不同数量卡训练](./python_developer_tools/cv/train/不同数量卡训练/README.md)
