@@ -132,6 +132,8 @@ from python_developer_tools import cv
         - **LARS**
     - [post_processing后处理](./python_developer_tools/cv/post_processing/README.md)
         - **tta**
+    - [pre_processing]
+        - **learnableResizer**
     - [loss](./python_developer_tools/cv/loss/README.md)
         - classes
             - **CrossEntropyLoss**

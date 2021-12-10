@@ -68,3 +68,11 @@ Lovasz-SoftMax Loss
 ### Rank & Sort Loss for Object Detection and Instance Segmentation
 1. [github代码](https://github.com/kemaloksuz/RankSortLoss)
 2. [论文](https://arxiv.org/abs/2107.11669)
+
+### pytorch-loss
+> [github地址](https://github.com/CoinCheung/pytorch-loss)
+```shell script
+git clone https://github.com/CoinCheung/pytorch-loss
+python setup.py install
+from pytorch_loss import SwishV1, SwishV2, SwishV3
+```

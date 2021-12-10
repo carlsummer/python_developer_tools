@@ -209,8 +209,11 @@ optimizer = adabound.AdaBound(model.parameters(), lr=1e-3, final_lr=0.1)
 > [本地代码](torchlars)
 
 # torch-optimizer
-> https://github.com/jettify/pytorch-optimizer
+> [官网](https://pytorch-optimizer.rtfd.io/)
+> [github地址](https://github.com/jettify/pytorch-optimizer)
 > [whl包](../../../docs/whls/torch_optimizer-0.3.0-py3-none-any.whl)
+> [使用例子](../../../test/cv/optimizer/test_torch_optimizer/mnist.py)
+> [对比每种优化器的效果](../../../test/cv/optimizer/test_torch_optimizer/viz_optimizers.py)
 ```shell script
 pip install torch_optimizer
 ```

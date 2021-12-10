@@ -1,4 +1,5 @@
 import math
+import os
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -93,7 +94,10 @@ def plot_rastrigin(grad_iter, optimizer_name, lr):
     )
     plt.plot(*minimum, 'gD')
     plt.plot(iter_x[-1], iter_y[-1], 'rD')
-    plt.savefig('docs/rastrigin_{}.png'.format(optimizer_name))
+    savedir = "docs"
+    if not os.path.exists(savedir):
+        os.makedirs(savedir)
+    plt.savefig('{}/rastrigin_{}.png'.format(savedir,optimizer_name))
 
 
 def plot_rosenbrok(grad_iter, optimizer_name, lr):

@@ -77,3 +77,6 @@ rm .git/module/* 删除模块下的子模块目录，每个子模块对应一个
 git rm --cached 子模块名称
 完成删除后，提交到仓库即可。
 ```
+
+## github 搜索最优的torch技巧
+> [链接](https://github.com/search?o=desc&q=torch+in%3Afile+filename%3A%2A.py+language%3Apython+is%3Apublic+archived%3Afalse+stars%3A%3E10+size%3A%3E500+pushed%3A%3E2019-02-12+in%3Areadme+tricks+OR+paper+OR+%E8%AE%BA%E6%96%87+OR+%E6%8A%80%E5%B7%A7+OR+%E5%A4%8D%E7%8E%B0&s=stars&type=Repositories)

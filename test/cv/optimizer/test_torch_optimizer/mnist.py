@@ -90,7 +90,7 @@ def prepare_loaders(conf, use_cuda=False):
     kwargs = {'num_workers': 1, 'pin_memory': True} if use_cuda else {}
     train_loader = torch.utils.data.DataLoader(
         datasets.MNIST(
-            '../data',
+            '/home/zengxh/datasets',
             train=True,
             download=True,
             transform=transforms.Compose(
@@ -107,7 +107,7 @@ def prepare_loaders(conf, use_cuda=False):
 
     test_loader = torch.utils.data.DataLoader(
         datasets.MNIST(
-            '../data',
+            '/home/zengxh/datasets',
             train=False,
             transform=transforms.Compose(
                 [
