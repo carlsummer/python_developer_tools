@@ -1,8 +1,8 @@
 # !/usr/bin/env python
 # -- coding: utf-8 --
 # @Author zengxiaohui
-# Datatime:8/14/2021 3:19 PM
-# @File:demo
+# Datatime:8/13/2021 11:20 AM
+# @File:train_cifar10
 import os
 import torch
 import torchvision
@@ -11,7 +11,7 @@ import torch.optim as optim
 import torch.nn as nn
 from tqdm import tqdm
 
-from python_developer_tools.cv.bases.activates.DynamicReLU import DyReLUA, DyReLUB, DyReLUC, convert_relu_to_DyReLU
+from python_developer_tools.cv.bases.pool.AvgPool2d import GlobalAvgPool2d, SwishAdaptiveAvgPool2d
 from python_developer_tools.cv.utils.torch_utils import init_seeds
 
 transform = transforms.Compose(
@@ -25,9 +25,7 @@ class shufflenet_v2_x0_5M(nn.Module):
     def __init__(self,nc,pretrained=True):
         super(shufflenet_v2_x0_5M, self).__init__()
         self.model_ft = torchvision.models.shufflenet_v2_x0_5(pretrained=pretrained)
-        # 将relu替换为DyReLUA
-        self.model_ft = convert_relu_to_DyReLU(self.model_ft,"A")
-
+        self.global_pool = SwishAdaptiveAvgPool2d(False)
         num_ftrs = self.model_ft.fc.in_features
         self.model_ft.fc = nn.Linear(num_ftrs, nc)
 
@@ -38,21 +36,15 @@ class shufflenet_v2_x0_5M(nn.Module):
         x = self.model_ft.stage3(x)
         x = self.model_ft.stage4(x)
         x = self.model_ft.conv5(x)
-        x = x.mean([2, 3])  # globalpool
+        x = self.global_pool(x)
+        x = x.view(x.size(0), -1)  # globalpool
         out = self.model_ft.fc(x)
         return out
 
-
-
 if __name__ == '__main__':
-    """
-    ReLU 41%
-    DyReLUA 42 %
-    DyReLUB 41 %
-    DyReLUC 40 %
-    """
+    #34.849998 %
     root_dir = "/home/zengxh/datasets"
-    # os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     epochs = 50
     batch_size = 1024
     num_workers = 8
@@ -105,4 +97,4 @@ if __name__ == '__main__':
         outputs = model(images.cuda())
         _, predicted = torch.max(outputs.data, 1)
         correct += (predicted.cpu() == labels).sum()
-    print('Accuracy of the network on the 10000 test images: %d %%' % (100 * correct / len(testset)))
+    print('Accuracy of the network on the 10000 test images: %.6f %%' % (100 * correct / len(testset)))

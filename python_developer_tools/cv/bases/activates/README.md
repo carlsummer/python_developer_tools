@@ -26,24 +26,13 @@ import torch.nn as nn
 silu = nn.SiLU(inplace=True)
 ```
 
-# sigmoid
-## code
-```python
-import torch
-a = torch.randn(4)
-a = torch.sigmoid(a)
-```
+# [sigmoid](./sigmoid.py)
+1. sigmoid
+2. h_sigmoid
 
-# Swish
-##### code
-```python
-import torch
-import torch.nn as nn
-class Swish(nn.Module):
-    def forward(self, x):
-        return x * torch.sigmoid(x)
-swish = Swish()
-```
+# [Swish](./swish.py)
+1. Swish
+2. h_Swish
 
 
 # ACON

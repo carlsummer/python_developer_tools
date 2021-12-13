@@ -2,7 +2,7 @@
 1. [code](softpool.py)
 
 # Global average pooling (GAP)
-1. [code](GlobalAvgPool2d.py)
+1. [code](./AvgPool2d.py)
 2. [使用demo](../../../../test/cv/bases/pool/train_GAP.py)
 
 # BlurPool
