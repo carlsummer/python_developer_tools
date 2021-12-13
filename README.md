@@ -65,6 +65,7 @@ from python_developer_tools import cv
             - **serf**
         - [全连接FC]
             - [SSM](#SSM)
+            - **SwishLinear**
         - [池化pool](./python_developer_tools/cv/bases/pool/README.md)
             - **SoftPool**
             - **GlobalAvgPool2d**
@@ -208,22 +209,6 @@ from python_developer_tools import cv
 | [Adaptively-Parametric-ReLU](./python_developer_tools/cv/bases/activates/APReLU.py)  | |
 | [DynamicReLU](./python_developer_tools/cv/bases/activates/DynamicReLU.py)  | [解析](https://blog.csdn.net/Carlsummer/article/details/119730645)|
 
-
-#### SSM
-##### Paper
-[Exploiting Featureswith Split-and-Share Module](https://arxiv.org/abs/2108.04500)
-##### Overview
-![](./temimg/SSM.png)
-##### code
-```python
-from python_developer_tools.cv.bases.FC.SSM import SSM
-import torch
-x = torch.randn(2, 2048, 1, 1)
-x = x.view(x.size(0), -1)
-model = SSM()
-out = model(x)
-print(out.shape)
-```
 
 ### classnetwork
 | 名称      |    代码实例 | 

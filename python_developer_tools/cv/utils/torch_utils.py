@@ -1,5 +1,7 @@
 import random
 import importlib
+from functools import reduce
+
 import numpy as np
 import os
 import re
@@ -16,6 +18,54 @@ import torch.distributed as dist
 from torchvision import transforms
 from thop import profile
 from copy import deepcopy
+
+def collate_func(batch_dic):
+    """
+    自定义 collate_fn
+    :param batch_dic:
+    :return:
+    >>> dataloader = torch.utils.data.DataLoader(dataset,batch_size=batch_size, num_workers=nw,pin_memory=isTrain,shuffle=isTrain,collate_fn=collate_func)
+    """
+    def get_pad_lrtb(pad_tb):
+        if pad_tb % 2 == 0:
+            pad_tb = pad_tb / 2
+            pad_t = pad_tb
+            pad_b = pad_tb
+        else:
+            pad_tb = (pad_tb-1) / 2
+            pad_t = pad_tb
+            pad_b = pad_tb + 1
+        return int(pad_t),int(pad_b)
+    resize_h,resize_w=cuda2cpu(torch.max(torch.tensor([dic[0].shape[1:] for dic in batch_dic]),0).values) # h,w
+    batch_dic_list0 = []
+    batch_dic_list1 = []
+    batch_dic_list2 = []
+    batch_dic_list3 = []
+    for dic0, dic1, dic2, dic3 in batch_dic:
+        dic_c, dic_h, dic_w = dic0.shape
+        pad_t,pad_b = get_pad_lrtb(resize_h - dic_h)
+        pad_l,pad_r = get_pad_lrtb(resize_w - dic_w)
+        pad = nn.ConstantPad2d(padding=(pad_l, pad_r, pad_t, pad_b),value=-1)
+        batch_dic_list0.append(pad(dic0))
+        batch_dic_list1.append(dic1)
+        batch_dic_list2.append(dic2)
+        batch_dic_list3.append(dic3)
+    res=[]
+    res.append(torch.stack(batch_dic_list0))
+    res.append(torch.tensor(batch_dic_list1))
+    res.append(batch_dic_list2)
+    res.append(torch.tensor(batch_dic_list3))
+    return res
+
+def delete_tensor_one(tmp_x):
+    # 删除tensor等于-1的值
+    indexx = torch.where(tmp_x != -1)
+    shape_list = [index.unique().size()[0] for index in indexx]
+    shape_list[-1] = int(tmp_x[indexx].shape[0] / shape_list[0] / shape_list[1])
+    shape_max_index = reduce(lambda x, y: x * y, shape_list)
+    tmp_x2 = torch.reshape(tmp_x[indexx][:shape_max_index], shape_list)
+    return tmp_x2
+
 
 def get_model_info(model, tsize=(640,640)): # h,w
     """计算模型的参数量和计算一张图片的计算量"""
