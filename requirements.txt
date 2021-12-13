@@ -32,3 +32,4 @@ wmi
 pymem
 pytorch_ranger>=0.1.1
 hyperopt==0.2.5
+yacs

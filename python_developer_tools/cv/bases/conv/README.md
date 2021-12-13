@@ -10,7 +10,7 @@
 感谢[代码来源External-Attention-pytorch](https://github.com/xmu-xiaoma666/External-Attention-pytorch#1-Depthwise-Separable-Convolution-Usage)
 ```python
 import torch
-from python_developer_tools.cv.bases.conv.DepthwiseSeparableConvolution import DepthwiseSeparableConvolution
+from python_developer_tools.cv.bases.conv.DepthSpatialSepConvs import DepthwiseSeparableConvolution
 input=torch.randn(1,3,224,224)
 dsconv=DepthwiseSeparableConvolution(3,64)
 out=dsconv(input)
@@ -70,7 +70,8 @@ print(out.shape)
 
 【经典卷积系列】
 原始卷积 (Vanilla Convolution)
-组卷积 (Group convolution)
+组卷积 (Group convolution)[](./DepthSpatialSepConvs.py)
+
 转置卷积 (Transposed Convolution)
 1×1卷积 (1×1 Convolution)
 空洞卷积 (Atrous convolution)

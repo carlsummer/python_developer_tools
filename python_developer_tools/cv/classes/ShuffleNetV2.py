@@ -2,6 +2,9 @@ import torch
 import torch.nn as nn
 import torchvision
 
+from python_developer_tools.cv.bases.channels.channels import ChannelShuffle
+
+
 def Conv3x3BNReLU(in_channels,out_channels,stride,groups):
     return nn.Sequential(
             nn.Conv2d(in_channels=in_channels, out_channels=out_channels, kernel_size=3, stride=stride, padding=1,groups=groups),
@@ -37,17 +40,6 @@ class HalfSplit(nn.Module):
     def forward(self, input):
         splits = torch.chunk(input, 2, dim=self.dim)
         return splits[0] if self.first_half else splits[1]
-
-class ChannelShuffle(nn.Module):
-    def __init__(self, groups):
-        super(ChannelShuffle, self).__init__()
-        self.groups = groups
-
-    def forward(self, x):
-        '''Channel shuffle: [N,C,H,W] -> [N,g,C/g,H,W] -> [N,C/g,g,H,w] -> [N,C,H,W]'''
-        N, C, H, W = x.size()
-        g = self.groups
-        return x.view(N, g, int(C / g), H, W).permute(0, 2, 1, 3, 4).contiguous().view(N, C, H, W)
 
 class ShuffleNetUnits(nn.Module):
     def __init__(self, in_channels, out_channels, stride, groups):

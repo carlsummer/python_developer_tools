@@ -233,6 +233,7 @@ from python_developer_tools import cv
 | ShuffleNetV2  | [实现](./python_developer_tools/cv/classes/ShuffleNetV2.py)|
 | SqueezeNet  | [实现](./python_developer_tools/cv/classes/SqueezeNet.py)|
 | Xception  | [实现](./python_developer_tools/cv/classes/Xception.py)|
+| MicroNet  | [实现](./python_developer_tools/cv/classes/micronet.py)|
 
 ### [torch_utils](./python_developer_tools/cv/utils/torch_utils.py)
 <table>

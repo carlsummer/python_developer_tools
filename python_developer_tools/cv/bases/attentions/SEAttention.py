@@ -8,6 +8,9 @@ import torch
 from torch import nn
 from torch.nn import init
 
+from python_developer_tools.cv.bases.activates.sigmoid import h_sigmoid
+from python_developer_tools.cv.bases.channels.channels import get_squeeze_channels
+
 
 class SEAttention(nn.Module):
     """
@@ -46,6 +49,35 @@ class SEAttention(nn.Module):
         z = self.excitation(y).view(b, c, 1, 1)
         return x * z.expand_as(x)
 
+
+class SELayer(nn.Module):
+    def __init__(self, inp, oup, reduction=4):
+        super(SELayer, self).__init__()
+        self.oup = oup
+        self.avg_pool = nn.AdaptiveAvgPool2d(1)
+
+        # determine squeeze
+        squeeze = get_squeeze_channels(inp, reduction)
+        print('reduction: {}, squeeze: {}/{}'.format(reduction, inp, squeeze))
+
+        self.fc = nn.Sequential(
+            nn.Linear(inp, squeeze),
+            nn.ReLU(inplace=True),
+            nn.Linear(squeeze, oup),
+            h_sigmoid()
+        )
+
+    def forward(self, x):
+        if isinstance(x, list):
+            x_in = x[0]
+            x_out = x[1]
+        else:
+            x_in = x
+            x_out = x
+        b, c, _, _ = x_in.size()
+        y = self.avg_pool(x_in).view(b, c)
+        y = self.fc(y).view(b, self.oup, 1, 1)
+        return x_out * y
 
 if __name__ == '__main__':
     input=torch.randn(50,512,7,7)
