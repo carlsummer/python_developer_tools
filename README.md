@@ -28,6 +28,10 @@ from python_developer_tools import cv
             - **SpaceToDepth**
         - [Convolution Series](#Convolution-series)
             - **Depthwise Separable Convolution Usage**
+            - **DepthSpatialSepConv**
+            - **GroupConv**
+            - **SpatialSepConvSF**
+            - **DepthConv**
             - **MBConv**
             - **Involution**
             - **DY_Conv2d**
@@ -64,18 +68,19 @@ from python_developer_tools import cv
                 - **norm_sin_softmax**
             - **serf**
         - [全连接FC]
-            - [SSM](#SSM)
-            - **SwishLinear**
+            - [SSM](./python_developer_tools/cv/bases/FC/SSM.py)
+            - [SwishLinear](./python_developer_tools/cv/bases/FC/SwishLinear.py)
         - [池化pool](./python_developer_tools/cv/bases/pool/README.md)
             - **SoftPool**
             - **GlobalAvgPool2d**
+            - **SwishAdaptiveAvgPool2d**
             - **BlurPool**
             - **SPP**
+            - [MaxGroupPooling](./python_developer_tools/cv/bases/pool/MaxGroupPooling.py)
         - [regularization](./python_developer_tools/cv/bases/regularization.py)
-    - 分类classes
+    - [分类classes](./python_developer_tools/cv/classes/README.md)
         - demo
             - [训练cifar10数据集](test/train_cifar10.py)
-        - [分类模型classnetwork](#classnetwork)
     - datasets
         - [数据增强](./python_developer_tools/cv/datasets/README.md)
             - 分类任务数据增强
@@ -209,31 +214,6 @@ from python_developer_tools import cv
 | [Adaptively-Parametric-ReLU](./python_developer_tools/cv/bases/activates/APReLU.py)  | |
 | [DynamicReLU](./python_developer_tools/cv/bases/activates/DynamicReLU.py)  | [解析](https://blog.csdn.net/Carlsummer/article/details/119730645)|
 
-
-### classnetwork
-| 名称      |    代码实例 | 
-| :-------- | --------:| 
-| AlexNet  | [实现](./python_developer_tools/cv/classes/AlexNet.py)|
-| DenseNet  | [实现](./python_developer_tools/cv/classes/DenseNet.py)|
-| Efficientnet  | [实现](./python_developer_tools/cv/classes/Efficientnet.py)|
-| InceptionV1  | [实现](./python_developer_tools/cv/classes/InceptionV1.py)|
-| InceptionV2  | [实现](./python_developer_tools/cv/classes/InceptionV2.py)|
-| InceptionV3  | [实现](./python_developer_tools/cv/classes/InceptionV3.py)|
-| repVGGNet  | [实现](./python_developer_tools/cv/classes/repVGGNet.py)|
-| ResNet  | [实现](./python_developer_tools/cv/classes/ResNet.py)|
-| ResNeXt  | [实现](./python_developer_tools/cv/classes/ResNeXt.py)|
-| VGGNet  | [实现](./python_developer_tools/cv/classes/VGGNet.py)|
-| GhostNet  | [实现](./python_developer_tools/cv/classes/GhostNet.py)|
-| MixNet  | [实现](./python_developer_tools/cv/classes/MixNet.py)|
-| MobileNetV1  | [实现](./python_developer_tools/cv/classes/MobileNetV1.py)|
-| MobileNetV2  | [实现](./python_developer_tools/cv/classes/MobileNetV2.py)|
-| MobileNetV3  | [实现](./python_developer_tools/cv/classes/MobileNetV3.py)|
-| MobileNetXt  | [实现](./python_developer_tools/cv/classes/MobileNetXt.py)|
-| ShuffleNet  | [实现](./python_developer_tools/cv/classes/ShuffleNet.py)|
-| ShuffleNetV2  | [实现](./python_developer_tools/cv/classes/ShuffleNetV2.py)|
-| SqueezeNet  | [实现](./python_developer_tools/cv/classes/SqueezeNet.py)|
-| Xception  | [实现](./python_developer_tools/cv/classes/Xception.py)|
-| MicroNet  | [实现](./python_developer_tools/cv/classes/micronet.py)|
 
 ### [torch_utils](./python_developer_tools/cv/utils/torch_utils.py)
 <table>
