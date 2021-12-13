@@ -15,8 +15,10 @@ print(out.shape)
 ```
 
 ## SwishLinear
+> 使用之前41.15% 使用之后56.560001 %
 ##### Paper
 [MicroNet](https://arxiv.org/abs/2108.05894)
+[demo](../../../../test/cv/bases/FC/train_SwishLinear.py)
 ##### code
 ```python
 from python_developer_tools.cv.bases.FC.SwishLinear import SwishLinear
