@@ -9,7 +9,8 @@ from yacs.config import CfgNode as CN
 
 from python_developer_tools.cv.bases.activates.sigmoid import h_sigmoid
 from python_developer_tools.cv.bases.attentions.SEAttention import SELayer
-from python_developer_tools.cv.bases.channels.channels import _make_divisible, get_squeeze_channels, ChannelShuffle
+from python_developer_tools.cv.bases.channels.channels import _make_divisible, get_squeeze_channels, ChannelShuffle, \
+    ChannelShuffle2
 from python_developer_tools.cv.bases.conv.DepthSpatialSepConvs import GroupConv, DepthSpatialSepConv, DepthConv
 
 
@@ -167,7 +168,7 @@ class DYMicroBlock(nn.Module):
                     expansion = False
                 ) if y2 > 0 else nn.ReLU6(inplace=True),
                 ChannelShuffle(gs1[1]) if shuffle else nn.Sequential(),
-                ChannelShuffle(hidden_dim2//2) if shuffle and y2 !=0 else nn.Sequential(),
+                ChannelShuffle2(hidden_dim2//2) if shuffle and y2 !=0 else nn.Sequential(),
                 get_pointwise_conv(pointwise, hidden_dim2, oup, hidden_fft, (g1, g2)),
                 get_act_layer(
                     oup,
@@ -183,7 +184,7 @@ class DYMicroBlock(nn.Module):
                     expansion = False
                 ) if y3 > 0 else nn.Sequential(),
                 ChannelShuffle(g2) if shuffle else nn.Sequential(),
-                ChannelShuffle(oup//2) if shuffle and oup%2 == 0  and y3!=0 else nn.Sequential(),
+                ChannelShuffle2(oup//2) if shuffle and oup%2 == 0  and y3!=0 else nn.Sequential(),
             )
         elif g2 == 0:
             self.layers = nn.Sequential(
@@ -237,7 +238,7 @@ class DYMicroBlock(nn.Module):
                     g = gs1,
                     expansion = True
                 ) if y2 > 0 else nn.ReLU6(inplace=True),
-                ChannelShuffle(hidden_dim2//4) if shuffle and y1!=0 and y2 !=0 else nn.Sequential() if y1==0 and y2==0 else ChannelShuffle(hidden_dim2//2),
+                ChannelShuffle2(hidden_dim2//4) if shuffle and y1!=0 and y2 !=0 else nn.Sequential() if y1==0 and y2==0 else ChannelShuffle2(hidden_dim2//2),
                 get_pointwise_conv(pointwise, hidden_dim2, oup, hidden_fft, (g1, g2)), #FFTConv
                 get_act_layer(
                     oup,
@@ -253,7 +254,7 @@ class DYMicroBlock(nn.Module):
                     expansion = False
                 ) if y3 > 0 else nn.Sequential(),
                 ChannelShuffle(g2) if shuffle else nn.Sequential(),
-                ChannelShuffle(oup//2) if shuffle and y3!=0 else nn.Sequential(),
+                ChannelShuffle2(oup//2) if shuffle and y3!=0 else nn.Sequential(),
             )
 
     def forward(self, x):

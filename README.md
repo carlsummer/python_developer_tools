@@ -41,7 +41,6 @@ from python_developer_tools import cv
             - **Residual Attention**
         - [BN](./python_developer_tools/cv/bases/BatchNormalization/README.md)
             - **inplace_abn**
-        - channels
         - [activates 激活函数](#activates)
             - **ReLU**
             - **GELU**
@@ -73,6 +72,10 @@ from python_developer_tools import cv
             - [SwishLinear](./python_developer_tools/cv/bases/FC/SwishLinear.py)
         - [池化pool](./python_developer_tools/cv/bases/pool/README.md)
             - **SoftPool**
+            - **adaPool**
+            - **empool**
+            - **eidwpool**
+            - **idwpool**
             - **GlobalAvgPool2d**
             - **SwishAdaptiveAvgPool2d**
             - **BlurPool**

@@ -80,3 +80,11 @@ git rm --cached 子模块名称
 
 ## github 搜索最优的torch技巧
 > [链接](https://github.com/search?o=desc&q=torch+in%3Afile+filename%3A%2A.py+language%3Apython+is%3Apublic+archived%3Afalse+stars%3A%3E10+size%3A%3E500+pushed%3A%3E2019-02-12+in%3Areadme+tricks+OR+paper+OR+%E8%AE%BA%E6%96%87+OR+%E6%8A%80%E5%B7%A7+OR+%E5%A4%8D%E7%8E%B0&s=stars&type=Repositories)
+
+## 创建新的分支并且提交到远程仓库
+```shell script
+git reset --hard 040a78807af2e2b3fd59650d134bd24cef54e335
+git branch 210
+git checkout 210
+git push --set-upstream origin 210
+```

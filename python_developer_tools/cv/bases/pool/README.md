@@ -1,5 +1,27 @@
 # SoftPool
-1. [code](softpool.py)
+1. [code](./softpoolDemo.py)
+2. [github](https://github.com/alexandrosstergiou/SoftPool.git)
+3. [本库包](../../../../docs/whls/SoftPool-master.zip)
+```shell script
+unzip SoftPool-master.zip
+cd SoftPool-master/pytorch/
+conda activate CreepageDistance
+make install
+make test
+```
+
+# adaPool
+1. [github](https://github.com/alexandrosstergiou/adaPool)
+2. [paper](https://arxiv.org/abs/2111.00772)
+3. [本库包](../../../../docs/whls/adaPool-main.zip)
+```shell script
+unzip adaPool-main.zip
+cd adaPool-main/pytorch/
+conda activate CreepageDistance
+make install
+make test
+```
+4. [本库示例代码](./adaPool.py)
 
 # Global average pooling (GAP)
 1. [code](./AvgPool2d.py)

@@ -28,3 +28,10 @@ conda remove CenterNet2
 ```shell script
 conda deactivate
 ```
+
+```shell script
+# 激活 anaconda 环境
+ source activate
+# 退出 anaconda 环境
+ source deactivate
+```

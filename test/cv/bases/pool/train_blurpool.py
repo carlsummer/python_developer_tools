@@ -12,7 +12,6 @@ import torch.nn as nn
 from tqdm import tqdm
 
 from python_developer_tools.cv.bases.pool.BlurPool import BlurPool
-from python_developer_tools.cv.bases.pool.GlobalAvgPool2d import GlobalAvgPool2d
 from python_developer_tools.cv.utils.torch_utils import init_seeds
 
 transform = transforms.Compose(

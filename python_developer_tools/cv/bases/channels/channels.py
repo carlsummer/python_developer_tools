@@ -51,3 +51,20 @@ class ChannelShuffle(nn.Module):
 
         return out
 
+class ChannelShuffle2(nn.Module):
+    def __init__(self, groups):
+        super(ChannelShuffle2, self).__init__()
+        self.groups = groups
+
+    def forward(self, x):
+        b, c, h, w = x.size()
+
+        channels_per_group = c // self.groups
+
+        # reshape
+        x = x.view(b, self.groups, channels_per_group, h, w)
+
+        x = torch.transpose(x, 1, 2).contiguous()
+        out = x.view(b, -1, h, w)
+
+        return out

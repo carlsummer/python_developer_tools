@@ -1,5 +1,3 @@
-https://www.pythonf.cn/read/153014
-
 # 不用NAS，无需attention，只用3x3卷积和ReLU 的SOTA算法RepVGG
 1. [github代码](https://github.com/DingXiaoH/RepVGG/blob/main/repvgg.py)
 2. [论文](RepVGG)
