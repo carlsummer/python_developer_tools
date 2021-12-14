@@ -3,7 +3,6 @@
 # @Author zengxiaohui
 # Datatime:8/13/2021 11:20 AM
 # @File:train_cifar10
-import math
 import os
 import torch
 import torchvision
@@ -11,8 +10,9 @@ import torchvision.transforms as transforms
 import torch.optim as optim
 import torch.nn as nn
 from tqdm import tqdm
-import adapool_cuda
-from adaPool import AdaPool1d, AdaPool2d, AdaPool3d,IDWPool2d,EDSCWPool2d,EMPool2d
+from dcn_v2 import DCN
+
+from python_developer_tools.cv.bases.conv.DY_Conv2d import DY_Conv2d
 from python_developer_tools.cv.utils.torch_utils import init_seeds
 
 transform = transforms.Compose(
@@ -22,23 +22,14 @@ transform = transforms.Compose(
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-images = torch.randn((1024, 3, 32, 32)).float().cuda()
-beta = (8,8) #(32 / 4 ,32 / 4)
-beta_ones = torch.ones((8,8)).float().cuda()
-beta_zeros = torch.zeros((8,8)).float().cuda()
-pool = {'adapool': AdaPool2d(kernel_size=2, stride=2, beta=beta, dtype=images.dtype, device=images.get_device()),  #40.070000 %
-        'empool': AdaPool2d(kernel_size=2, stride=2, beta=beta_zeros, dtype=images.dtype, device=images.get_device()), #40.770000 %
-        'eidwpool': AdaPool2d(kernel_size=2, stride=2, beta=beta_ones, dtype=images.dtype, device=images.get_device()), #37.740002 %
-        'edscwpool2d': EDSCWPool2d(kernel_size=2, stride=2), # 37.740002 %
-        'empool2d': EMPool2d(kernel_size=2, stride=2), # 40.740002 %
-        'idwpool': IDWPool2d(kernel_size=2, stride=2)} #33.400002 %
-
 def convert_relu_to_BlurPool(model):
     model_ft_modules = list(model.modules())
     dyReluchannels = []
     for i, (m, name) in enumerate(zip(model.modules(), model.named_modules())):
-        if type(m) is nn.MaxPool2d:
-            dyReluchannels.append({"name": name, "dyrelu":pool["empool2d"]})
+        if type(m) is nn.Conv2d and m.in_channels > 4:
+            dyReluchannels.append({"name": name, "dyrelu":
+                DCN(m.in_channels,m.out_channels, kernel_size=m.kernel_size, stride=m.stride, padding=m.padding, deformable_groups=2).cuda()
+                                   })
     for dictsss in dyReluchannels:
         setattr(model, dictsss["name"][0], dictsss["dyrelu"])
     return model
@@ -61,11 +52,11 @@ class shufflenet_v2_x0_5M(nn.Module):
         x = self.model_ft.stage4(x)
         x = self.model_ft.conv5(x)
         x = x.mean([2, 3])  # globalpool
-        # x = self.global_pool(x)
         out = self.model_ft.fc(x)
         return out
 
 if __name__ == '__main__':
+    # 41.840000 %
     root_dir = "/home/zengxh/datasets"
     os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     epochs = 50
