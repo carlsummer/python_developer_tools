@@ -15,3 +15,6 @@ python.exe -m pip install --upgrade pip
 
 #### pip 缓存位置
 > /home/admin/.cache/pip/wheels/
+
+### window 设置pip源
+> pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/

@@ -195,6 +195,10 @@ ls -lR | grep "^-"| wc -l
 ```shell script
 ls -lR | grep "^d"| wc -l
 ```
+```shell
+# 按时间顺序排序，只查看前10条信息
+ls -ltr | head -10
+```
 
 # centos
 ##### ftp 服务器搭建
