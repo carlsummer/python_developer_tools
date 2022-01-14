@@ -24,3 +24,8 @@ if %errorlevel% == 0 (
 　　echo failed
 )
 ```
+
+### 杀死进程
+```shell script
+taskkill /pid 3548  -t  -f
+```
