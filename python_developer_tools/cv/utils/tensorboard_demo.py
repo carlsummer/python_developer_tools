@@ -41,6 +41,7 @@ def run_tensorboard(out,port=6006):
     p = subprocess.Popen(cmdlist)
 
     def killme():
+        writer.close()
         os.kill(p.pid, signal.SIGTERM)
 
     atexit.register(killme)

@@ -145,7 +145,12 @@ zip -q -r data.zip /home/data
 ##### 查看内存大小
 ```shell script
 free -h
+free -m #以M的形式查看
+# 清除缓存 /root/Auto_clear_mem
+chmod 777 Auto_clear_mem.sh
+./Auto_clear_mem.sh 
 ```
+
 ##### 禁止访问百度
 ```shell script
 iptables -A OUTPUT -p tcp -d www.baidu.com --dport 80 -j DROP
