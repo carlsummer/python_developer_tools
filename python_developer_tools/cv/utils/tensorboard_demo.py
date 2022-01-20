@@ -10,7 +10,8 @@ import torchvision
 from tensorboardX import SummaryWriter
 import subprocess
 import sys
-
+import numpy as np
+from matplotlib import pyplot as plt
 import socket
 
 def get_host_ip():
@@ -26,6 +27,14 @@ def get_host_ip():
         s.close()
 
     return ip
+
+def save_tensor_batch(imgs):
+    """查看训练时的图片"""
+    train_inputs_make_grid = torchvision.utils.make_grid(imgs.float().to("cpu"), normalize=True, scale_each=True,nrow=4)
+    train_inputs_make_grid = train_inputs_make_grid / 2 + 0.5  # unnormalize
+    npimg = train_inputs_make_grid.numpy()
+    plt.imshow(np.transpose(npimg, (1, 2, 0)))  # 将【3，32，128】-->【32,128,3】
+    plt.savefig("sdf.jpg")
 
 def run_tensorboard(out,port=6006):
     """创建并且运行"""
@@ -64,7 +73,7 @@ if __name__ == '__main__':
         summarywriter.add_histogram(name, param.clone().data, epoch)
 
     # 保存的是训练时候的图片
-    train_inputs_make_grid = torchvision.utils.make_grid(dummy_input.to("cpu"), normalize=True,scale_each=True)
+    train_inputs_make_grid = torchvision.utils.make_grid(dummy_input.to("cpu"), normalize=True,scale_each=True,padding=2)
     summarywriter.add_image('Train Image{}'.format(epoch), train_inputs_make_grid,epoch)
 
     line1="this is ..."
