@@ -59,6 +59,8 @@ lastlog
 ##### 实时查看linux某条命令
 ```shell script
 watch -n 1 nvidia-smi
+# 每隔2秒查看一次
+nvidia-smi -l 2 
 ```
 ##### scp copy文件
 ```shell script
