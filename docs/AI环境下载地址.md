@@ -1,0 +1,5 @@
+[nvidia-smi](https://www.nvidia.cn/geforce/drivers/)
+[cuda](https://developer.nvidia.cn/cuda-toolkit-archive)
+[cudnn](https://developer.nvidia.com/rdp/cudnn-archive#a-collapse824-114)
+[pytorch](http://pytorch.org/)
+[tensorrt](https://developer.nvidia.com/nvidia-tensorrt-download)
