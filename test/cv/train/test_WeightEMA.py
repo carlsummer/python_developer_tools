@@ -12,6 +12,7 @@ import torch.nn as nn
 from tqdm import tqdm
 
 from python_developer_tools.cv.classes.transferTorch import shufflenet_v2_x0_5
+from python_developer_tools.cv.train.WeightEMA_code import WeightEMA
 from python_developer_tools.cv.utils.torch_utils import init_seeds
 
 transform = transforms.Compose(
@@ -20,6 +21,14 @@ transform = transforms.Compose(
 
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+
+# shadow ema model
+def new_ema_model():
+    model = shufflenet_v2_x0_5(classes, True)
+    model = model.cuda()
+    for param in model.parameters():
+        param.detach_()  # disable gradient trace 去除梯度
+    return model
 
 if __name__ == '__main__':
     #41.189999 %
@@ -42,6 +51,8 @@ if __name__ == '__main__':
     model = shufflenet_v2_x0_5(classes, True)
     model.cuda()
     model.train()
+    ema_model = new_ema_model()
+    model_ema_opt = WeightEMA(model, ema_model)
 
     criterion = nn.CrossEntropyLoss()
     # SGD with momentum
@@ -64,6 +75,7 @@ if __name__ == '__main__':
             loss.backward()
             # update weights
             optimizer.step()
+            model_ema_opt.step()
 
             # print statistics
             train_loss += loss

@@ -13,6 +13,7 @@ from tqdm import tqdm
 
 from python_developer_tools.cv.classes.transferTorch import shufflenet_v2_x0_5
 from python_developer_tools.cv.utils.torch_utils import init_seeds
+from python_developer_tools.cv.半监督.MixMatch import sharpen
 
 transform = transforms.Compose(
     [transforms.ToTensor(),
@@ -58,6 +59,7 @@ if __name__ == '__main__':
 
             # forward
             outputs = model(inputs)
+            outputs = sharpen(outputs,0.5) #0.5-43.700001 % 
             # loss
             loss = criterion(outputs, labels)
             # backward
