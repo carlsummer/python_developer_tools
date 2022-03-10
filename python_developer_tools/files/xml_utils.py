@@ -6,6 +6,36 @@
 from xml.dom.minidom import parse
 from lxml.etree import Element, SubElement, tostring
 
+import xml.etree.ElementTree as ET
+
+def read_xml(xmlpath):
+    """Read the name of label in the XML marked by labelimg"""
+    tree = ET.parse(xmlpath)
+    root = tree.getroot()
+    annotation = {}
+    annotation["objects"] = []
+    for annotationchild in root:
+        if annotationchild.tag == "path":
+            annotation["path"] = annotationchild.text
+        if annotationchild.tag == 'object':
+            objectnode = {}
+            for objectnodechild in annotationchild:
+                if objectnodechild.tag == 'name':
+                    objectnode["name"] = objectnodechild.text
+                if objectnodechild.tag == 'bndbox':
+                    bndboxnode = {}
+                    for bndboxnodechild in objectnodechild:
+                        if bndboxnodechild.tag == 'xmin':
+                            bndboxnode["xmin"] = int(bndboxnodechild.text)
+                        if bndboxnodechild.tag == 'ymin':
+                            bndboxnode["ymin"] = int(bndboxnodechild.text)
+                        if bndboxnodechild.tag == 'xmax':
+                            bndboxnode["xmax"] = int(bndboxnodechild.text)
+                        if bndboxnodechild.tag == 'ymax':
+                            bndboxnode["ymax"] = int(bndboxnodechild.text)
+                    objectnode['bndbox'] = bndboxnode
+            annotation["objects"].append(objectnode)
+    return annotation
 
 def read_predict_xml(label_path):
     # 读取xml中的内容
