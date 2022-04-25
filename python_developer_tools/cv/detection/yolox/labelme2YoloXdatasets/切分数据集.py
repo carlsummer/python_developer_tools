@@ -9,7 +9,7 @@ from imutils import paths
 from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 
-from python_developer_tools.cv.detection.yolovx.labelme2YoloXdatasets.txt2jsoncoco import labelme2coco
+from python_developer_tools.cv.detection.yolox.labelme2YoloXdatasets.txt2jsoncoco import labelme2coco
 from python_developer_tools.files.common import resetDir, get_filename_suf_pix
 from python_developer_tools.python.threadings.multiprocessing_utils import parmap
 

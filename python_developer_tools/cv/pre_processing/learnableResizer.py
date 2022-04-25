@@ -73,7 +73,7 @@ class ResizingNetwork(nn.Module):
         out = self.leakyrelu2(out)
         out = self.bn1(out)
 
-        out_residual = F.interpolate(out, size,scale_factor=0.5, mode='bilinear')
+        out_residual = F.interpolate(out, size,scale_factor=scale_factor, mode='bilinear')
 
         out = self.resblock(out_residual)
 

@@ -109,7 +109,7 @@ from python_developer_tools import cv
         - 数据集读取
     - [detection]
         - **YOLOX**
-            - [YOLOX训练自己的数据集](./python_developer_tools/cv/detection/yolovx/训练自己的数据集.md)
+            - [YOLOX训练自己的数据集](python_developer_tools/cv/detection/yolox/训练自己的数据集.md)
     - [scheduler](./python_developer_tools/cv/scheduler/README.md)
         - **ExpLR**
         - **WarmupExponentialLR**
