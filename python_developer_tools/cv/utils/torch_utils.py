@@ -69,7 +69,7 @@ def delete_tensor_one(tmp_x):
 
 def get_model_info(model, tsize=(640,640)): # h,w
     """计算模型的参数量和计算一张图片的计算量"""
-    stride = 64
+    stride = tsize[0]
     img = torch.zeros((1, 3, stride, stride), device=next(model.parameters()).device)
     flops, params = profile(deepcopy(model), inputs=(img,), verbose=False)
     params /= 1e6

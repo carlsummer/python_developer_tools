@@ -46,10 +46,10 @@ def make_block(r, n):
     return nn.Sequential(*residual)
 
 class ResizingNetwork(nn.Module):
-    def __init__(self, r=1, n=16):
+    def __init__(self, r=1, n=16,in_channels=3):
         super(ResizingNetwork, self).__init__()
 
-        self.conv1 = nn.Conv2d(in_channels=3, out_channels=n, kernel_size=7, stride=1, padding=3)
+        self.conv1 = nn.Conv2d(in_channels=in_channels, out_channels=n, kernel_size=7, stride=1, padding=3)
         self.leakyrelu1 = nn.LeakyReLU(negative_slope=0.2, inplace=True)
 
         self.conv2 = nn.Conv2d(n, n, kernel_size=1, stride=1)
@@ -61,7 +61,7 @@ class ResizingNetwork(nn.Module):
         self.conv3 = nn.Conv2d(n, n, kernel_size=3, stride=1, padding=1)
         self.bn2 = nn.BatchNorm2d(n)
 
-        self.conv4 = nn.Conv2d(n, out_channels=3, kernel_size=7, stride=1, padding=3)
+        self.conv4 = nn.Conv2d(n, out_channels=in_channels, kernel_size=7, stride=1, padding=3)
 
     def forward(self, x,size=None,scale_factor=0.5):
         residual = F.interpolate(x, size,scale_factor=scale_factor, mode='bilinear')
